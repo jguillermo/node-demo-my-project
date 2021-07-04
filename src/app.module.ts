@@ -8,11 +8,10 @@ import { UserResolver } from './app/user/user.resolver';
     GraphQLModule.forRoot({
       autoSchemaFile: true,
       playground: true,
-      debug: false,
+      debug: true,
     }),
     CqrsModule,
   ],
   providers: [UserResolver],
 })
-export class AppModule {
-}
+export class AppModule {}

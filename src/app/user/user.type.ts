@@ -6,6 +6,5 @@ export class UserType {
   id: string;
 
   @Field()
-  mame: string;
-
+  name: string;
 }
