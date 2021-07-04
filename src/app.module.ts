@@ -1,10 +1,18 @@
+import { CqrsModule } from '@nestjs/cqrs';
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { GraphQLModule } from '@nestjs/graphql';
+import { UserResolver } from './app/user/user.resolver';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    GraphQLModule.forRoot({
+      autoSchemaFile: true,
+      playground: true,
+      debug: false,
+    }),
+    CqrsModule,
+  ],
+  providers: [UserResolver],
 })
-export class AppModule {}
+export class AppModule {
+}
