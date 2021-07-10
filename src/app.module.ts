@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { UserResolver } from './app/user/user.resolver';
 import { UserModule } from './modules/user/user.module';
+import { ShareModule } from './modules/share/share.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { UserModule } from './modules/user/user.module';
     }),
     CqrsModule,
     UserModule,
+    ShareModule,
   ],
   providers: [UserResolver],
 })
