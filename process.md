@@ -128,3 +128,37 @@ vision default instance
   ```bash
 firebase emulators:start --only firestore
  ```
+
+ ### instalr fireestore orm
+```bash
+npm install firebase-admin fireorm reflect-metadata
+nest g cl modules/share/infrastructure/firebase --no-spec
+```
+replace class 
+```javascript
+import admin from 'firebase-admin';
+
+export abstract class Firebase {
+  protected initDefaultApp(): void {
+    if (!Firebase.isAppInit('[DEFAULT]')) {
+      admin.initializeApp({
+        projectId: 'test',
+        credential: admin.credential.applicationDefault(),
+      });
+    }
+  }
+
+  public static isAppInit(name: string): boolean {
+    if (admin.apps.length === 0) {
+      return false;
+    }
+    let isInit = false;
+    admin.apps.forEach(app => {
+      if (app.name === name) {
+        isInit = true;
+      }
+    });
+    return isInit;
+  }
+}
+```
