@@ -20,7 +20,7 @@ export class UserFirestoreRepository
     this.repository = getRepository(UserDao);
   }
 
-  async save(user: User): Promise<void> {
+  async persist(user: User): Promise<void> {
     const dao = UserDao.create(user);
     await this.repository.update(dao);
   }

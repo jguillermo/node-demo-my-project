@@ -186,10 +186,47 @@ agregamos la clase "UserFirestoreRepository" en userModule
 
 ``` javascript
 import { Module } from '@nestjs/common';
-import { UserFirestoreRepository } from './infrastructure/persistence/user-firestore.repository';
+import { CqrsModule } from '@nestjs/cqrs';
 
 @Module({
-  providers: [UserFirestoreRepository],
+  imports: [CqrsModule],
+  providers: [UserFirestoreRepository]
 })
 export class UserModule {}
+
+```
+
+## persit a user
+generate a cqrs command called create, select only propertie User:name
+```bash
+flab
+```
+esto genera 3 archivos, en user/application/create
+- user-create.command
+- user-create.handler
+- user-create.service
+
+debes registrar lso inject generados al modulo para que sea usado
+```javascript
+import { Module } from '@nestjs/common';
+import { CqrsModule } from '@nestjs/cqrs';
+import { UserFirestoreRepository } from './infrastructure/persistence/user-firestore.repository';
+import { UserCreateService } from './application/create/user-create.service';
+import { UserCreateHandler } from './application/create/user-create.handler';
+
+export const CommandHandlers = [UserCreateHandler];
+export const QueryHandlers = [];
+export const Services = [UserCreateService];
+
+@Module({
+  imports: [CqrsModule],
+  providers: [
+    UserFirestoreRepository,
+    ...CommandHandlers,
+    ...QueryHandlers,
+    ...Services,
+  ],
+})
+export class UserModule {}
+
 ```

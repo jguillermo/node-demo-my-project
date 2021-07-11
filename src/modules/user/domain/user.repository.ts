@@ -2,7 +2,7 @@ import { User } from './user';
 import { UserId } from './user-id';
 
 export interface UserRepository {
-  save(user: User);
+  persist(user: User);
 
   findById(id: UserId): Promise<User | null>;
 
