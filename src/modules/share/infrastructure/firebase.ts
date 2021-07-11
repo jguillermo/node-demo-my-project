@@ -1,8 +1,8 @@
 import admin from 'firebase-admin';
 import * as fireorm from 'fireorm';
 
-export abstract class Firebase {
-  protected initDefaultApp(): void {
+export class Firebase {
+  public static initDefaultApp(): void {
     if (!Firebase.isAppInit('[DEFAULT]')) {
       admin.initializeApp({
         projectId: 'test',

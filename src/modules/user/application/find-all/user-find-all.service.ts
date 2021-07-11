@@ -3,13 +3,13 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { UserFirestoreRepository } from '../../infrastructure/persistence/user-firestore.repository';
 import { ListUserResponse } from '../list-user.response';
 import { UserResponse } from '../user.response';
+import { UserRepository } from '../../domain/user.repository';
 
 @Injectable()
 export class UserFindAllService {
-  constructor(private repository: UserFirestoreRepository) {}
+  constructor(private repository: UserRepository) {}
 
   public async execute(): Promise<ListUserResponse> {
     const listUser = await this.repository.findAll();

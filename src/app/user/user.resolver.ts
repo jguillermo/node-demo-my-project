@@ -9,7 +9,7 @@ import { UserFindAllQuery } from '../../modules/user/application/find-all/user-f
 export class UserResolver {
   constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
 
-  @Query((returns) => [UserType],)
+  @Query((returns) => [UserType])
   async users() {
     const data = await this.queryBus.execute(new UserFindAllQuery());
     return data.list;

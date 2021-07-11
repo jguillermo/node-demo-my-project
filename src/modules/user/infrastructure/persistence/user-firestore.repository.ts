@@ -8,15 +8,12 @@ import { UserDao } from './user.dao';
 import { UserRepository } from '../../domain/user.repository';
 
 @Injectable()
-export class UserFirestoreRepository
-  extends Firebase
-  implements UserRepository
-{
+export class UserFirestoreRepository extends UserRepository {
   private repository: BaseFirestoreRepository<UserDao>;
 
   constructor() {
     super();
-    super.initDefaultApp();
+    Firebase.initDefaultApp();
     this.repository = getRepository(UserDao);
   }
 

@@ -1,12 +1,12 @@
 import { User } from './user';
 import { UserId } from './user-id';
 
-export interface UserRepository {
-  persist(user: User);
+export abstract class UserRepository {
+  abstract persist(user: User): Promise<void>;
 
-  findById(id: UserId): Promise<User | null>;
+  abstract findById(id: UserId): Promise<User | null>;
 
-  findAll(): Promise<User[]>;
+  abstract findAll(): Promise<User[]>;
 
-  deleteById(id: UserId): Promise<void>;
+  abstract deleteById(id: UserId): Promise<void>;
 }
