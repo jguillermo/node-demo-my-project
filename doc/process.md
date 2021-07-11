@@ -76,28 +76,11 @@ npm i --save base-ddd
 npm i -g generate-code-ddd
 ```
 
-run cli
-```bash
-flab
-```
-change ./config-cli/user-yml path: src/modules/user for generate code in user module
-
-run cli to generate response and aggregate
-```bash
-flab
 
 ##install firebase firestore
 
-para esto debes estar logueado en firebase https://console.firebase.google.com/
-
 ```bash
 npm install -g firebase-tools
-
-firebase --version
-
-firebase login
-
-firebase init
 ```
 select firestore
 para inciar con firestore necesitamos 4 archivos de configuracion,
@@ -145,3 +128,30 @@ export abstract class Firebase {
   }
 }
 ```
+aqui mas odcumentacion de la integraion del ORM
+
+# CLI RUN
+##vamos a genenerar los value object y aggregate del usuario
+corremos el cli y cerramos ctrl+c para que se genere la carpeta de configuracion
+```bash
+flab
+```
+change ./config-cli/user-yml path: src/modules/user for generate code in user module
+
+```bash
+flab
+```
+corremos la terminal, elegimos el aggregtae User y generamos las propiedades, aggregate y responses
+```bash
+? Select aggregate (Use arrow keys)
+❯ User 
+
+  3) Generate Propertie
+  4) Create Aggregate
+  5) Create Response
+```
+esto va a generar clases dentro de src/modules/user/
+se arma la arquitectura hexagonal 
+- application (casos de uso)
+- domain (value oject, aggregtae y eventos)
+- infrastrcture ( persistencia a la base de datos)

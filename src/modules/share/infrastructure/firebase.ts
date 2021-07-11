@@ -15,7 +15,7 @@ export abstract class Firebase {
       return false;
     }
     let isInit = false;
-    admin.apps.forEach(app => {
+    admin.apps.forEach((app) => {
       if (app.name === name) {
         isInit = true;
       }

@@ -1,4 +1,14 @@
 ## select firestore
+para esto debes estar logueado en firebase https://console.firebase.google.com/
+```bash
+npm install -g firebase-tools
+
+firebase --version
+
+firebase login
+
+firebase init
+```
 
 ```bash
  ◯ Realtime Database: Configure a security rules file for Realtime Database and (optionally) pro
