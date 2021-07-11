@@ -1,4 +1,5 @@
 import admin from 'firebase-admin';
+import * as fireorm from 'fireorm';
 
 export abstract class Firebase {
   protected initDefaultApp(): void {
@@ -7,6 +8,8 @@ export abstract class Firebase {
         projectId: 'test',
         credential: admin.credential.applicationDefault(),
       });
+      const firestore = admin.firestore();
+      fireorm.initialize(firestore);
     }
   }
 

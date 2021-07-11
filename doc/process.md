@@ -9,6 +9,7 @@ npm i --save class-validator class-transformer
 ```
 
 create file src/app/user/user.type.ts
+
 ```javascript
 import { Field, ObjectType } from '@nestjs/graphql';
 
@@ -22,7 +23,9 @@ export class UserType {
 }
 
 ```
+
 create file src/app/user/user.resolver.ts
+
 ```javascript
 import { Query, Resolver } from '@nestjs/graphql';
 import { UserType } from './user.type';
@@ -38,6 +41,7 @@ export class UserResolver {
 ```
 
 replace app.module
+
 ```javascript
 import { CqrsModule } from '@nestjs/cqrs';
 import { Module } from '@nestjs/common';
@@ -55,54 +59,64 @@ import { UserResolver } from './app/user/user.resolver';
   ],
   providers: [UserResolver],
 })
-export class AppModule {}
+export class AppModule {
+}
 
 ```
 
-run server 
+run server
+
 ```bash
 npm run start:dev
 ```
-open link 
+
+open link
 http://localhost:3000/graphql
 
-##generate user module
+## generate user module
+
 ```bash
 nest g mo modules/user
 ```
+
 install ddd-base library and cli tools
+
 ```bash
 npm i --save base-ddd
 npm i -g generate-code-ddd
 ```
 
-
-##install firebase firestore
+## install firebase firestore
 
 ```bash
 npm install -g firebase-tools
 ```
-select firestore
-para inciar con firestore necesitamos 4 archivos de configuracion,
+
+select firestore para inciar con firestore necesitamos 4 archivos de configuracion,
+
 - .firebasrc
 - firebase.json (aqui es donde vamos a configurar los puertos del emulador)
 - firebase.indexes.json
 - firestore.rules
 
- iniciamos el emulador
- ojo :  debes tener instaldo java  https://openjdk.java.net/install/
+iniciamos el emulador ojo :  debes tener instaldo java  https://openjdk.java.net/install/
+
   ```bash
 firebase emulators:start --only firestore
  ```
 
- ### instalar firestore orm
+### instalar firestore orm
+
 ```bash
 npm install firebase-admin fireorm reflect-metadata
 nest g cl modules/share/infrastructure/firebase --no-spec
 ```
-replace class 
+
+replace class
+
 ```javascript
 import admin from 'firebase-admin';
+import * as fireorm from 'fireorm';
 
 export abstract class Firebase {
   protected initDefaultApp(): void {
@@ -111,6 +125,8 @@ export abstract class Firebase {
         projectId: 'test',
         credential: admin.credential.applicationDefault(),
       });
+      const firestore = admin.firestore();
+      fireorm.initialize(firestore);
     }
   }
 
@@ -119,7 +135,7 @@ export abstract class Firebase {
       return false;
     }
     let isInit = false;
-    admin.apps.forEach(app => {
+    admin.apps.forEach((app) => {
       if (app.name === name) {
         isInit = true;
       }
@@ -127,21 +143,29 @@ export abstract class Firebase {
     return isInit;
   }
 }
+
 ```
+
 aqui mas odcumentacion de la integraion del ORM
 
 # CLI RUN
-##vamos a genenerar los value object y aggregate del usuario
+
+## vamos a genenerar los value object y aggregate del usuario
+
 corremos el cli y cerramos ctrl+c para que se genere la carpeta de configuracion
+
 ```bash
 flab
 ```
+
 change ./config-cli/user-yml path: src/modules/user for generate code in user module
 
 ```bash
 flab
 ```
+
 corremos la terminal, elegimos el aggregtae User y generamos las propiedades, aggregate y responses
+
 ```bash
 ? Select aggregate (Use arrow keys)
 ❯ User 
@@ -149,9 +173,23 @@ corremos la terminal, elegimos el aggregtae User y generamos las propiedades, ag
   3) Generate Propertie
   4) Create Aggregate
   5) Create Response
+  6) Create Repository
 ```
-esto va a generar clases dentro de src/modules/user/
-se arma la arquitectura hexagonal 
+
+esto va a generar clases dentro de src/modules/user/ se arma la arquitectura hexagonal
+
 - application (casos de uso)
 - domain (value oject, aggregtae y eventos)
 - infrastrcture ( persistencia a la base de datos)
+
+agregamos la clase "UserFirestoreRepository" en userModule
+
+``` javascript
+import { Module } from '@nestjs/common';
+import { UserFirestoreRepository } from './infrastructure/persistence/user-firestore.repository';
+
+@Module({
+  providers: [UserFirestoreRepository],
+})
+export class UserModule {}
+```
