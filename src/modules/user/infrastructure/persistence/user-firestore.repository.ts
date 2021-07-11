@@ -22,7 +22,7 @@ export class UserFirestoreRepository
 
   async persist(user: User): Promise<void> {
     const dao = UserDao.create(user);
-    await this.repository.update(dao);
+    await this.repository.create(dao);
   }
 
   async findById(id: UserId): Promise<User | null> {

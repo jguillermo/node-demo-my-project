@@ -166,7 +166,7 @@ flab
 
 corremos la terminal, elegimos el aggregtae User y generamos las propiedades, aggregate y responses
 
-```bash
+```shell
 ? Select aggregate (Use arrow keys)
 ❯ User 
 
@@ -198,7 +198,7 @@ export class UserModule {}
 
 ## persit a user
 generate a cqrs command called create, select only propertie User:name
-```bash
+```shell
 flab
 ```
 esto genera 3 archivos, en user/application/create
@@ -229,4 +229,14 @@ export const Services = [UserCreateService];
 })
 export class UserModule {}
 
+```
+
+# run nest whith firestore
+```shell
+firebase emulators:exec "npm run start:dev" --only firestore
+```
+si te da error en el puerto, 
+```shell
+sudo lsof -i tcp:8080
+kill -9 <PID>
 ```

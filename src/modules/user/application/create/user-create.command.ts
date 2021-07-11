@@ -14,10 +14,8 @@ export class UserCreateCommand extends CqBaseDto {
     super();
   }
 
-  @IsDefined()
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  @Field()
   id: string;
 
   @IsDefined()
