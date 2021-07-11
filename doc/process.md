@@ -231,6 +231,8 @@ export class UserModule {}
 
 ```
 
+## generar query findAll
+
 # run nest whith firestore
 ```shell
 firebase emulators:exec "npm run start:dev" --only firestore

@@ -3,10 +3,12 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { UserFirestoreRepository } from './infrastructure/persistence/user-firestore.repository';
 import { UserCreateService } from './application/create/user-create.service';
 import { UserCreateHandler } from './application/create/user-create.handler';
+import { UserFindAllService } from './application/find-all/user-find-all.service';
+import { UserFindAllHandler } from './application/find-all/user-find-all.handler';
 
 export const CommandHandlers = [UserCreateHandler];
-export const QueryHandlers = [];
-export const Services = [UserCreateService];
+export const QueryHandlers = [UserFindAllHandler];
+export const Services = [UserCreateService, UserFindAllService];
 
 @Module({
   imports: [CqrsModule],
