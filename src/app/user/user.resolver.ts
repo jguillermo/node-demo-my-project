@@ -20,8 +20,8 @@ export class UserResolver {
     return data.list;
   }
 
-  @Mutation(() => UserType)
-  async createUser(@Args('input') input: UserCreateCommand) {
+  @Mutation(() => UserType, { name: 'createUser' })
+  async create(@Args('input') input: UserCreateCommand) {
     input.id = UUIDTypeImp.random();
     await this.commandBus.execute(input);
     return await this.queryBus.execute(new UserFindByIdQuery(input.id));
