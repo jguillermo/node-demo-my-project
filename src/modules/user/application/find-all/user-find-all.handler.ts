@@ -7,7 +7,7 @@ import { ListUserResponse } from '../list-user.response';
 export class UserFindAllHandler implements IQueryHandler<UserFindAllQuery> {
   constructor(private service: UserFindAllService) {}
 
-  async execute(query: UserFindAllQuery): Promise<ListUserResponse> {
+  async execute(): Promise<ListUserResponse> {
     return await this.service.execute();
   }
 }

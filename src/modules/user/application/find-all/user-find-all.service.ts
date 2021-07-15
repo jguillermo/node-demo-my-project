@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ListUserResponse } from '../list-user.response';
 import { UserResponse } from '../user.response';
 import { UserRepository } from '../../domain/user.repository';
