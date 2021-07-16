@@ -3,19 +3,19 @@ import { UserType } from './user.type';
 import { UserCreateCommand } from '../../modules/user/application/create/user-create.command';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { UUIDTypeImp } from 'base-ddd/dist/ValueObject/Implement/UUIDTypeImp';
-import { UserFindAllQuery } from '../../modules/user/application/find-all/user-find-all.query';
 import { UserFindByIdQuery } from '../../modules/user/application/find-by-id/user-find-by-id.query';
 import { ListUserResponse } from '../../modules/user/application/list-user.response';
 import { UserResponse } from '../../modules/user/application/user.response';
+import { UserListQuery } from '../../modules/user/application/list/user-list.query';
 
 @Resolver(() => UserType)
 export class UserResolver {
   constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
 
-  @Query(() => [UserType])
-  async users(): Promise<UserResponse[]> {
+  @Query(() => [UserType], { name: 'listUser' })
+  async list(): Promise<UserResponse[]> {
     const data: ListUserResponse = await this.queryBus.execute(
-      new UserFindAllQuery(),
+      new UserListQuery(),
     );
     return data.list;
   }

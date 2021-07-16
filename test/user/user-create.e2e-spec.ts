@@ -10,6 +10,10 @@ describe('User Create [createUser] (e2e)', () => {
   let userRepository: UserRepository;
   beforeEach(async () => {
     ({ app, userRepository } = await TestingE2EModule.create());
+    const users = await userRepository.findAll({});
+    users.map((user) => {
+      userRepository.deleteById(user.id);
+    });
   });
 
   it('data ok', () => {

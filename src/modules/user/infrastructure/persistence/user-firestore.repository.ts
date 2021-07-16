@@ -27,7 +27,7 @@ export class UserFirestoreRepository extends UserRepository {
     return dao ? dao.toDomain() : null;
   }
 
-  async findAll(): Promise<User[]> {
+  async findAll(filters: any = {}): Promise<User[]> {
     const daos = await this.repository.find();
     return daos.map((dao) => {
       return dao.toDomain();
