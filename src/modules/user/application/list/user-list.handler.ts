@@ -12,7 +12,7 @@ export class UserListHandler implements IQueryHandler<UserListQuery> {
   async execute(query: UserListQuery): Promise<ListUserResponse> {
     const id = new UUIDTypeImp(query.id);
     const name = new StringTypeImp(query.name);
-
+    //todo agregar paginator y order
     return await this.service.execute(id, name);
   }
 }

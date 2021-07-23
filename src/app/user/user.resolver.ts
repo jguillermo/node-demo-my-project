@@ -13,10 +13,10 @@ export class UserResolver {
   constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
 
   @Query(() => [UserType], { name: 'listUser' })
-  async list(): Promise<UserResponse[]> {
-    const data: ListUserResponse = await this.queryBus.execute(
-      new UserListQuery(),
-    );
+  async list(
+    @Args('filter', { nullable: true }) filter: UserListQuery,
+  ): Promise<UserResponse[]> {
+    const data: ListUserResponse = await this.queryBus.execute(filter);
     return data.list;
   }
 

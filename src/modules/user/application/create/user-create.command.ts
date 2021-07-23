@@ -1,9 +1,9 @@
 import { IsDefined, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { Field, InputType } from '@nestjs/graphql';
-import { CqBaseDto } from '../../../share/application/cq-base.dto';
+import { BaseDto } from '../../../share/application/base.dto';
 
 @InputType('UserCreateInput')
-export class UserCreateCommand extends CqBaseDto {
+export class UserCreateCommand extends BaseDto {
   constructor() {
     super();
   }

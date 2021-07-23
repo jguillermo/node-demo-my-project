@@ -1,6 +1,6 @@
 import { IsOptional } from 'class-validator';
 
-export abstract class CqBaseDto {
+export abstract class BaseDto {
   @IsOptional()
   public _transactionId: string;
 

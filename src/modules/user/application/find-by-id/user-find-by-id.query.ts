@@ -1,9 +1,9 @@
 import { IsDefined, IsNotEmpty, IsString } from 'class-validator';
 import { InputType } from '@nestjs/graphql';
-import { CqBaseDto } from '../../../share/application/cq-base.dto';
+import { BaseDto } from '../../../share/application/base.dto';
 
 @InputType('UserFindByIdInput')
-export class UserFindByIdQuery extends CqBaseDto {
+export class UserFindByIdQuery extends BaseDto {
   constructor(id: string) {
     super();
     this.id = id;
