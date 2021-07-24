@@ -8,6 +8,7 @@ import { UserListHandler } from './application/list/user-list.handler';
 import { UserListService } from './application/list/user-list.service';
 import { UserPersistService } from './application/persist/user-persist.service';
 import { UserPersistHandler } from './application/persist/user-persist.handler';
+import { ShareModule } from '../share/share.module';
 
 export const CommandHandlers = [UserPersistHandler];
 export const QueryHandlers = [UserListHandler, UserFindByIdHandler];
@@ -18,7 +19,7 @@ export const Services = [
 ];
 
 @Module({
-  imports: [CqrsModule],
+  imports: [CqrsModule, ShareModule],
   providers: [
     {
       provide: UserRepository,

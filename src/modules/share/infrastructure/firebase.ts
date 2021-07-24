@@ -1,5 +1,4 @@
 import admin from 'firebase-admin';
-import * as fireorm from 'fireorm';
 
 export class Firebase {
   public static initDefaultApp(): void {
@@ -8,8 +7,6 @@ export class Firebase {
         projectId: 'test',
         credential: admin.credential.applicationDefault(),
       });
-      const firestore = admin.firestore();
-      fireorm.initialize(firestore);
     }
   }
 

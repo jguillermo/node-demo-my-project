@@ -1,40 +1,42 @@
-import { Firebase } from '../../../share/infrastructure/firebase';
-import { BaseFirestoreRepository } from 'fireorm/lib/src/BaseFirestoreRepository';
-import { getRepository } from 'fireorm';
 import { Injectable } from '@nestjs/common';
 import { User } from '../../domain/user';
 import { UserId } from '../../domain/user-id';
 import { UserDao } from './user.dao';
 import { UserRepository } from '../../domain/user.repository';
+import { FirestoreService } from '../../../share/infrastructure/firestore/firestore.service';
 
 @Injectable()
 export class UserFirestoreRepository extends UserRepository {
-  private repository: BaseFirestoreRepository<UserDao>;
+  private _collection = 'users';
 
-  constructor() {
+  constructor(private readonly firestore: FirestoreService) {
     super();
-    Firebase.initDefaultApp();
-    this.repository = getRepository(UserDao);
   }
 
   async persist(user: User): Promise<void> {
-    const dao = UserDao.create(user);
-    await this.repository.create(dao);
+    const dao = UserDao.fromAggregate(user);
+    await this.firestore.persist(this._collection, dao.id, dao.data);
   }
 
   async findById(id: UserId): Promise<User | null> {
-    const dao = await this.repository.findById(id.value);
-    return dao ? dao.toDomain() : null;
+    const item = await this.firestore.findOneDocumentById(
+      this._collection,
+      id.value,
+    );
+    if (!item) {
+      return null;
+    }
+    return UserDao.fromItem(item).toAggregate();
   }
 
   async findAll(filters: any = {}): Promise<User[]> {
-    const daos = await this.repository.find();
-    return daos.map((dao) => {
-      return dao.toDomain();
+    const items = await this.firestore.findAll(this._collection);
+    return items.map((item) => {
+      return UserDao.fromItem(item).toAggregate();
     });
   }
 
   async deleteById(id: UserId): Promise<void> {
-    await this.repository.delete(id.value);
+    await this.firestore.delete(this._collection, id.value);
   }
 }
