@@ -6,6 +6,18 @@ export class ResponseId {
   }
 }
 
+export class ResponseStatus {
+  status: string;
+
+  constructor(status: string) {
+    this.status = status;
+  }
+
+  static ok() {
+    return new ResponseStatus('ok');
+  }
+}
+
 export class ApplicationResponse {
   public static id(id: string): ResponseId {
     return new ResponseId(id);

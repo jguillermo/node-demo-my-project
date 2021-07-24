@@ -9,13 +9,16 @@ import { UserListService } from './application/list/user-list.service';
 import { UserPersistService } from './application/persist/user-persist.service';
 import { UserPersistHandler } from './application/persist/user-persist.handler';
 import { ShareModule } from '../share/share.module';
+import { UserDeleteHandler } from './application/delete/user-delete.handler';
+import { UserDeleteService } from './application/delete/user-delete.service';
 
-export const CommandHandlers = [UserPersistHandler];
+export const CommandHandlers = [UserPersistHandler, UserDeleteHandler];
 export const QueryHandlers = [UserListHandler, UserFindByIdHandler];
 export const Services = [
   UserPersistService,
   UserListService,
   UserFindByIdService,
+  UserDeleteService,
 ];
 
 @Module({

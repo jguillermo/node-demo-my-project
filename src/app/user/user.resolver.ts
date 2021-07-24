@@ -6,6 +6,9 @@ import { ListUserResponse } from '../../modules/user/application/list-user.respo
 import { UserResponse } from '../../modules/user/application/user.response';
 import { UserListQuery } from '../../modules/user/application/list/user-list.query';
 import { UserPersistCommand } from '../../modules/user/application/persist/user-persist.command';
+import { UserDeleteCommand } from '../../modules/user/application/delete/user-delete.command';
+import { ResponseStatus } from '../../modules/share/application/applicationResponse';
+import { StatusType } from '../status.type';
 
 @Resolver(() => UserType)
 export class UserResolver {
@@ -20,8 +23,18 @@ export class UserResolver {
   }
 
   @Mutation(() => UserType, { name: 'userPersist' })
-  async persist(@Args('input') input: UserPersistCommand) {
+  async persist(
+    @Args('input') input: UserPersistCommand,
+  ): Promise<UserResponse> {
     await this.commandBus.execute(input);
     return await this.queryBus.execute(new UserFindByIdQuery(input.id));
+  }
+
+  @Mutation(() => StatusType, { name: 'userDelete' })
+  async delete(
+    @Args('input') input: UserDeleteCommand,
+  ): Promise<ResponseStatus> {
+    await this.commandBus.execute(input);
+    return ResponseStatus.ok();
   }
 }
