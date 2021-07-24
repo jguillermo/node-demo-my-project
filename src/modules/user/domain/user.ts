@@ -4,7 +4,8 @@ import { UserName } from './user-name';
 export class User {
   constructor(private _id: UserId, private _name: UserName) {}
 
-  static create(id: UserId, name: UserName) {
+  static create(id: UserId, name: UserName): User {
+    //todo: create event create
     return new User(id, name);
   }
 
@@ -14,5 +15,10 @@ export class User {
 
   get name(): UserName {
     return this._name;
+  }
+
+  change(name: UserName): void {
+    this._name = name;
+    //todo: create event update
   }
 }

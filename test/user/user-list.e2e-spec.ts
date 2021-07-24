@@ -6,7 +6,7 @@ import { User } from '../../src/modules/user/domain/user';
 import { UserId } from '../../src/modules/user/domain/user-id';
 import { UserName } from '../../src/modules/user/domain/user-name';
 
-describe('User list [listUser] (e2e)', () => {
+describe('User list [userList] (e2e)', () => {
   let app: INestApplication;
   let userRepository: UserRepository;
   beforeEach(async () => {
@@ -20,7 +20,7 @@ describe('User list [listUser] (e2e)', () => {
   it('get empty', async () => {
     const query = `
           query{
-            listUser{
+            userList{
               id
               name
             }
@@ -32,7 +32,7 @@ describe('User list [listUser] (e2e)', () => {
       .then(async (response) => {
         expect(response.body).toEqual({
           data: {
-            listUser: [],
+            userList: [],
           },
         });
         expect(response.statusCode).toEqual(200);
@@ -49,7 +49,7 @@ describe('User list [listUser] (e2e)', () => {
 
     const query = `
           query{
-            listUser{
+            userList{
               id
               name
             }
@@ -61,7 +61,7 @@ describe('User list [listUser] (e2e)', () => {
       .then(async (response) => {
         expect(response.body).toEqual({
           data: {
-            listUser: [
+            userList: [
               {
                 id: '0c4eeef8-5b32-470f-bdf9-7ec40ecf6877',
                 name: 'Guille',
