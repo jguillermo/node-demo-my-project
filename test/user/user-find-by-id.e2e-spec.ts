@@ -54,4 +54,31 @@ describe('User entity [user] (e2e)', () => {
         expect(response.statusCode).toEqual(200);
       });
   });
+
+  it('get not exit', async () => {
+    const query = `
+          query{
+            user(input:{id: "9e190c8f-20d4-41fe-b114-df8782a511c3"}){
+              id
+              name
+            }
+          }
+          `;
+    return request(app.getHttpServer())
+      .post(`/graphql`)
+      .send({ query: query, variables: {} })
+      .then(async (response) => {
+        expect(response.body).toEqual({
+          data: {
+            user: null,
+          },
+        });
+        const user: User = await userRepository.findById(
+          new UserId('9e190c8f-20d4-41fe-b114-df8782a511c3'),
+        );
+        expect(user).toBeNull();
+
+        expect(response.statusCode).toEqual(200);
+      });
+  });
 });

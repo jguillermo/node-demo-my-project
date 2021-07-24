@@ -22,10 +22,10 @@ export class UserResolver {
     return data.list;
   }
 
-  @Query(() => UserType, { name: 'user' })
+  @Query(() => UserType, { name: 'user', nullable: true })
   async aggregate(
     @Args('input') input: UserFindByIdQuery,
-  ): Promise<UserResponse> {
+  ): Promise<UserResponse | null> {
     return await this.queryBus.execute(input);
   }
 

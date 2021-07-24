@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../../domain/user.repository';
 import { UserId } from '../../domain/user-id';
 import { UserResponse } from '../user.response';
@@ -7,10 +7,10 @@ import { UserResponse } from '../user.response';
 export class UserFindByIdService {
   constructor(private repository: UserRepository) {}
 
-  public async execute(id: UserId): Promise<UserResponse> {
+  public async execute(id: UserId): Promise<UserResponse | null> {
     const user = await this.repository.findById(id);
     if (!user) {
-      throw new NotFoundException(`User with id ${id} not found`);
+      return null;
     }
     return UserResponse.fromAggregate(user);
   }
