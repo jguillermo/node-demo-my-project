@@ -22,6 +22,13 @@ export class UserResolver {
     return data.list;
   }
 
+  @Query(() => UserType, { name: 'user' })
+  async aggregate(
+    @Args('input') input: UserFindByIdQuery,
+  ): Promise<UserResponse> {
+    return await this.queryBus.execute(input);
+  }
+
   @Mutation(() => UserType, { name: 'userPersist' })
   async persist(
     @Args('input') input: UserPersistCommand,
