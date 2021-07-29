@@ -3,7 +3,11 @@ import { User } from '../../domain/user';
 import { UserId } from '../../domain/user-id';
 import { UserDao } from './user.dao';
 import { UserRepository } from '../../domain/user.repository';
-import { FirestoreService } from '../../../share/infrastructure/firestore/firestore.service';
+import {
+  FirestoreService,
+  Where,
+  WhereOpStr,
+} from '../../../share/infrastructure/firestore/firestore.service';
 
 @Injectable()
 export class UserFirestoreRepository extends UserRepository {
@@ -30,7 +34,15 @@ export class UserFirestoreRepository extends UserRepository {
   }
 
   async findAll(filters: any = {}): Promise<User[]> {
-    const items = await this.firestore.findAll(this._collection);
+    const where: Where[] = [];
+    if (filters.id?.isNotNull) {
+      where.push({
+        fieldPath: 'id',
+        opStr: WhereOpStr.EQUAL_TO,
+        value: filters.id.value,
+      });
+    }
+    const items = await this.firestore.findAll(this._collection, where);
     return items.map((item) => {
       return UserDao.fromItem(item).toAggregate();
     });

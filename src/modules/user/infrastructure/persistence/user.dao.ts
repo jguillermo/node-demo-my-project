@@ -23,6 +23,7 @@ export class UserDao {
 
   get data() {
     return {
+      id: this.id,
       name: this.name,
     };
   }

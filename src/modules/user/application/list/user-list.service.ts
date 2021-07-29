@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../../domain/user.repository';
-import { UUIDTypeImp } from 'base-ddd/dist/ValueObject/Implement/UUIDTypeImp';
 import { StringTypeImp } from 'base-ddd/dist/ValueObject/Implement/StringTypeImp';
 import { ListUserResponse } from '../list-user.response';
 import { UserResponse } from '../user.response';
 import { NumberTypeImp } from 'base-ddd/dist/ValueObject/Implement/NumberTypeImp';
+import { UUIDTypeImp } from 'base-ddd/dist/ValueObject/Implement/UUIDTypeImp';
 
 @Injectable()
 export class UserListService {
@@ -26,6 +26,7 @@ export class UserListService {
       orderOrderBy,
       orderDirection,
     });
+    id.isNull;
     return new ListUserResponse(
       listUser.map((user) => {
         return UserResponse.fromAggregate(user);

@@ -6,6 +6,26 @@ import CollectionReference = admin.firestore.CollectionReference;
 import QuerySnapshot = admin.firestore.QuerySnapshot;
 import { Firebase } from '../firebase';
 import { ItemDto } from './item.dto';
+import { Query, WhereFilterOp } from '@google-cloud/firestore';
+
+export enum WhereOpStr {
+  LESS_THAN = '<',
+  LESS_THAN_OR_EQUAL_TO = '<=',
+  EQUAL_TO = '==',
+  GREATER_THAN = '>',
+  GREATER_THAN_OR_EQUAL_TO = '>=',
+  NOT_EQUAL_TO = '!=',
+  ARRAY_CONTAINS = 'array-contains',
+  ARRAY_CONTAINS_ANY = 'array-contains-any',
+  IN = 'in',
+  NOT_IN = 'not-in',
+}
+
+export interface Where {
+  fieldPath: string;
+  opStr: WhereOpStr;
+  value: string;
+}
 
 @Injectable()
 export class FirestoreService {
@@ -91,10 +111,18 @@ export class FirestoreService {
     }
   }
 
-  public async findAll(collection: string): Promise<ItemDto[]> {
+  public async findAll(
+    collection: string,
+    filters: Where[] = [],
+  ): Promise<ItemDto[]> {
     try {
       const storeDb = this.getCollection(collection);
-      const getDoc = await storeDb.get();
+
+      const where = filters.reduce<Query>((acc, cur) => {
+        const op = cur.opStr as WhereFilterOp;
+        return acc.where(cur.fieldPath, op, cur.value);
+      }, storeDb);
+      const getDoc = await where.get();
       return this.processGetAllData(getDoc);
     } catch (e) {
       throw new InternalServerErrorException(`Error en el servidor ${e}`);
