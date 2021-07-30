@@ -82,7 +82,7 @@ describe('User list [userList] (e2e)', () => {
     });
   });
 
-  describe('filter', () => {
+  describe('filter one filter', () => {
     it('id', async () => {
       await userRepository.persist(
         new User(
@@ -120,14 +120,46 @@ describe('User list [userList] (e2e)', () => {
               ],
             },
           });
+          expect(response.statusCode).toEqual(200);
+        });
+    });
+    it('name', async () => {
+      await userRepository.persist(
+        new User(
+          new UserId('bd1b2971-f289-4cc6-8829-96188c3dd95b'),
+          new UserName('Guille'),
+        ),
+      );
 
-          const user: User = await userRepository.findById(
-            new UserId('bd1b2971-f289-4cc6-8829-96188c3dd95b'),
-          );
-          expect(user).not.toBeNull();
-          expect(user.id.value).toEqual('bd1b2971-f289-4cc6-8829-96188c3dd95b');
-          expect(user.name.value).toEqual('Guille');
+      await userRepository.persist(
+        new User(
+          new UserId('018f45af-55a6-449c-88aa-767c4200b902'),
+          new UserName('Jose'),
+        ),
+      );
 
+      const query = `
+          query{
+            userList(filter:{name:"Guille"}){
+              id
+              name
+            }
+          }
+          `;
+      return request(app.getHttpServer())
+        .post(`/graphql`)
+        .send({ query: query, variables: {} })
+        .then(async (response) => {
+          expect(response.body).toEqual({
+            data: {
+              userList: [
+                {
+                  id: 'bd1b2971-f289-4cc6-8829-96188c3dd95b',
+                  name: 'Guille',
+                },
+              ],
+            },
+          });
           expect(response.statusCode).toEqual(200);
         });
     });

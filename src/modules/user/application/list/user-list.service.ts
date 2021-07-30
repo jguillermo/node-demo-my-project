@@ -5,6 +5,7 @@ import { ListUserResponse } from '../list-user.response';
 import { UserResponse } from '../user.response';
 import { NumberTypeImp } from 'base-ddd/dist/ValueObject/Implement/NumberTypeImp';
 import { UUIDTypeImp } from 'base-ddd/dist/ValueObject/Implement/UUIDTypeImp';
+import { FilterOpStr } from '../../../share/domain/repository';
 
 @Injectable()
 export class UserListService {
@@ -18,15 +19,18 @@ export class UserListService {
     orderOrderBy: StringTypeImp,
     orderDirection: StringTypeImp,
   ): Promise<ListUserResponse> {
-    const listUser = await this.repository.findAll({
-      id,
-      name,
-      paginatorPage,
-      paginatorPerPage,
-      orderOrderBy,
-      orderDirection,
-    });
-    id.isNull;
+    const listUser = await this.repository.findAll([
+      {
+        field: 'id',
+        opStr: FilterOpStr.EQUAL_TO,
+        value: id.value,
+      },
+      {
+        field: 'name',
+        opStr: FilterOpStr.EQUAL_TO,
+        value: name.value,
+      },
+    ]);
     return new ListUserResponse(
       listUser.map((user) => {
         return UserResponse.fromAggregate(user);
