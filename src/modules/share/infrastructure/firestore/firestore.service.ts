@@ -8,6 +8,8 @@ import { Firebase } from '../firebase';
 import { ItemDto } from './item.dto';
 import { Query, WhereFilterOp } from '@google-cloud/firestore';
 import { FilterItem } from '../../domain/repository';
+import { PaginatorType } from '../../domain/paginator.type';
+import { OrderType } from '../../domain/order.type';
 
 @Injectable()
 export class FirestoreService {
@@ -96,6 +98,8 @@ export class FirestoreService {
   public async findAll(
     collection: string,
     filters: Array<FilterItem> = [],
+    paginator: PaginatorType,
+    order: OrderType,
   ): Promise<ItemDto[]> {
     try {
       const storeDb = this.getCollection(collection);
