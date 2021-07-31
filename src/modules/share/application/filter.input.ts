@@ -6,7 +6,7 @@ export abstract class OrderInput {
   @IsOptional()
   @IsString()
   @Field({ nullable: true })
-  orderBy?: string;
+  field?: string;
 
   @IsOptional()
   @IsInt()

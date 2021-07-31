@@ -214,4 +214,77 @@ describe('User list [userList] (e2e)', () => {
         });
     });
   });
+
+  describe('order', () => {
+    it('should return 2 items desc', async () => {
+      await userRepository.persist(
+        new User(
+          new UserId('fb9525a6-0288-4e20-ae41-fc1939c37e01'),
+          new UserName('User1'),
+        ),
+      );
+
+      await userRepository.persist(
+        new User(
+          new UserId('fb9525a6-0288-4e20-ae41-fc1939c37e02'),
+          new UserName('User2'),
+        ),
+      );
+      const query = `
+          query{
+            userList(filter:{order:{field:"id", direction:"desc"}}){
+              id
+              name
+            }
+          }
+          `;
+      return request(app.getHttpServer())
+        .post(`/graphql`)
+        .send({ query: query, variables: {} })
+        .then(async (response) => {
+          expect(response.body.data.userList[0].id).toEqual(
+            'fb9525a6-0288-4e20-ae41-fc1939c37e02',
+          );
+          expect(response.body.data.userList[1].id).toEqual(
+            'fb9525a6-0288-4e20-ae41-fc1939c37e01',
+          );
+          expect(response.statusCode).toEqual(200);
+        });
+    });
+    it('should return 2 items asc', async () => {
+      await userRepository.persist(
+        new User(
+          new UserId('fb9525a6-0288-4e20-ae41-fc1939c37e01'),
+          new UserName('User1'),
+        ),
+      );
+
+      await userRepository.persist(
+        new User(
+          new UserId('fb9525a6-0288-4e20-ae41-fc1939c37e02'),
+          new UserName('User2'),
+        ),
+      );
+      const query = `
+          query{
+            userList(filter:{order:{field:"id", direction:"asc"}}){
+              id
+              name
+            }
+          }
+          `;
+      return request(app.getHttpServer())
+        .post(`/graphql`)
+        .send({ query: query, variables: {} })
+        .then(async (response) => {
+          expect(response.body.data.userList[0].id).toEqual(
+            'fb9525a6-0288-4e20-ae41-fc1939c37e01',
+          );
+          expect(response.body.data.userList[1].id).toEqual(
+            'fb9525a6-0288-4e20-ae41-fc1939c37e02',
+          );
+          expect(response.statusCode).toEqual(200);
+        });
+    });
+  });
 });

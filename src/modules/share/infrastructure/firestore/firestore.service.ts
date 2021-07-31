@@ -6,7 +6,11 @@ import CollectionReference = admin.firestore.CollectionReference;
 import QuerySnapshot = admin.firestore.QuerySnapshot;
 import { Firebase } from '../firebase';
 import { ItemDto } from './item.dto';
-import { Query, WhereFilterOp } from '@google-cloud/firestore';
+import {
+  Query,
+  WhereFilterOp,
+  OrderByDirection,
+} from '@google-cloud/firestore';
 import { FilterItem } from '../../domain/repository';
 import { PaginatorType } from '../../domain/paginator.type';
 import { OrderType } from '../../domain/order.type';
@@ -74,6 +78,13 @@ export class FirestoreService {
         const op = cur.opStr as WhereFilterOp;
         return acc.where(cur.field, op, cur.value);
       }, storeDb);
+
+      if (!order.isEmpty()) {
+        where = where.orderBy(
+          order.field.value,
+          order.direction.value as OrderByDirection,
+        );
+      }
 
       if (!paginator.isEmpty()) {
         const startAt = (paginator.page.value - 1) * paginator.perPage.value;

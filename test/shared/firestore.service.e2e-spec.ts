@@ -14,7 +14,7 @@ describe('FirestoreService (infrastructure)', () => {
     const filterParam = `020b635e-ca5c-43f3-9bab-55c7039dc0${id}`;
     const dataPersist = {
       id: resourceId,
-      storage: 1,
+      storage: id,
       color: 'blue',
       param: filterParam,
     };
@@ -66,7 +66,7 @@ describe('FirestoreService (infrastructure)', () => {
   describe('findOneDocumentById', () => {
     describe('when data with ID exist', () => {
       it('should return the data', async () => {
-        const { resourceId, dataPersist, filterParam } = await persist(10);
+        const { resourceId, dataPersist } = await persist(10);
         const result = await firestoreService.findOneDocumentById(
           collection,
           resourceId,
@@ -187,6 +187,60 @@ describe('FirestoreService (infrastructure)', () => {
           expect(result).toBeDefined();
           expect(result.length).toEqual(1);
           expect(result[0].id).toEqual(resourceId);
+        });
+      });
+      describe('when data exist order', () => {
+        it('should return the two data, order id desc', async () => {
+          await persist(31);
+          await persist(32);
+          await persist(33);
+
+          const result = await firestoreService.findAll(
+            collection,
+            [],
+            PaginatorType.empty(),
+            OrderType.create('id', 'desc'),
+          );
+          expect(result).toBeDefined();
+          expect(result.length).toEqual(3);
+          expect(result[0].data.storage).toEqual(33);
+          expect(result[1].data.storage).toEqual(32);
+          expect(result[2].data.storage).toEqual(31);
+        });
+        it('should return the two data, order id asc', async () => {
+          await persist(31);
+          await persist(32);
+          await persist(33);
+
+          const result = await firestoreService.findAll(
+            collection,
+            [],
+            PaginatorType.empty(),
+            OrderType.create('id', 'asc'),
+          );
+          expect(result).toBeDefined();
+          expect(result.length).toEqual(3);
+          expect(result[0].data.storage).toEqual(31);
+          expect(result[1].data.storage).toEqual(32);
+          expect(result[2].data.storage).toEqual(33);
+        });
+      });
+
+      describe('when data exist order and page', () => {
+        it('should return the one item, page', async () => {
+          await persist(31);
+          await persist(32);
+          await persist(33);
+
+          const result = await firestoreService.findAll(
+            collection,
+            [],
+            PaginatorType.create(2, 2),
+            OrderType.create('id', 'asc'),
+          );
+          expect(result).toBeDefined();
+          expect(result.length).toEqual(1);
+          expect(result[0].data.storage).toEqual(33);
         });
       });
     });

@@ -19,10 +19,7 @@ export class UserListHandler implements IQueryHandler<UserListQuery> {
       query.paginator?.perPage,
     );
 
-    const order = OrderType.create(
-      query.order?.orderBy,
-      query.order?.direction,
-    );
+    const order = OrderType.create(query.order?.field, query.order?.direction);
 
     return await this.service.execute(id, name, paginator, order);
   }
