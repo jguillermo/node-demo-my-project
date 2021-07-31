@@ -33,9 +33,9 @@ export class UserFirestoreRepository extends UserRepository {
   }
 
   async findAll(
-    filters: Array<FilterItem>,
-    paginator: PaginatorType,
-    order: OrderType,
+    filters?: Array<FilterItem>,
+    paginator?: PaginatorType,
+    order?: OrderType,
   ): Promise<User[]> {
     if (!Array.isArray(filters)) {
       filters = [];

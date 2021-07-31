@@ -11,7 +11,7 @@ describe('User Create [userPersist] (e2e)', () => {
   let userRepository: UserRepository;
   beforeEach(async () => {
     ({ app, userRepository } = await TestingE2EModule.create());
-    const users = await userRepository.findAll({});
+    const users = await userRepository.findAll();
     users.map((user) => {
       userRepository.deleteById(user.id);
     });
