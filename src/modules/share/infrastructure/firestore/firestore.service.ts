@@ -62,39 +62,6 @@ export class FirestoreService {
     }
   }
 
-  public async findFirstDocumentByFilter(
-    collection: string,
-    fieldPath: string,
-    opStr: any,
-    value: any,
-  ): Promise<ItemDto> {
-    const list: ItemDto[] = await this.findAllDocumentByFilter(
-      collection,
-      fieldPath,
-      opStr,
-      value,
-    );
-    if (!list) {
-      return null;
-    }
-    return list[0];
-  }
-
-  public async findAllDocumentByFilter(
-    collection: string,
-    fieldPath: string,
-    opStr: any,
-    value: any,
-  ): Promise<ItemDto[]> {
-    try {
-      const storeDb = this.getCollection(collection);
-      const getDoc = await storeDb.where(fieldPath, opStr, value).get();
-      return this.processGetAllData(getDoc);
-    } catch (e) {
-      throw new InternalServerErrorException(`Error en el servidor ${e}`);
-    }
-  }
-
   public async findAll(
     collection: string,
     filters: Array<FilterItem> = [],
@@ -103,10 +70,16 @@ export class FirestoreService {
   ): Promise<ItemDto[]> {
     try {
       const storeDb = this.getCollection(collection);
-      const where = filters.reduce<Query>((acc, cur) => {
+      let where = filters.reduce<Query>((acc, cur) => {
         const op = cur.opStr as WhereFilterOp;
         return acc.where(cur.field, op, cur.value);
       }, storeDb);
+
+      if (!paginator.isEmpty()) {
+        const startAt = (paginator.page.value - 1) * paginator.perPage.value;
+        where = where.offset(startAt).limit(paginator.perPage.value);
+      }
+
       const getDoc = await where.get();
       return this.processGetAllData(getDoc);
     } catch (e) {

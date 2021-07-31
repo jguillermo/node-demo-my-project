@@ -164,4 +164,54 @@ describe('User list [userList] (e2e)', () => {
         });
     });
   });
+
+  describe('paginator', () => {
+    it('page 1 perPage 1', async () => {
+      await userRepository.persist(
+        new User(
+          new UserId('fb9525a6-0288-4e20-ae41-fc1939c37e01'),
+          new UserName('User1'),
+        ),
+      );
+
+      await userRepository.persist(
+        new User(
+          new UserId('fb9525a6-0288-4e20-ae41-fc1939c37e02'),
+          new UserName('User2'),
+        ),
+      );
+
+      await userRepository.persist(
+        new User(
+          new UserId('fb9525a6-0288-4e20-ae41-fc1939c37e03'),
+          new UserName('User3'),
+        ),
+      );
+
+      const query = `
+          query{
+            userList(filter:{paginator:{page:1, perPage:1}}){
+              id
+              name
+            }
+          }
+          `;
+      return request(app.getHttpServer())
+        .post(`/graphql`)
+        .send({ query: query, variables: {} })
+        .then(async (response) => {
+          expect(response.body).toEqual({
+            data: {
+              userList: [
+                {
+                  id: 'fb9525a6-0288-4e20-ae41-fc1939c37e01',
+                  name: 'User1',
+                },
+              ],
+            },
+          });
+          expect(response.statusCode).toEqual(200);
+        });
+    });
+  });
 });

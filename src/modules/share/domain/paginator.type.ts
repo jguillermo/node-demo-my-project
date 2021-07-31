@@ -21,4 +21,8 @@ export class PaginatorType {
   get perPage(): NumberTypeImp {
     return this._perPage;
   }
+
+  isEmpty() {
+    return this._page.isNull && this._perPage.isNull;
+  }
 }
