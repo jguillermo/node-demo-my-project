@@ -15,12 +15,6 @@ export class TestingE2EModule {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
-    const userRepository: UserRepository =
-      moduleFixture.get<UserRepository>(UserRepository);
-
-    const firestoreService: FirestoreService =
-      moduleFixture.get<FirestoreService>(FirestoreService);
-
     const app: INestApplication = moduleFixture.createNestApplication();
     app.useGlobalPipes(
       new ValidationPipe({
@@ -32,8 +26,8 @@ export class TestingE2EModule {
     await app.init();
     return {
       app,
-      userRepository,
-      firestoreService,
+      userRepository: moduleFixture.get<UserRepository>(UserRepository),
+      firestoreService: moduleFixture.get<FirestoreService>(FirestoreService),
     };
   }
 }
