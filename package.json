@@ -34,7 +34,6 @@
     "class-validator": "^0.13.1",
     "firebase-admin": "^9.10.0",
     "graphql": "^15.5.1",
-    "graphql-tools": "^7.0.5",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.6"
   },
