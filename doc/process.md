@@ -2,7 +2,7 @@
 
 ```bash
 npm i -g @nestjs/cli
-nest new my-proyect
+nest new my-project
 npm install --save @nestjs/cqrs
 npm i @nestjs/graphql graphql-tools graphql apollo-server-express
 npm i --save class-validator class-transformer

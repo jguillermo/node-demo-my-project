@@ -28,9 +28,6 @@ format-fix:
 test-unit:
 	npm run test
 
-test-unit-cov:
-	npm run test:cov
-
 test-e2e:
 	firebase emulators:exec "npm run test:e2e" --only firestore
 
@@ -39,7 +36,7 @@ test:
 	@make fix
 	@make format
 	@make lint
-	@#make test-unit-cov
+	@make test-unit
 	@make test-e2e
 
 fix:
