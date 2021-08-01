@@ -12,9 +12,9 @@ describe('User list [userList] (e2e)', () => {
   beforeEach(async () => {
     ({ app, userRepository } = await TestingE2EModule.create());
     const users = await userRepository.findAll();
-    users.map((user) => {
-      userRepository.deleteById(user.id);
-    });
+    for await (const user of users) {
+      await userRepository.deleteById(user.id);
+    }
   });
   describe('whitout filter', () => {
     it('get empty', async () => {

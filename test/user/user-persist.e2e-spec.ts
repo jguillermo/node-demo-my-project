@@ -12,9 +12,9 @@ describe('User Create [userPersist] (e2e)', () => {
   beforeEach(async () => {
     ({ app, userRepository } = await TestingE2EModule.create());
     const users = await userRepository.findAll();
-    users.map((user) => {
-      userRepository.deleteById(user.id);
-    });
+    for await (const user of users) {
+      await userRepository.deleteById(user.id);
+    }
   });
 
   it('data persist ok', () => {
