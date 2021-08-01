@@ -242,3 +242,9 @@ si te da error en el puerto,
 sudo lsof -i tcp:8080
 kill -9 <PID>
 ```
+
+##install faker for data
+```shell
+npm i faker --save-dev 
+npm i @types/faker --save-dev
+```

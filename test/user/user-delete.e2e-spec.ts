@@ -3,8 +3,7 @@ import * as request from 'supertest';
 import { TestingE2EModule } from '../testing-e2-e-module';
 import { UserRepository } from '../../src/modules/user/domain/user.repository';
 import { User } from '../../src/modules/user/domain/user';
-import { UserId } from '../../src/modules/user/domain/user-id';
-import { UserName } from '../../src/modules/user/domain/user-name';
+import { UserMother } from './user-object-mother';
 
 describe('User list [userDelete] (e2e)', () => {
   let app: INestApplication;
@@ -18,16 +17,11 @@ describe('User list [userDelete] (e2e)', () => {
   });
 
   it('delete user', async () => {
-    await userRepository.persist(
-      new User(
-        new UserId('ffade6eb-f4f3-4afe-b141-997f285521c5'),
-        new UserName('Guille'),
-      ),
-    );
-
+    const user = UserMother.create();
+    await userRepository.persist(user);
     const query = `
           mutation{
-            userDelete(input:{id: "ffade6eb-f4f3-4afe-b141-997f285521c5"}){
+            userDelete(input:{id: "${user.id.value}"}){
               status
             }
           }
@@ -43,19 +37,17 @@ describe('User list [userDelete] (e2e)', () => {
             },
           },
         });
-
-        const user: User = await userRepository.findById(
-          new UserId('ffade6eb-f4f3-4afe-b141-997f285521c5'),
-        );
-        expect(user).toBeNull();
+        const userDb: User = await userRepository.findById(user.id);
+        expect(userDb).toBeNull();
         expect(response.statusCode).toEqual(200);
       });
   });
 
   it('delete user not exist', async () => {
+    const user = UserMother.create();
     const query = `
           mutation{
-            userDelete(input:{id: "b4e05f83-a32f-43a3-8303-d2dcf0b91f4d"}){
+            userDelete(input:{id: "${user.id.value}"}){
               status
             }
           }
@@ -71,11 +63,8 @@ describe('User list [userDelete] (e2e)', () => {
             },
           },
         });
-
-        const user: User = await userRepository.findById(
-          new UserId('ffade6eb-f4f3-4afe-b141-997f285521c5'),
-        );
-        expect(user).toBeNull();
+        const userDb: User = await userRepository.findById(user.id);
+        expect(userDb).toBeNull();
         expect(response.statusCode).toEqual(200);
       });
   });

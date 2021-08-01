@@ -3,8 +3,7 @@ import * as request from 'supertest';
 import { TestingE2EModule } from '../testing-e2-e-module';
 import { UserRepository } from '../../src/modules/user/domain/user.repository';
 import { User } from '../../src/modules/user/domain/user';
-import { UserId } from '../../src/modules/user/domain/user-id';
-import { UserName } from '../../src/modules/user/domain/user-name';
+import { UserMother } from './user-object-mother';
 
 describe('User Create [userPersist] (e2e)', () => {
   let app: INestApplication;
@@ -18,11 +17,12 @@ describe('User Create [userPersist] (e2e)', () => {
   });
 
   it('data persist ok', () => {
+    const user = UserMother.create();
     const query = `
           mutation{
             userPersist(input:{
-              id: "593b9dfe-79ff-4b6e-b75f-6159e3f340a9"
-              name: "guille"
+              id: "${user.id.value}"
+              name: "${user.name.value}"
             }){
               id
               name
@@ -36,35 +36,27 @@ describe('User Create [userPersist] (e2e)', () => {
         expect(response.body).toEqual({
           data: {
             userPersist: {
-              id: '593b9dfe-79ff-4b6e-b75f-6159e3f340a9',
-              name: 'guille',
+              id: user.id.value,
+              name: user.name.value,
             },
           },
         });
-        const user: User = await userRepository.findById(
-          new UserId('593b9dfe-79ff-4b6e-b75f-6159e3f340a9'),
-        );
-        expect(user).not.toBeNull();
-        expect(user.id.value).toEqual('593b9dfe-79ff-4b6e-b75f-6159e3f340a9');
-        expect(user.name.value).toEqual('guille');
-
+        const userDb: User = await userRepository.findById(user.id);
+        expect(userDb).not.toBeNull();
+        expect(userDb.id.value).toEqual(user.id.value);
+        expect(userDb.name.value).toEqual(user.name.value);
         expect(response.statusCode).toEqual(200);
       });
   });
 
   it('data update ok', async () => {
-    await userRepository.persist(
-      new User(
-        new UserId('eefbaa19-d8c8-4f62-8507-03b83b70a019'),
-        new UserName('Jose'),
-      ),
-    );
-
+    const user = UserMother.create();
+    await userRepository.persist(user);
     const query = `
           mutation{
             userPersist(input:{
-              id: "eefbaa19-d8c8-4f62-8507-03b83b70a019"
-              name: "guille"
+              id: "${user.id.value}"
+              name: "${user.name.value}"
             }){
               id
               name
@@ -78,27 +70,25 @@ describe('User Create [userPersist] (e2e)', () => {
         expect(response.body).toEqual({
           data: {
             userPersist: {
-              id: 'eefbaa19-d8c8-4f62-8507-03b83b70a019',
-              name: 'guille',
+              id: user.id.value,
+              name: user.name.value,
             },
           },
         });
-        const user: User = await userRepository.findById(
-          new UserId('eefbaa19-d8c8-4f62-8507-03b83b70a019'),
-        );
-        expect(user).not.toBeNull();
-        expect(user.id.value).toEqual('eefbaa19-d8c8-4f62-8507-03b83b70a019');
-        expect(user.name.value).toEqual('guille');
-
+        const userDb: User = await userRepository.findById(user.id);
+        expect(userDb).not.toBeNull();
+        expect(userDb.id.value).toEqual(user.id.value);
+        expect(userDb.name.value).toEqual(user.name.value);
         expect(response.statusCode).toEqual(200);
       });
   });
 
   it('data error', () => {
+    const user = UserMother.create();
     const query = `
           mutation{
             userPersist(input:{
-              name: "guille"
+              name: "${user.name.value}"
             }){
               id
               name
@@ -114,10 +104,8 @@ describe('User Create [userPersist] (e2e)', () => {
         expect(response.body.errors[0].message).toEqual(
           'Field "UserPersistInput.id" of required type "String!" was not provided.',
         );
-        const user: User = await userRepository.findById(
-          new UserId('593b9dfe-79ff-4b6e-b75f-6159e3f340a9'),
-        );
-        expect(user).toBeNull();
+        const userDb: User = await userRepository.findById(user.id);
+        expect(userDb).toBeNull();
         // todo, code must be 200
         expect(response.statusCode).toEqual(400);
       });

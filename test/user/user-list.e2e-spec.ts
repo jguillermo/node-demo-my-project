@@ -3,8 +3,7 @@ import * as request from 'supertest';
 import { TestingE2EModule } from '../testing-e2-e-module';
 import { UserRepository } from '../../src/modules/user/domain/user.repository';
 import { User } from '../../src/modules/user/domain/user';
-import { UserId } from '../../src/modules/user/domain/user-id';
-import { UserName } from '../../src/modules/user/domain/user-name';
+import { UserMother } from './user-object-mother';
 
 describe('User list [userList] (e2e)', () => {
   let app: INestApplication;
@@ -40,13 +39,8 @@ describe('User list [userList] (e2e)', () => {
     });
 
     it('get all', async () => {
-      await userRepository.persist(
-        new User(
-          new UserId('0c4eeef8-5b32-470f-bdf9-7ec40ecf6877'),
-          new UserName('Guille'),
-        ),
-      );
-
+      const user = UserMother.create();
+      await userRepository.persist(user);
       const query = `
           query{
             userList{
@@ -63,20 +57,16 @@ describe('User list [userList] (e2e)', () => {
             data: {
               userList: [
                 {
-                  id: '0c4eeef8-5b32-470f-bdf9-7ec40ecf6877',
-                  name: 'Guille',
+                  id: user.id.value,
+                  name: user.name.value,
                 },
               ],
             },
           });
-
-          const user: User = await userRepository.findById(
-            new UserId('0c4eeef8-5b32-470f-bdf9-7ec40ecf6877'),
-          );
-          expect(user).not.toBeNull();
-          expect(user.id.value).toEqual('0c4eeef8-5b32-470f-bdf9-7ec40ecf6877');
-          expect(user.name.value).toEqual('Guille');
-
+          const userDb: User = await userRepository.findById(user.id);
+          expect(userDb).not.toBeNull();
+          expect(userDb.id.value).toEqual(user.id.value);
+          expect(userDb.name.value).toEqual(user.name.value);
           expect(response.statusCode).toEqual(200);
         });
     });
@@ -84,23 +74,15 @@ describe('User list [userList] (e2e)', () => {
 
   describe('filter one filter', () => {
     it('id', async () => {
-      await userRepository.persist(
-        new User(
-          new UserId('bd1b2971-f289-4cc6-8829-96188c3dd95b'),
-          new UserName('Guille'),
-        ),
-      );
+      const user1 = UserMother.create();
+      const user2 = UserMother.create();
 
-      await userRepository.persist(
-        new User(
-          new UserId('018f45af-55a6-449c-88aa-767c4200b902'),
-          new UserName('Jose'),
-        ),
-      );
+      await userRepository.persist(user1);
+      await userRepository.persist(user2);
 
       const query = `
           query{
-            userList(filter:{id:"bd1b2971-f289-4cc6-8829-96188c3dd95b"}){
+            userList(filter:{id:"${user1.id.value}"}){
               id
               name
             }
@@ -114,8 +96,8 @@ describe('User list [userList] (e2e)', () => {
             data: {
               userList: [
                 {
-                  id: 'bd1b2971-f289-4cc6-8829-96188c3dd95b',
-                  name: 'Guille',
+                  id: user1.id.value,
+                  name: user1.name.value,
                 },
               ],
             },
@@ -124,23 +106,15 @@ describe('User list [userList] (e2e)', () => {
         });
     });
     it('name', async () => {
-      await userRepository.persist(
-        new User(
-          new UserId('bd1b2971-f289-4cc6-8829-96188c3dd95b'),
-          new UserName('Guille'),
-        ),
-      );
+      const user1 = UserMother.create();
+      const user2 = UserMother.create();
 
-      await userRepository.persist(
-        new User(
-          new UserId('018f45af-55a6-449c-88aa-767c4200b902'),
-          new UserName('Jose'),
-        ),
-      );
+      await userRepository.persist(user1);
+      await userRepository.persist(user2);
 
       const query = `
           query{
-            userList(filter:{name:"Guille"}){
+            userList(filter:{name:"${user1.name.value}"}){
               id
               name
             }
@@ -154,8 +128,8 @@ describe('User list [userList] (e2e)', () => {
             data: {
               userList: [
                 {
-                  id: 'bd1b2971-f289-4cc6-8829-96188c3dd95b',
-                  name: 'Guille',
+                  id: user1.id.value,
+                  name: user1.name.value,
                 },
               ],
             },
@@ -167,26 +141,19 @@ describe('User list [userList] (e2e)', () => {
 
   describe('paginator', () => {
     it('page 1 perPage 1', async () => {
-      await userRepository.persist(
-        new User(
-          new UserId('fb9525a6-0288-4e20-ae41-fc1939c37e01'),
-          new UserName('User1'),
-        ),
-      );
+      const user1 = UserMother.create({
+        id: 'fb9525a6-0288-4e20-ae41-fc1939c37e01',
+      });
+      const user2 = UserMother.create({
+        id: 'fb9525a6-0288-4e20-ae41-fc1939c37e02',
+      });
+      const user3 = UserMother.create({
+        id: 'fb9525a6-0288-4e20-ae41-fc1939c37e03',
+      });
 
-      await userRepository.persist(
-        new User(
-          new UserId('fb9525a6-0288-4e20-ae41-fc1939c37e02'),
-          new UserName('User2'),
-        ),
-      );
-
-      await userRepository.persist(
-        new User(
-          new UserId('fb9525a6-0288-4e20-ae41-fc1939c37e03'),
-          new UserName('User3'),
-        ),
-      );
+      await userRepository.persist(user1);
+      await userRepository.persist(user2);
+      await userRepository.persist(user3);
 
       const query = `
           query{
@@ -204,8 +171,8 @@ describe('User list [userList] (e2e)', () => {
             data: {
               userList: [
                 {
-                  id: 'fb9525a6-0288-4e20-ae41-fc1939c37e01',
-                  name: 'User1',
+                  id: user1.id.value,
+                  name: user1.name.value,
                 },
               ],
             },
@@ -217,19 +184,16 @@ describe('User list [userList] (e2e)', () => {
 
   describe('order', () => {
     it('should return 2 items desc', async () => {
-      await userRepository.persist(
-        new User(
-          new UserId('fb9525a6-0288-4e20-ae41-fc1939c37e01'),
-          new UserName('User1'),
-        ),
-      );
+      const user1 = UserMother.create({
+        id: 'fb9525a6-0288-4e20-ae41-fc1939c37e01',
+      });
+      const user2 = UserMother.create({
+        id: 'fb9525a6-0288-4e20-ae41-fc1939c37e02',
+      });
 
-      await userRepository.persist(
-        new User(
-          new UserId('fb9525a6-0288-4e20-ae41-fc1939c37e02'),
-          new UserName('User2'),
-        ),
-      );
+      await userRepository.persist(user1);
+      await userRepository.persist(user2);
+
       const query = `
           query{
             userList(filter:{order:{field:"id", direction:"desc"}}){
@@ -242,29 +206,22 @@ describe('User list [userList] (e2e)', () => {
         .post(`/graphql`)
         .send({ query: query, variables: {} })
         .then(async (response) => {
-          expect(response.body.data.userList[0].id).toEqual(
-            'fb9525a6-0288-4e20-ae41-fc1939c37e02',
-          );
-          expect(response.body.data.userList[1].id).toEqual(
-            'fb9525a6-0288-4e20-ae41-fc1939c37e01',
-          );
+          expect(response.body.data.userList[0].id).toEqual(user2.id.value);
+          expect(response.body.data.userList[1].id).toEqual(user1.id.value);
           expect(response.statusCode).toEqual(200);
         });
     });
     it('should return 2 items asc', async () => {
-      await userRepository.persist(
-        new User(
-          new UserId('fb9525a6-0288-4e20-ae41-fc1939c37e01'),
-          new UserName('User1'),
-        ),
-      );
+      const user1 = UserMother.create({
+        id: 'fb9525a6-0288-4e20-ae41-fc1939c37e01',
+      });
+      const user2 = UserMother.create({
+        id: 'fb9525a6-0288-4e20-ae41-fc1939c37e02',
+      });
 
-      await userRepository.persist(
-        new User(
-          new UserId('fb9525a6-0288-4e20-ae41-fc1939c37e02'),
-          new UserName('User2'),
-        ),
-      );
+      await userRepository.persist(user1);
+      await userRepository.persist(user2);
+
       const query = `
           query{
             userList(filter:{order:{field:"id", direction:"asc"}}){
@@ -277,12 +234,8 @@ describe('User list [userList] (e2e)', () => {
         .post(`/graphql`)
         .send({ query: query, variables: {} })
         .then(async (response) => {
-          expect(response.body.data.userList[0].id).toEqual(
-            'fb9525a6-0288-4e20-ae41-fc1939c37e01',
-          );
-          expect(response.body.data.userList[1].id).toEqual(
-            'fb9525a6-0288-4e20-ae41-fc1939c37e02',
-          );
+          expect(response.body.data.userList[0].id).toEqual(user1.id.value);
+          expect(response.body.data.userList[1].id).toEqual(user2.id.value);
           expect(response.statusCode).toEqual(200);
         });
     });
