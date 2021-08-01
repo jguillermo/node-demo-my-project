@@ -1,10 +1,7 @@
 import { IsOptional, IsString } from 'class-validator';
 import { Field, InputType } from '@nestjs/graphql';
 import { BaseDto } from '../../../share/application/base.dto';
-import {
-  OrderInput,
-  PaginatorInput,
-} from '../../../share/application/filter.input';
+import { OrderDao, PaginatorDao } from '../../../share/application/filter.dto';
 
 @InputType('UserListInput')
 export class UserListDao extends BaseDto {
@@ -23,10 +20,10 @@ export class UserListDao extends BaseDto {
   name?: string;
 
   @IsOptional()
-  @Field(() => PaginatorInput, { nullable: true })
-  paginator?: PaginatorInput;
+  @Field(() => PaginatorDao, { nullable: true })
+  paginator?: PaginatorDao;
 
   @IsOptional()
-  @Field(() => OrderInput, { nullable: true })
-  order?: OrderInput;
+  @Field(() => OrderDao, { nullable: true })
+  order?: OrderDao;
 }

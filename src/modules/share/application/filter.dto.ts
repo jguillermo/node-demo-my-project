@@ -2,7 +2,7 @@ import { IsInt, IsOptional, IsString } from 'class-validator';
 import { Field, InputType } from '@nestjs/graphql';
 
 @InputType('OrderInput')
-export abstract class OrderInput {
+export abstract class OrderDao {
   @IsOptional()
   @IsString()
   @Field({ nullable: true })
@@ -15,7 +15,7 @@ export abstract class OrderInput {
 }
 
 @InputType('PaginatorInput')
-export abstract class PaginatorInput {
+export abstract class PaginatorDao {
   @IsOptional()
   @IsInt()
   @Field({ nullable: true })
