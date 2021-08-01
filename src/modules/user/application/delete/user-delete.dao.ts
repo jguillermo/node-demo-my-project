@@ -2,11 +2,10 @@ import { IsDefined, IsNotEmpty, IsString } from 'class-validator';
 import { Field, InputType } from '@nestjs/graphql';
 import { BaseDto } from '../../../share/application/base.dto';
 
-@InputType('UserFindByIdInput')
-export class UserFindByIdQuery extends BaseDto {
-  constructor(id: string) {
+@InputType('UserDeleteInput')
+export class UserDeleteDao extends BaseDto {
+  constructor() {
     super();
-    this.id = id;
   }
 
   @IsDefined()

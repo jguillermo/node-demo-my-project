@@ -7,7 +7,7 @@ import {
 } from '../../../share/application/filter.input';
 
 @InputType('UserListInput')
-export class UserListQuery extends BaseDto {
+export class UserListDao extends BaseDto {
   constructor() {
     super();
   }

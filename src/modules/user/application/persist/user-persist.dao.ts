@@ -2,8 +2,8 @@ import { IsDefined, IsNotEmpty, IsString } from 'class-validator';
 import { Field, InputType } from '@nestjs/graphql';
 import { BaseDto } from '../../../share/application/base.dto';
 
-@InputType('UserDeleteInput')
-export class UserDeleteCommand extends BaseDto {
+@InputType('UserPersistInput')
+export class UserPersistDao extends BaseDto {
   constructor() {
     super();
   }
@@ -13,4 +13,10 @@ export class UserDeleteCommand extends BaseDto {
   @IsNotEmpty()
   @Field()
   id: string;
+
+  @IsDefined()
+  @IsString()
+  @IsNotEmpty()
+  @Field()
+  name: string;
 }
