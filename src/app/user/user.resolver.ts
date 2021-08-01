@@ -30,17 +30,13 @@ export class UserResolver {
   }
 
   @Mutation(() => UserType, { name: 'userPersist' })
-  async persist(
-    @Args('input') input: UserPersistDao,
-  ): Promise<UserResponse> {
+  async persist(@Args('input') input: UserPersistDao): Promise<UserResponse> {
     await this.commandBus.execute(input);
     return await this.queryBus.execute(new UserFindByIdDao(input.id));
   }
 
   @Mutation(() => StatusType, { name: 'userDelete' })
-  async delete(
-    @Args('input') input: UserDeleteDao,
-  ): Promise<ResponseStatus> {
+  async delete(@Args('input') input: UserDeleteDao): Promise<ResponseStatus> {
     await this.commandBus.execute(input);
     return ResponseStatus.ok();
   }
