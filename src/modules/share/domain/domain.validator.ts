@@ -21,7 +21,7 @@ export class DomainValidator implements ValidatorConstraintInterface {
       vo.isValid();
       return vo.validatorMessage();
     } catch (e) {
-      return e.toString();
+      return `${args.property}: ${e.message}`;
     }
   }
 }
