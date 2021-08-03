@@ -82,7 +82,7 @@ describe('User list [userList] (e2e)', () => {
 
       const query = `
           query{
-            userList(filter:{id:"${user1.id.value}"}){
+            userList(id:"${user1.id.value}"){
               id
               name
             }
@@ -114,7 +114,7 @@ describe('User list [userList] (e2e)', () => {
 
       const query = `
           query{
-            userList(filter:{name:"${user1.name.value}"}){
+            userList(name:"${user1.name.value}"){
               id
               name
             }
@@ -157,7 +157,7 @@ describe('User list [userList] (e2e)', () => {
 
       const query = `
           query{
-            userList(filter:{paginator:{page:1, perPage:1}}){
+            userList(paginator:{page:1, perPage:1}){
               id
               name
             }
@@ -196,7 +196,7 @@ describe('User list [userList] (e2e)', () => {
 
       const query = `
           query{
-            userList(filter:{order:{field:"id", direction:"desc"}}){
+            userList(order:{field:"id", direction:"desc"}){
               id
               name
             }
@@ -224,7 +224,7 @@ describe('User list [userList] (e2e)', () => {
 
       const query = `
           query{
-            userList(filter:{order:{field:"id", direction:"asc"}}){
+            userList(order:{field:"id", direction:"asc"}){
               id
               name
             }

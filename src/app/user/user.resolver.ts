@@ -15,10 +15,8 @@ export class UserResolver {
   constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
 
   @Query(() => [UserType], { name: 'userList' })
-  async list(
-    @Args('filter', { nullable: true }) filter: UserListDao,
-  ): Promise<UserResponse[]> {
-    const data: ListUserResponse = await this.queryBus.execute(filter);
+  async list(@Args() args: UserListDao): Promise<UserResponse[]> {
+    const data: ListUserResponse = await this.queryBus.execute(args);
     return data.list;
   }
 
@@ -28,9 +26,9 @@ export class UserResolver {
   }
 
   @Mutation(() => UserType, { name: 'userPersist' })
-  async persist(@Args('input') input: UserPersistDao): Promise<UserResponse> {
-    await this.commandBus.execute(input);
-    return await this.queryBus.execute(new UserFindByIdDao(input.id));
+  async persist(@Args() args: UserPersistDao): Promise<UserResponse> {
+    await this.commandBus.execute(args);
+    return await this.queryBus.execute(new UserFindByIdDao(args.id));
   }
 
   @Mutation(() => StatusType, { name: 'userDelete' })

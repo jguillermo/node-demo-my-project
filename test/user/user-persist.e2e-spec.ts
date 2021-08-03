@@ -20,10 +20,10 @@ describe('User Create [userPersist] (e2e)', () => {
     const user = UserMother.create();
     const query = `
           mutation{
-            userPersist(input:{
+            userPersist(
               id: "${user.id.value}"
               name: "${user.name.value}"
-            }){
+            ){
               id
               name
             }
@@ -54,10 +54,10 @@ describe('User Create [userPersist] (e2e)', () => {
     await userRepository.persist(user);
     const query = `
           mutation{
-            userPersist(input:{
+            userPersist(
               id: "${user.id.value}"
               name: "${user.name.value}"
-            }){
+            ){
               id
               name
             }
@@ -87,9 +87,9 @@ describe('User Create [userPersist] (e2e)', () => {
     const user = UserMother.create();
     const query = `
           mutation{
-            userPersist(input:{
+            userPersist(
               name: "${user.name.value}"
-            }){
+            ){
               id
               name
             }
@@ -102,7 +102,7 @@ describe('User Create [userPersist] (e2e)', () => {
         expect(response.body.errors).toBeDefined();
         expect(response.body.errors[0]).toBeDefined();
         expect(response.body.errors[0].message).toEqual(
-          'Field "UserPersistInput.id" of required type "String!" was not provided.',
+          'Field "userPersist" argument "id" of type "String!" is required, but it was not provided.',
         );
         const userDb: User = await userRepository.findById(user.id);
         expect(userDb).toBeNull();
