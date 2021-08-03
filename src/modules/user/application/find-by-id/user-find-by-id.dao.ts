@@ -1,6 +1,8 @@
-import { IsDefined, IsNotEmpty, IsString } from 'class-validator';
+import { Validate } from 'class-validator';
 import { Field, InputType } from '@nestjs/graphql';
 import { BaseDto } from '../../../share/application/base.dto';
+import { DomainValidator } from '../../../share/domain/domain.validator';
+import { UserId } from '../../domain/user-id';
 
 @InputType('UserFindByIdInput')
 export class UserFindByIdDao extends BaseDto {
@@ -9,9 +11,7 @@ export class UserFindByIdDao extends BaseDto {
     this.id = id;
   }
 
-  @IsDefined()
-  @IsString()
-  @IsNotEmpty()
+  @Validate(DomainValidator, [UserId])
   @Field()
   id: string;
 }
