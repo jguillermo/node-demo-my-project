@@ -21,7 +21,7 @@ describe('User list [userDelete] (e2e)', () => {
     await userRepository.persist(user);
     const query = `
           mutation{
-            userDelete(input:{id: "${user.id.value}"}){
+            userDelete(id:"${user.id.value}"){
               status
             }
           }
@@ -47,7 +47,7 @@ describe('User list [userDelete] (e2e)', () => {
     const user = UserMother.create();
     const query = `
           mutation{
-            userDelete(input:{id: "${user.id.value}"}){
+            userDelete(id: "${user.id.value}"){
               status
             }
           }

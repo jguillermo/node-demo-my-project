@@ -21,7 +21,7 @@ describe('User entity [user] (e2e)', () => {
     await userRepository.persist(user);
     const query = `
           query{
-            user(input:{id: "${user.id.value}"}){
+            user(id: "${user.id.value}"){
               id
               name
             }
@@ -51,7 +51,7 @@ describe('User entity [user] (e2e)', () => {
     const user = UserMother.create();
     const query = `
           query{
-            user(input:{id: "${user.id.value}"}){
+            user(id: "${user.id.value}"){
               id
               name
             }

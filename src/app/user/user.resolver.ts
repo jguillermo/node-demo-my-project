@@ -23,10 +23,8 @@ export class UserResolver {
   }
 
   @Query(() => UserType, { name: 'user', nullable: true })
-  async aggregate(
-    @Args('input') input: UserFindByIdDao,
-  ): Promise<UserResponse | null> {
-    return await this.queryBus.execute(input);
+  async aggregate(@Args() args: UserFindByIdDao): Promise<UserResponse | null> {
+    return await this.queryBus.execute(args);
   }
 
   @Mutation(() => UserType, { name: 'userPersist' })
@@ -36,8 +34,8 @@ export class UserResolver {
   }
 
   @Mutation(() => StatusType, { name: 'userDelete' })
-  async delete(@Args('input') input: UserDeleteDao): Promise<ResponseStatus> {
-    await this.commandBus.execute(input);
+  async delete(@Args() args: UserDeleteDao): Promise<ResponseStatus> {
+    await this.commandBus.execute(args);
     return ResponseStatus.ok();
   }
 }
