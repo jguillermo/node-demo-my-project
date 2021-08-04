@@ -2,22 +2,22 @@
 #To Do
 
 ##Graphql
-    - nestCli remove @Field from type class
-    - generate abstract class for template
     - return entity or status in persist
+    - generate abstract class for template
+    - nestCli remove @Field from type class
 ##Infrastructure
     - find LIKE sub string in filter
 ##Application
-    - publish and subscribe events
     - validate paginator and order dto
+    - publish and subscribe events [ depent domain a,b ]
     - nestcli remove field dao
 ##Domain
-    - abstract class from aggregtae and manage events
-    - events generate and send
+    - [a] abstract class from aggregtae and manage events
+    - [b] events generate and send
 ##Nest
-    - migrate to v8
-    - security
     - logguer
+    - security
     - exceptions
+    - migrate to v8
 ##General
     - use plural in grapql https://www.npmjs.com/package/pluralize
