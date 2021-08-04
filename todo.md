@@ -4,6 +4,7 @@
 ##Graphql
     - nestCli remove @Field from type class
     - generate abstract class for template
+    - return entity or status in persist
 ##Infrastructure
     - find LIKE sub string in filter
 ##Application
