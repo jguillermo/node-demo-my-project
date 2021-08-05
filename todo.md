@@ -9,11 +9,9 @@
     - find LIKE sub string in filter
 ##Application
     - validate paginator and order dto
-    - publish and subscribe events [ depent domain a,b ]
     - nestcli remove field dao
 ##Domain
-    - [a] abstract class from aggregtae and manage events
-    - [b] events generate and send
+    - move AggregateRoot and EventBase class to base-ddd
 ##Nest
     - logguer
     - security

@@ -4,6 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { UserResolver } from './app/user/user.resolver';
 import { UserModule } from './modules/user/user.module';
 import { ShareModule } from './modules/share/share.module';
+import { AppEvents } from './event/events';
 
 @Module({
   imports: [
@@ -16,6 +17,6 @@ import { ShareModule } from './modules/share/share.module';
     UserModule,
     ShareModule,
   ],
-  providers: [UserResolver],
+  providers: [UserResolver, ...AppEvents],
 })
 export class AppModule {}
