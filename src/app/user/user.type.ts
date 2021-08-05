@@ -1,4 +1,5 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { createUnionType, Field, ObjectType } from '@nestjs/graphql';
+import { StatusType } from '../status.type';
 
 @ObjectType('User')
 export class UserType {
@@ -8,3 +9,14 @@ export class UserType {
   @Field()
   name: string;
 }
+
+export const ResultUserPersist = createUnionType({
+  name: 'ResultUserPersist',
+  types: () => [UserType, StatusType],
+  resolveType(value) {
+    if (value.status) {
+      return StatusType;
+    }
+    return UserType;
+  },
+});

@@ -1,4 +1,4 @@
-import { Validate } from 'class-validator';
+import { Validate, IsOptional } from 'class-validator';
 import { ArgsType, Field } from '@nestjs/graphql';
 import { BaseDto } from '../../../share/application/base.dto';
 import { DomainValidator } from '../../../share/domain/domain.validator';
@@ -18,4 +18,8 @@ export class UserPersistDao extends BaseDto {
   @Validate(DomainValidator, [UserName])
   @Field()
   name: string;
+
+  @IsOptional()
+  @Field({ nullable: true, defaultValue: false })
+  showEntity?: boolean;
 }

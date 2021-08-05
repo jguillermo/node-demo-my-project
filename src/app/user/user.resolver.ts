@@ -1,5 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { UserType } from './user.type';
+import { ResultUserPersist, UserType } from './user.type';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { UserFindByIdDao } from '../../modules/user/application/find-by-id/user-find-by-id.dao';
 import { ListUserResponse } from '../../modules/user/application/list-user.response';
@@ -25,10 +25,12 @@ export class UserResolver {
     return await this.queryBus.execute(args);
   }
 
-  @Mutation(() => UserType, { name: 'userPersist' })
-  async persist(@Args() args: UserPersistDao): Promise<UserResponse> {
+  @Mutation(() => ResultUserPersist, { name: 'userPersist' })
+  async persist(@Args() args: UserPersistDao) {
     await this.commandBus.execute(args);
-    return await this.queryBus.execute(new UserFindByIdDao(args.id));
+    return args.showEntity
+      ? await this.queryBus.execute(new UserFindByIdDao(args.id))
+      : ResponseStatus.ok();
   }
 
   @Mutation(() => StatusType, { name: 'userDelete' })

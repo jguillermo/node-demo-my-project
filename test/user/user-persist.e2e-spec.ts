@@ -15,72 +15,161 @@ describe('User Create [userPersist] (e2e)', () => {
       await userRepository.deleteById(user.id);
     }
   });
-
-  it('data persist ok', () => {
-    const user = UserMother.create();
-    const query = `
+  describe('create', () => {
+    it('data ok return status', () => {
+      const user = UserMother.create();
+      const query = `
           mutation{
             userPersist(
               id: "${user.id.value}"
               name: "${user.name.value}"
             ){
-              id
-              name
+              ...on Status{
+                status
+              }
+              ...on User{
+                id
+                name
+              }
             }
           }
           `;
-    return request(app.getHttpServer())
-      .post(`/graphql`)
-      .send({ query: query, variables: {} })
-      .then(async (response) => {
-        expect(response.body).toEqual({
-          data: {
-            userPersist: {
-              id: user.id.value,
-              name: user.name.value,
+      return request(app.getHttpServer())
+        .post(`/graphql`)
+        .send({ query: query, variables: {} })
+        .then(async (response) => {
+          expect(response.body).toEqual({
+            data: {
+              userPersist: {
+                status: 'ok',
+              },
             },
-          },
+          });
+          const userDb: User = await userRepository.findById(user.id);
+          expect(userDb).not.toBeNull();
+          expect(userDb.id.value).toEqual(user.id.value);
+          expect(userDb.name.value).toEqual(user.name.value);
+          expect(response.statusCode).toEqual(200);
         });
-        const userDb: User = await userRepository.findById(user.id);
-        expect(userDb).not.toBeNull();
-        expect(userDb.id.value).toEqual(user.id.value);
-        expect(userDb.name.value).toEqual(user.name.value);
-        expect(response.statusCode).toEqual(200);
-      });
+    });
+
+    it('data ok return entity', () => {
+      const user = UserMother.create();
+      const query = `
+          mutation{
+            userPersist(
+              id: "${user.id.value}"
+              name: "${user.name.value}"
+              showEntity: true
+            ){
+              ...on Status{
+                status
+              }
+              ...on User{
+                id
+                name
+              }
+            }
+          }
+          `;
+      return request(app.getHttpServer())
+        .post(`/graphql`)
+        .send({ query: query, variables: {} })
+        .then(async (response) => {
+          expect(response.body).toEqual({
+            data: {
+              userPersist: {
+                id: user.id.value,
+                name: user.name.value,
+              },
+            },
+          });
+          const userDb: User = await userRepository.findById(user.id);
+          expect(userDb).not.toBeNull();
+          expect(userDb.id.value).toEqual(user.id.value);
+          expect(userDb.name.value).toEqual(user.name.value);
+          expect(response.statusCode).toEqual(200);
+        });
+    });
   });
 
-  it('data update ok', async () => {
-    const user = UserMother.create();
-    await userRepository.persist(user);
-    const query = `
+  describe('update', () => {
+    it('data  ok return status', async () => {
+      const user = UserMother.create();
+      await userRepository.persist(user);
+      const query = `
           mutation{
             userPersist(
               id: "${user.id.value}"
               name: "${user.name.value}"
             ){
-              id
-              name
+              ...on Status{
+                status
+              }
+              ...on User{
+                id
+                name
+              }
             }
           }
           `;
-    return request(app.getHttpServer())
-      .post(`/graphql`)
-      .send({ query: query, variables: {} })
-      .then(async (response) => {
-        expect(response.body).toEqual({
-          data: {
-            userPersist: {
-              id: user.id.value,
-              name: user.name.value,
+      return request(app.getHttpServer())
+        .post(`/graphql`)
+        .send({ query: query, variables: {} })
+        .then(async (response) => {
+          expect(response.body).toEqual({
+            data: {
+              userPersist: {
+                status: 'ok',
+              },
             },
-          },
+          });
+          const userDb: User = await userRepository.findById(user.id);
+          expect(userDb).not.toBeNull();
+          expect(userDb.id.value).toEqual(user.id.value);
+          expect(userDb.name.value).toEqual(user.name.value);
+          expect(response.statusCode).toEqual(200);
         });
-        const userDb: User = await userRepository.findById(user.id);
-        expect(userDb).not.toBeNull();
-        expect(userDb.id.value).toEqual(user.id.value);
-        expect(userDb.name.value).toEqual(user.name.value);
-        expect(response.statusCode).toEqual(200);
-      });
+    });
+    it('data  ok return entity', async () => {
+      const user = UserMother.create();
+      await userRepository.persist(user);
+      const query = `
+          mutation{
+            userPersist(
+              id: "${user.id.value}"
+              name: "${user.name.value}"
+              showEntity: true
+            ){
+              ...on Status{
+                status
+              }
+              ...on User{
+                id
+                name
+              }
+            }
+          }
+          `;
+      return request(app.getHttpServer())
+        .post(`/graphql`)
+        .send({ query: query, variables: {} })
+        .then(async (response) => {
+          expect(response.body).toEqual({
+            data: {
+              userPersist: {
+                id: user.id.value,
+                name: user.name.value,
+              },
+            },
+          });
+          const userDb: User = await userRepository.findById(user.id);
+          expect(userDb).not.toBeNull();
+          expect(userDb.id.value).toEqual(user.id.value);
+          expect(userDb.name.value).toEqual(user.name.value);
+          expect(response.statusCode).toEqual(200);
+        });
+    });
   });
 
   it('data error', () => {
@@ -90,8 +179,13 @@ describe('User Create [userPersist] (e2e)', () => {
             userPersist(
               name: "${user.name.value}"
             ){
-              id
-              name
+              ...on Status{
+                status
+              }
+              ...on User{
+                id
+                name
+              }
             }
           }
           `;
