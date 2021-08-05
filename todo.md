@@ -2,7 +2,6 @@
 #To Do
 
 ##Graphql
-    - return entity or status in persist
     - generate abstract class for template
     - nestCli remove @Field from type class
 ##Infrastructure
