@@ -1,13 +1,12 @@
 import { IsOptional, Validate } from 'class-validator';
 import { ArgsType, Field } from '@nestjs/graphql';
-import { BaseDto } from '../../../share/application/base.dto';
-import { OrderDao, PaginatorDao } from '../../../share/application/filter.dto';
 import { UUIDTypeImp } from 'base-ddd/dist/ValueObject/Implement/UUIDTypeImp';
 import { StringTypeImp } from 'base-ddd/dist/ValueObject/Implement/StringTypeImp';
 import { DomainValidator, OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
+import { BaseDao, OrderDao, PaginatorDao } from '../../../share/application/base.dao';
 
 @ArgsType()
-export class UserListDao extends BaseDto {
+export class UserListDao extends BaseDao {
   constructor() {
     super();
   }

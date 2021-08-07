@@ -1,11 +1,11 @@
 import { Validate } from 'class-validator';
 import { ArgsType, Field } from '@nestjs/graphql';
-import { BaseDto } from '../../../share/application/base.dto';
 import { UserId } from '../../domain/user-id';
 import { DomainValidator } from 'base-ddd';
+import { BaseDao } from '../../../share/application/base.dao';
 
 @ArgsType()
-export class UserFindByIdDao extends BaseDto {
+export class UserFindByIdDao extends BaseDao {
   constructor(id: string) {
     super();
     this.id = id;
