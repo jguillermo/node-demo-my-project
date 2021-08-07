@@ -19,9 +19,6 @@ export class UserNameMother {
 
 export class UserMother {
   static create(data?: any): User {
-    return new User(
-      UserIdMother.create(data?.id),
-      UserNameMother.create(data?.name),
-    );
+    return new User(UserIdMother.create(data?.id), UserNameMother.create(data?.name));
   }
 }

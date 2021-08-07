@@ -20,21 +20,14 @@ export class UserFirestoreRepository extends UserRepository {
   }
 
   async findById(id: UserId): Promise<User | null> {
-    const item = await this.firestore.findOneDocumentById(
-      this._collection,
-      id.value,
-    );
+    const item = await this.firestore.findOneDocumentById(this._collection, id.value);
     if (!item) {
       return null;
     }
     return UserDao.fromItem(item).toAggregate();
   }
 
-  async findAll(
-    filters?: Array<FilterItem>,
-    paginator?: PaginatorTypeImp,
-    order?: OrderTypeImp,
-  ): Promise<User[]> {
+  async findAll(filters?: Array<FilterItem>, paginator?: PaginatorTypeImp, order?: OrderTypeImp): Promise<User[]> {
     if (!Array.isArray(filters)) {
       filters = [];
     }

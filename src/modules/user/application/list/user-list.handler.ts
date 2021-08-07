@@ -13,10 +13,7 @@ export class UserListHandler implements IQueryHandler<UserListDao> {
   async execute(dao: UserListDao): Promise<ListUserResponse> {
     const id = new UUIDTypeImp(dao.id);
     const name = new StringTypeImp(dao.name);
-    const paginator = PaginatorTypeImp.create(
-      dao.paginator?.page,
-      dao.paginator?.perPage,
-    );
+    const paginator = PaginatorTypeImp.create(dao.paginator?.page, dao.paginator?.perPage);
 
     const order = OrderTypeImp.create(dao.order?.field, dao.order?.direction);
 

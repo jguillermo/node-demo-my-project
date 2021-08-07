@@ -28,9 +28,7 @@ export class UserResolver {
   @Mutation(() => ResultUserPersist, { name: 'userPersist' })
   async persist(@Args() args: UserPersistDao) {
     await this.commandBus.execute(args);
-    return args.showEntity
-      ? await this.queryBus.execute(new UserFindByIdDao(args.id))
-      : ResponseStatus.ok();
+    return args.showEntity ? await this.queryBus.execute(new UserFindByIdDao(args.id)) : ResponseStatus.ok();
   }
 
   @Mutation(() => StatusType, { name: 'userDelete' })

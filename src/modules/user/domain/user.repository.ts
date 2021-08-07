@@ -7,11 +7,7 @@ export abstract class UserRepository {
 
   abstract findById(id: UserId): Promise<User | null>;
 
-  abstract findAll(
-    filters?: Array<FilterItem>,
-    paginator?: PaginatorTypeImp,
-    order?: OrderTypeImp,
-  ): Promise<User[]>;
+  abstract findAll(filters?: Array<FilterItem>, paginator?: PaginatorTypeImp, order?: OrderTypeImp): Promise<User[]>;
 
   abstract deleteById(id: UserId): Promise<void>;
 }

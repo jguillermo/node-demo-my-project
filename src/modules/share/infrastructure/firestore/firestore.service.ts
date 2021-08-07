@@ -6,11 +6,7 @@ import CollectionReference = admin.firestore.CollectionReference;
 import QuerySnapshot = admin.firestore.QuerySnapshot;
 import { Firebase } from '../firebase';
 import { ItemDto } from './item.dto';
-import {
-  Query,
-  WhereFilterOp,
-  OrderByDirection,
-} from '@google-cloud/firestore';
+import { Query, WhereFilterOp, OrderByDirection } from '@google-cloud/firestore';
 import { FilterItem, OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
 
 @Injectable()
@@ -22,11 +18,7 @@ export class FirestoreService {
     this.db = admin.firestore();
   }
 
-  public async persist(
-    collection: string,
-    id: string,
-    data: any,
-  ): Promise<void> {
+  public async persist(collection: string, id: string, data: any): Promise<void> {
     try {
       await this.getCollection(collection).doc(id).set(data);
     } catch (e) {
@@ -42,10 +34,7 @@ export class FirestoreService {
     }
   }
 
-  public async findOneDocumentById(
-    collection: string,
-    id: string,
-  ): Promise<ItemDto> {
+  public async findOneDocumentById(collection: string, id: string): Promise<ItemDto> {
     try {
       const storeDb = this.getCollection(collection).doc(id);
       const getDoc = await storeDb.get();
@@ -57,10 +46,7 @@ export class FirestoreService {
         data: getDoc.data(),
       };
     } catch (e) {
-      throw new InternalServerErrorException(
-        e,
-        `Error en el servidor FirestoreService findOneDocumentById`,
-      );
+      throw new InternalServerErrorException(e, `Error en el servidor FirestoreService findOneDocumentById`);
     }
   }
 
@@ -78,10 +64,7 @@ export class FirestoreService {
       }, storeDb);
 
       if (!order.isEmpty()) {
-        where = where.orderBy(
-          order.field.value,
-          order.direction.value as OrderByDirection,
-        );
+        where = where.orderBy(order.field.value, order.direction.value as OrderByDirection);
       }
 
       if (!paginator.isEmpty()) {

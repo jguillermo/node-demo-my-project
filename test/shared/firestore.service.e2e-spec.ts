@@ -26,12 +26,7 @@ describe('FirestoreService (infrastructure)', () => {
 
   beforeEach(async () => {
     ({ firestoreService } = await TestingE2EModule.create());
-    const result = await firestoreService.findAll(
-      collection,
-      [],
-      PaginatorTypeImp.empty(),
-      OrderTypeImp.empty(),
-    );
+    const result = await firestoreService.findAll(collection, [], PaginatorTypeImp.empty(), OrderTypeImp.empty());
     for await (const item of result) {
       await firestoreService.delete(collection, item.id);
     }
@@ -50,13 +45,9 @@ describe('FirestoreService (infrastructure)', () => {
     });
     describe('otherwise', () => {
       it('should exception when not send collectionName', async () => {
-        await expect(
-          firestoreService.persist(
-            null,
-            'ea91a821-e962-40a7-93ed-b289b6a5f7d0',
-            {},
-          ),
-        ).rejects.toThrow('Error en el servidor');
+        await expect(firestoreService.persist(null, 'ea91a821-e962-40a7-93ed-b289b6a5f7d0', {})).rejects.toThrow(
+          'Error en el servidor',
+        );
       });
     });
   });
@@ -65,10 +56,7 @@ describe('FirestoreService (infrastructure)', () => {
     describe('when data with ID exist', () => {
       it('should return the data', async () => {
         const { resourceId, dataPersist } = await persist(10);
-        const result = await firestoreService.findOneDocumentById(
-          collection,
-          resourceId,
-        );
+        const result = await firestoreService.findOneDocumentById(collection, resourceId);
         expect(result).toBeDefined();
         expect(result.data).toEqual(dataPersist);
         expect(result.id).toEqual(resourceId);
@@ -78,17 +66,12 @@ describe('FirestoreService (infrastructure)', () => {
       it('should return null', async () => {
         await persist(10);
         const resourceIdNotExit = '5e8048df-a9b6-4edd-8937-bad2108be71a';
-        const result = await firestoreService.findOneDocumentById(
-          collection,
-          resourceIdNotExit,
-        );
+        const result = await firestoreService.findOneDocumentById(collection, resourceIdNotExit);
         expect(result).toEqual(null);
       });
       it('should exception when not send collectionName', async () => {
         const { resourceId } = await persist(10);
-        await expect(
-          firestoreService.findOneDocumentById(null, resourceId),
-        ).rejects.toThrow(
+        await expect(firestoreService.findOneDocumentById(null, resourceId)).rejects.toThrow(
           'Value for argument "collectionPath" is not a valid resource path. Path must be a non-empty string.',
         );
       });

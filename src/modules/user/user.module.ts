@@ -14,12 +14,7 @@ import { UserDeleteService } from './application/delete/user-delete.service';
 
 export const CommandHandlers = [UserPersistHandler, UserDeleteHandler];
 export const QueryHandlers = [UserListHandler, UserFindByIdHandler];
-export const Services = [
-  UserPersistService,
-  UserListService,
-  UserFindByIdService,
-  UserDeleteService,
-];
+export const Services = [UserPersistService, UserListService, UserFindByIdService, UserDeleteService];
 
 @Module({
   imports: [CqrsModule, ShareModule],
