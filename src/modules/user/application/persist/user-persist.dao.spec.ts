@@ -18,7 +18,7 @@ describe('User dao', () => {
       const errors = await validate(userDao);
       expect(errors.length).toEqual(1);
       expect(errors[0].constraints).toEqual({
-        customText: 'id: is required.',
+        domainValidator: 'id: is required.',
       });
     });
     it('id empty', async () => {
@@ -28,7 +28,7 @@ describe('User dao', () => {
       const errors = await validate(userDao);
       expect(errors.length).toEqual(1);
       expect(errors[0].constraints).toEqual({
-        customText: 'id: invalid uuid value.',
+        domainValidator: 'id: invalid uuid value.',
       });
     });
     it('id not uuid value', async () => {
@@ -38,7 +38,7 @@ describe('User dao', () => {
       const errors = await validate(userDao);
       expect(errors.length).toEqual(1);
       expect(errors[0].constraints).toEqual({
-        customText: 'id: invalid uuid value.',
+        domainValidator: 'id: invalid uuid value.',
       });
     });
   });
@@ -50,7 +50,7 @@ describe('User dao', () => {
       const errors = await validate(userDao);
       expect(errors.length).toEqual(1);
       expect(errors[0].constraints).toEqual({
-        customText: 'name: is required.',
+        domainValidator: 'name: is required.',
       });
     });
     it('name empty', async () => {
@@ -60,7 +60,7 @@ describe('User dao', () => {
       const errors = await validate(userDao);
       expect(errors.length).toEqual(1);
       expect(errors[0].constraints).toEqual({
-        customText: 'name: should not be empty.',
+        domainValidator: 'name: should not be empty.',
       });
     });
   });

@@ -2,12 +2,11 @@
 #To Do
 
 ##Graphql
-    - generate abstract class for template
     - nestCli remove @Field from type class
+    - generate abstract class for template (bad idea)
 ##Infrastructure
     - find LIKE sub string in filter
 ##Application
-    - validate paginator and order dto
     - nestcli remove field dao
 ##Domain
     - move AggregateRoot and EventBase class to base-ddd

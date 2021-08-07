@@ -1,8 +1,6 @@
 import { TestingE2EModule } from '../testing-e2-e-module';
 import { FirestoreService } from '../../src/modules/share/infrastructure/firestore/firestore.service';
-import { FilterOpStr } from '../../src/modules/share/domain/repository';
-import { PaginatorType } from '../../src/modules/share/domain/paginator.type';
-import { OrderType } from '../../src/modules/share/domain/order.type';
+import { FilterOpStr, OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
 
 const collection = 'testcoll';
 
@@ -31,8 +29,8 @@ describe('FirestoreService (infrastructure)', () => {
     const result = await firestoreService.findAll(
       collection,
       [],
-      PaginatorType.empty(),
-      OrderType.empty(),
+      PaginatorTypeImp.empty(),
+      OrderTypeImp.empty(),
     );
     for await (const item of result) {
       await firestoreService.delete(collection, item.id);
@@ -111,8 +109,8 @@ describe('FirestoreService (infrastructure)', () => {
                 value: filterParam,
               },
             ],
-            PaginatorType.empty(),
-            OrderType.empty(),
+            PaginatorTypeImp.empty(),
+            OrderTypeImp.empty(),
           );
           expect(result).toBeDefined();
           expect(result.length).toEqual(1);
@@ -135,8 +133,8 @@ describe('FirestoreService (infrastructure)', () => {
                 value: 'blue',
               },
             ],
-            PaginatorType.empty(),
-            OrderType.empty(),
+            PaginatorTypeImp.empty(),
+            OrderTypeImp.empty(),
           );
           expect(result).toBeDefined();
           expect(result.length).toEqual(1);
@@ -153,8 +151,8 @@ describe('FirestoreService (infrastructure)', () => {
           const result = await firestoreService.findAll(
             collection,
             [],
-            PaginatorType.create(1, 1),
-            OrderType.empty(),
+            PaginatorTypeImp.create(1, 1),
+            OrderTypeImp.empty(),
           );
           expect(result).toBeDefined();
           expect(result.length).toEqual(1);
@@ -166,8 +164,8 @@ describe('FirestoreService (infrastructure)', () => {
           const result = await firestoreService.findAll(
             collection,
             [],
-            PaginatorType.create(1, 2),
-            OrderType.empty(),
+            PaginatorTypeImp.create(1, 2),
+            OrderTypeImp.empty(),
           );
           expect(result).toBeDefined();
           expect(result.length).toEqual(2);
@@ -181,8 +179,8 @@ describe('FirestoreService (infrastructure)', () => {
           const result = await firestoreService.findAll(
             collection,
             [],
-            PaginatorType.create(2, 2),
-            OrderType.empty(),
+            PaginatorTypeImp.create(2, 2),
+            OrderTypeImp.empty(),
           );
           expect(result).toBeDefined();
           expect(result.length).toEqual(1);
@@ -198,8 +196,8 @@ describe('FirestoreService (infrastructure)', () => {
           const result = await firestoreService.findAll(
             collection,
             [],
-            PaginatorType.empty(),
-            OrderType.create('id', 'desc'),
+            PaginatorTypeImp.empty(),
+            OrderTypeImp.create('id', 'desc'),
           );
           expect(result).toBeDefined();
           expect(result.length).toEqual(3);
@@ -215,8 +213,8 @@ describe('FirestoreService (infrastructure)', () => {
           const result = await firestoreService.findAll(
             collection,
             [],
-            PaginatorType.empty(),
-            OrderType.create('id', 'asc'),
+            PaginatorTypeImp.empty(),
+            OrderTypeImp.create('id', 'asc'),
           );
           expect(result).toBeDefined();
           expect(result.length).toEqual(3);
@@ -235,8 +233,8 @@ describe('FirestoreService (infrastructure)', () => {
           const result = await firestoreService.findAll(
             collection,
             [],
-            PaginatorType.create(2, 2),
-            OrderType.create('id', 'asc'),
+            PaginatorTypeImp.create(2, 2),
+            OrderTypeImp.create('id', 'asc'),
           );
           expect(result).toBeDefined();
           expect(result.length).toEqual(1);
@@ -257,8 +255,8 @@ describe('FirestoreService (infrastructure)', () => {
               value: filterParamNotExit,
             },
           ],
-          PaginatorType.empty(),
-          OrderType.empty(),
+          PaginatorTypeImp.empty(),
+          OrderTypeImp.empty(),
         );
         expect(result).toEqual([]);
       });
@@ -278,8 +276,8 @@ describe('FirestoreService (infrastructure)', () => {
               value: 'red',
             },
           ],
-          PaginatorType.empty(),
-          OrderType.empty(),
+          PaginatorTypeImp.empty(),
+          OrderTypeImp.empty(),
         );
         expect(result).toEqual([]);
       });
@@ -295,8 +293,8 @@ describe('FirestoreService (infrastructure)', () => {
                 value: filterParam,
               },
             ],
-            PaginatorType.empty(),
-            OrderType.empty(),
+            PaginatorTypeImp.empty(),
+            OrderTypeImp.empty(),
           ),
         ).rejects.toThrow('Error en el servidor');
       });
