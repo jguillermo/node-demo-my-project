@@ -4,7 +4,7 @@ import { BaseDto } from '../../../share/application/base.dto';
 import { OrderDao, PaginatorDao } from '../../../share/application/filter.dto';
 import { UUIDTypeImp } from 'base-ddd/dist/ValueObject/Implement/UUIDTypeImp';
 import { StringTypeImp } from 'base-ddd/dist/ValueObject/Implement/StringTypeImp';
-import { DomainValidator } from 'base-ddd';
+import { DomainValidator, OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
 
 @ArgsType()
 export class UserListDao extends BaseDto {
@@ -21,10 +21,12 @@ export class UserListDao extends BaseDto {
   name?: string;
 
   @IsOptional()
+  @Validate(DomainValidator, [PaginatorTypeImp])
   @Field(() => PaginatorDao, { nullable: true })
   paginator?: PaginatorDao;
 
   @IsOptional()
+  @Validate(DomainValidator, [OrderTypeImp])
   @Field(() => OrderDao, { nullable: true })
   order?: OrderDao;
 }

@@ -1,19 +1,19 @@
+# To Do
 
-#To Do
-
-##Graphql
+## Graphql
     - nestCli remove @Field from type class
-    - generate abstract class for template (bad idea)
-##Infrastructure
+## Infrastructure
     - find LIKE sub string in filter
-##Application
+## Application
     - nestcli remove field dao
-##Domain
-    - move AggregateRoot and EventBase class to base-ddd
-##Nest
+## Domain
+## Nest
     - logguer
     - security
     - exceptions
     - migrate to v8
-##General
+## General
     - use plural in grapql https://www.npmjs.com/package/pluralize
+
+## ideas to improve
+    - generate abstract class for template (bad idea)
