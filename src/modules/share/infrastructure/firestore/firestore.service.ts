@@ -5,9 +5,13 @@ import DocumentData = admin.firestore.DocumentData;
 import CollectionReference = admin.firestore.CollectionReference;
 import QuerySnapshot = admin.firestore.QuerySnapshot;
 import { Firebase } from '../firebase';
-import { ItemDto } from './item.dto';
 import { Query, WhereFilterOp, OrderByDirection } from '@google-cloud/firestore';
 import { FilterItem, OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
+
+export interface ItemDto {
+  id: string;
+  data: any;
+}
 
 @Injectable()
 export class FirestoreService {

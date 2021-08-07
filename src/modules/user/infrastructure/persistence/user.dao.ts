@@ -1,7 +1,7 @@
 import { User } from '../../domain/user';
 import { UserName } from '../../domain/user-name';
 import { UserId } from '../../domain/user-id';
-import { ItemDto } from '../../../share/infrastructure/firestore/item.dto';
+import { ItemDto } from '../../../share/infrastructure/firestore/firestore.service';
 
 export class UserDao {
   id: string;
