@@ -4,8 +4,7 @@ import { StringTypeImp } from 'base-ddd/dist/ValueObject/Implement/StringTypeImp
 import { ListUserResponse } from '../list-user.response';
 import { UserResponse } from '../user.response';
 import { UUIDTypeImp } from 'base-ddd/dist/ValueObject/Implement/UUIDTypeImp';
-import { FilterOpStr } from '../../../share/domain/repository';
-import { OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
+import { FilterOpStr, OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
 
 @Injectable()
 export class UserListService {

@@ -1,7 +1,6 @@
 import { TestingE2EModule } from '../testing-e2-e-module';
 import { FirestoreService } from '../../src/modules/share/infrastructure/firestore/firestore.service';
-import { FilterOpStr } from '../../src/modules/share/domain/repository';
-import { OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
+import { FilterOpStr, OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
 
 const collection = 'testcoll';
 

@@ -11,8 +11,7 @@ import {
   WhereFilterOp,
   OrderByDirection,
 } from '@google-cloud/firestore';
-import { FilterItem } from '../../domain/repository';
-import { OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
+import { FilterItem, OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
 
 @Injectable()
 export class FirestoreService {

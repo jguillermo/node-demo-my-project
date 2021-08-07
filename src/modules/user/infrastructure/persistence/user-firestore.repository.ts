@@ -4,8 +4,7 @@ import { UserId } from '../../domain/user-id';
 import { UserDao } from './user.dao';
 import { UserRepository } from '../../domain/user.repository';
 import { FirestoreService } from '../../../share/infrastructure/firestore/firestore.service';
-import { FilterItem } from '../../../share/domain/repository';
-import { OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
+import { FilterItem, OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
 
 @Injectable()
 export class UserFirestoreRepository extends UserRepository {
