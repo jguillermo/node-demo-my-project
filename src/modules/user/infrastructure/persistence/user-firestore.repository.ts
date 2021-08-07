@@ -5,8 +5,7 @@ import { UserDao } from './user.dao';
 import { UserRepository } from '../../domain/user.repository';
 import { FirestoreService } from '../../../share/infrastructure/firestore/firestore.service';
 import { FilterItem } from '../../../share/domain/repository';
-import { PaginatorType } from '../../../share/domain/paginator.type';
-import { OrderTypeImp } from 'base-ddd';
+import { OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
 
 @Injectable()
 export class UserFirestoreRepository extends UserRepository {
@@ -34,14 +33,14 @@ export class UserFirestoreRepository extends UserRepository {
 
   async findAll(
     filters?: Array<FilterItem>,
-    paginator?: PaginatorType,
+    paginator?: PaginatorTypeImp,
     order?: OrderTypeImp,
   ): Promise<User[]> {
     if (!Array.isArray(filters)) {
       filters = [];
     }
     if (!paginator) {
-      paginator = PaginatorType.empty();
+      paginator = PaginatorTypeImp.empty();
     }
     if (!order) {
       order = OrderTypeImp.empty();

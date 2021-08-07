@@ -4,8 +4,7 @@ import { UserListService } from './user-list.service';
 import { UUIDTypeImp } from 'base-ddd/dist/ValueObject/Implement/UUIDTypeImp';
 import { StringTypeImp } from 'base-ddd/dist/ValueObject/Implement/StringTypeImp';
 import { ListUserResponse } from '../list-user.response';
-import { PaginatorType } from '../../../share/domain/paginator.type';
-import { OrderTypeImp } from 'base-ddd';
+import { OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
 
 @QueryHandler(UserListDao)
 export class UserListHandler implements IQueryHandler<UserListDao> {
@@ -14,7 +13,7 @@ export class UserListHandler implements IQueryHandler<UserListDao> {
   async execute(dao: UserListDao): Promise<ListUserResponse> {
     const id = new UUIDTypeImp(dao.id);
     const name = new StringTypeImp(dao.name);
-    const paginator = PaginatorType.create(
+    const paginator = PaginatorTypeImp.create(
       dao.paginator?.page,
       dao.paginator?.perPage,
     );

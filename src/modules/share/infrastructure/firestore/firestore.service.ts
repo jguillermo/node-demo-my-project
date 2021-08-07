@@ -12,8 +12,7 @@ import {
   OrderByDirection,
 } from '@google-cloud/firestore';
 import { FilterItem } from '../../domain/repository';
-import { PaginatorType } from '../../domain/paginator.type';
-import { OrderTypeImp } from 'base-ddd';
+import { OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
 
 @Injectable()
 export class FirestoreService {
@@ -69,7 +68,7 @@ export class FirestoreService {
   public async findAll(
     collection: string,
     filters: Array<FilterItem> = [],
-    paginator: PaginatorType,
+    paginator: PaginatorTypeImp,
     order: OrderTypeImp,
   ): Promise<ItemDto[]> {
     try {
