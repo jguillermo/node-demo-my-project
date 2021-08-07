@@ -5,7 +5,7 @@ import { UUIDTypeImp } from 'base-ddd/dist/ValueObject/Implement/UUIDTypeImp';
 import { StringTypeImp } from 'base-ddd/dist/ValueObject/Implement/StringTypeImp';
 import { ListUserResponse } from '../list-user.response';
 import { PaginatorType } from '../../../share/domain/paginator.type';
-import { OrderType } from '../../../share/domain/order.type';
+import { OrderTypeImp } from 'base-ddd';
 
 @QueryHandler(UserListDao)
 export class UserListHandler implements IQueryHandler<UserListDao> {
@@ -19,7 +19,7 @@ export class UserListHandler implements IQueryHandler<UserListDao> {
       dao.paginator?.perPage,
     );
 
-    const order = OrderType.create(dao.order?.field, dao.order?.direction);
+    const order = OrderTypeImp.create(dao.order?.field, dao.order?.direction);
 
     return await this.service.execute(id, name, paginator, order);
   }

@@ -13,7 +13,7 @@ import {
 } from '@google-cloud/firestore';
 import { FilterItem } from '../../domain/repository';
 import { PaginatorType } from '../../domain/paginator.type';
-import { OrderType } from '../../domain/order.type';
+import { OrderTypeImp } from 'base-ddd';
 
 @Injectable()
 export class FirestoreService {
@@ -70,7 +70,7 @@ export class FirestoreService {
     collection: string,
     filters: Array<FilterItem> = [],
     paginator: PaginatorType,
-    order: OrderType,
+    order: OrderTypeImp,
   ): Promise<ItemDto[]> {
     try {
       const storeDb = this.getCollection(collection);

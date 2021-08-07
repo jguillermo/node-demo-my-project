@@ -6,7 +6,7 @@ import { UserRepository } from '../../domain/user.repository';
 import { FirestoreService } from '../../../share/infrastructure/firestore/firestore.service';
 import { FilterItem } from '../../../share/domain/repository';
 import { PaginatorType } from '../../../share/domain/paginator.type';
-import { OrderType } from '../../../share/domain/order.type';
+import { OrderTypeImp } from 'base-ddd';
 
 @Injectable()
 export class UserFirestoreRepository extends UserRepository {
@@ -35,7 +35,7 @@ export class UserFirestoreRepository extends UserRepository {
   async findAll(
     filters?: Array<FilterItem>,
     paginator?: PaginatorType,
-    order?: OrderType,
+    order?: OrderTypeImp,
   ): Promise<User[]> {
     if (!Array.isArray(filters)) {
       filters = [];
@@ -44,7 +44,7 @@ export class UserFirestoreRepository extends UserRepository {
       paginator = PaginatorType.empty();
     }
     if (!order) {
-      order = OrderType.empty();
+      order = OrderTypeImp.empty();
     }
     const items = await this.firestore.findAll(
       this._collection,

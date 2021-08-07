@@ -2,7 +2,7 @@ import { TestingE2EModule } from '../testing-e2-e-module';
 import { FirestoreService } from '../../src/modules/share/infrastructure/firestore/firestore.service';
 import { FilterOpStr } from '../../src/modules/share/domain/repository';
 import { PaginatorType } from '../../src/modules/share/domain/paginator.type';
-import { OrderType } from '../../src/modules/share/domain/order.type';
+import { OrderTypeImp } from 'base-ddd';
 
 const collection = 'testcoll';
 
@@ -32,7 +32,7 @@ describe('FirestoreService (infrastructure)', () => {
       collection,
       [],
       PaginatorType.empty(),
-      OrderType.empty(),
+      OrderTypeImp.empty(),
     );
     for await (const item of result) {
       await firestoreService.delete(collection, item.id);
@@ -112,7 +112,7 @@ describe('FirestoreService (infrastructure)', () => {
               },
             ],
             PaginatorType.empty(),
-            OrderType.empty(),
+            OrderTypeImp.empty(),
           );
           expect(result).toBeDefined();
           expect(result.length).toEqual(1);
@@ -136,7 +136,7 @@ describe('FirestoreService (infrastructure)', () => {
               },
             ],
             PaginatorType.empty(),
-            OrderType.empty(),
+            OrderTypeImp.empty(),
           );
           expect(result).toBeDefined();
           expect(result.length).toEqual(1);
@@ -154,7 +154,7 @@ describe('FirestoreService (infrastructure)', () => {
             collection,
             [],
             PaginatorType.create(1, 1),
-            OrderType.empty(),
+            OrderTypeImp.empty(),
           );
           expect(result).toBeDefined();
           expect(result.length).toEqual(1);
@@ -167,7 +167,7 @@ describe('FirestoreService (infrastructure)', () => {
             collection,
             [],
             PaginatorType.create(1, 2),
-            OrderType.empty(),
+            OrderTypeImp.empty(),
           );
           expect(result).toBeDefined();
           expect(result.length).toEqual(2);
@@ -182,7 +182,7 @@ describe('FirestoreService (infrastructure)', () => {
             collection,
             [],
             PaginatorType.create(2, 2),
-            OrderType.empty(),
+            OrderTypeImp.empty(),
           );
           expect(result).toBeDefined();
           expect(result.length).toEqual(1);
@@ -199,7 +199,7 @@ describe('FirestoreService (infrastructure)', () => {
             collection,
             [],
             PaginatorType.empty(),
-            OrderType.create('id', 'desc'),
+            OrderTypeImp.create('id', 'desc'),
           );
           expect(result).toBeDefined();
           expect(result.length).toEqual(3);
@@ -216,7 +216,7 @@ describe('FirestoreService (infrastructure)', () => {
             collection,
             [],
             PaginatorType.empty(),
-            OrderType.create('id', 'asc'),
+            OrderTypeImp.create('id', 'asc'),
           );
           expect(result).toBeDefined();
           expect(result.length).toEqual(3);
@@ -236,7 +236,7 @@ describe('FirestoreService (infrastructure)', () => {
             collection,
             [],
             PaginatorType.create(2, 2),
-            OrderType.create('id', 'asc'),
+            OrderTypeImp.create('id', 'asc'),
           );
           expect(result).toBeDefined();
           expect(result.length).toEqual(1);
@@ -258,7 +258,7 @@ describe('FirestoreService (infrastructure)', () => {
             },
           ],
           PaginatorType.empty(),
-          OrderType.empty(),
+          OrderTypeImp.empty(),
         );
         expect(result).toEqual([]);
       });
@@ -279,7 +279,7 @@ describe('FirestoreService (infrastructure)', () => {
             },
           ],
           PaginatorType.empty(),
-          OrderType.empty(),
+          OrderTypeImp.empty(),
         );
         expect(result).toEqual([]);
       });
@@ -296,7 +296,7 @@ describe('FirestoreService (infrastructure)', () => {
               },
             ],
             PaginatorType.empty(),
-            OrderType.empty(),
+            OrderTypeImp.empty(),
           ),
         ).rejects.toThrow('Error en el servidor');
       });

@@ -6,7 +6,7 @@ import { UserResponse } from '../user.response';
 import { UUIDTypeImp } from 'base-ddd/dist/ValueObject/Implement/UUIDTypeImp';
 import { FilterOpStr } from '../../../share/domain/repository';
 import { PaginatorType } from '../../../share/domain/paginator.type';
-import { OrderType } from '../../../share/domain/order.type';
+import { OrderTypeImp } from 'base-ddd';
 
 @Injectable()
 export class UserListService {
@@ -16,7 +16,7 @@ export class UserListService {
     id: UUIDTypeImp,
     name: StringTypeImp,
     paginator: PaginatorType,
-    order: OrderType,
+    order: OrderTypeImp,
   ): Promise<ListUserResponse> {
     const listUser = await this.repository.findAll(
       [
