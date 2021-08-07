@@ -1,8 +1,8 @@
 import { Validate } from 'class-validator';
 import { ArgsType, Field } from '@nestjs/graphql';
 import { BaseDto } from '../../../share/application/base.dto';
-import { DomainValidator } from '../../../share/domain/domain.validator';
 import { UserId } from '../../domain/user-id';
+import { DomainValidator } from 'base-ddd';
 
 @ArgsType()
 export class UserDeleteDao extends BaseDto {
