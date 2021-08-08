@@ -16,14 +16,14 @@ run:
 lint:
 	npm run lint
 
-lint-fix:
-	npm run lint-fix
+lint-check:
+	eslint "{src,apps,libs,test}/**/*.ts"
 
 format:
 	npm run format
 
-format-fix:
-	npm run format-fix
+format-check:
+	prettier --check "src/**/*.ts" "test/**/*.ts"
 
 test-unit:
 	npm run test
@@ -33,15 +33,12 @@ test-e2e:
 
 .PHONY: test
 test:
-	@make fix
 	@make format
 	@make lint
+	@make format-check
+	@make lint-check
 	@make test-unit
 	@make test-e2e
-
-fix:
-	@make format-fix
-	@make lint-fix
 
 help:
 	@printf "\033[31m%-16s %-59s %s\033[0m\n" "Target" "Help" "Usage"; \

@@ -11,7 +11,6 @@
     - logguer
     - security
     - exceptions
-    - migrate to v8
 ## General
     - use plural in grapql https://www.npmjs.com/package/pluralize
 

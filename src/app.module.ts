@@ -1,10 +1,10 @@
-import { CqrsModule } from '@nestjs/cqrs';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+import { CqrsModule } from '@nestjs/cqrs';
 import { UserResolver } from './app/user/user.resolver';
+import { AppEvents } from './event/events';
 import { UserModule } from './modules/user/user.module';
 import { ShareModule } from './modules/share/share.module';
-import { AppEvents } from './event/events';
 
 @Module({
   imports: [
@@ -17,6 +17,7 @@ import { AppEvents } from './event/events';
     UserModule,
     ShareModule,
   ],
+  controllers: [],
   providers: [UserResolver, ...AppEvents],
 })
 export class AppModule {}
