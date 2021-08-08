@@ -19,7 +19,7 @@ npm i firebase-admin
 npm i faker --save-dev 
 npm i @types/faker --save-dev
 ```
-### 2.- remove this files
+### 2.- update files
 ```bash
 rm src/app.controller.ts && rm src/app.controller.spec.ts && rm src/app.service.ts
 ```
@@ -47,6 +47,35 @@ import { AppEvents } from './event/events';
 })
 export class AppModule {
 }
+
+```
+
+replace main.ts
+
+```javascript
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
+
+  app.enableCors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type, Accept, Authorization',
+  });
+  await app.listen(3000);
+}
+
+bootstrap();
 
 ```
 
