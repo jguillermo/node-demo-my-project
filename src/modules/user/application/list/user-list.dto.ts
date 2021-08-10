@@ -3,10 +3,10 @@ import { ArgsType, Field } from '@nestjs/graphql';
 import { UUIDTypeImp } from 'base-ddd/dist/ValueObject/Implement/UUIDTypeImp';
 import { StringTypeImp } from 'base-ddd/dist/ValueObject/Implement/StringTypeImp';
 import { DomainValidator, OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
-import { BaseDao, OrderDao, PaginatorDao } from '../../../share/application/base.dao';
+import { BaseDto, OrderDto, PaginatorDto } from '../../../share/application/base.dto';
 
 @ArgsType()
-export class UserListDao extends BaseDao {
+export class UserListDto extends BaseDto {
   constructor() {
     super();
   }
@@ -21,11 +21,11 @@ export class UserListDao extends BaseDao {
 
   @IsOptional()
   @Validate(DomainValidator, [PaginatorTypeImp])
-  @Field(() => PaginatorDao, { nullable: true })
-  paginator?: PaginatorDao;
+  @Field(() => PaginatorDto, { nullable: true })
+  paginator?: PaginatorDto;
 
   @IsOptional()
   @Validate(DomainValidator, [OrderTypeImp])
-  @Field(() => OrderDao, { nullable: true })
-  order?: OrderDao;
+  @Field(() => OrderDto, { nullable: true })
+  order?: OrderDto;
 }

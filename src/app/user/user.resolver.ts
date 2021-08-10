@@ -1,12 +1,12 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ResultUserPersist, UserType } from './user.type';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { UserFindByIdDao } from '../../modules/user/application/find-by-id/user-find-by-id.dao';
+import { UserFindByIdDto } from '../../modules/user/application/find-by-id/user-find-by-id.dto';
 import { ListUserResponse } from '../../modules/user/application/list-user.response';
 import { UserResponse } from '../../modules/user/application/user.response';
-import { UserListDao } from '../../modules/user/application/list/user-list.dao';
-import { UserPersistDao } from '../../modules/user/application/persist/user-persist.dao';
-import { UserDeleteDao } from '../../modules/user/application/delete/user-delete.dao';
+import { UserListDto } from '../../modules/user/application/list/user-list.dto';
+import { UserPersistDto } from '../../modules/user/application/persist/user-persist.dto';
+import { UserDeleteDto } from '../../modules/user/application/delete/user-delete.dto';
 import { ResponseStatus } from '../../modules/share/application/applicationResponse';
 import { StatusType } from '../status.type';
 
@@ -15,24 +15,24 @@ export class UserResolver {
   constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
 
   @Query(() => [UserType], { name: 'userList' })
-  async list(@Args() args: UserListDao): Promise<UserResponse[]> {
+  async list(@Args() args: UserListDto): Promise<UserResponse[]> {
     const data: ListUserResponse = await this.queryBus.execute(args);
     return data.list;
   }
 
   @Query(() => UserType, { name: 'user', nullable: true })
-  async aggregate(@Args() args: UserFindByIdDao): Promise<UserResponse | null> {
+  async aggregate(@Args() args: UserFindByIdDto): Promise<UserResponse | null> {
     return await this.queryBus.execute(args);
   }
 
   @Mutation(() => ResultUserPersist, { name: 'userPersist' })
-  async persist(@Args() args: UserPersistDao) {
+  async persist(@Args() args: UserPersistDto) {
     await this.commandBus.execute(args);
-    return args.showEntity ? await this.queryBus.execute(new UserFindByIdDao(args.id)) : ResponseStatus.ok();
+    return args.showEntity ? await this.queryBus.execute(new UserFindByIdDto(args.id)) : ResponseStatus.ok();
   }
 
   @Mutation(() => StatusType, { name: 'userDelete' })
-  async delete(@Args() args: UserDeleteDao): Promise<ResponseStatus> {
+  async delete(@Args() args: UserDeleteDto): Promise<ResponseStatus> {
     await this.commandBus.execute(args);
     return ResponseStatus.ok();
   }

@@ -1,14 +1,14 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { UserDeleteDao } from './user-delete.dao';
+import { UserDeleteDto } from './user-delete.dto';
 import { UserDeleteService } from './user-delete.service';
 import { UserId } from '../../domain/user-id';
 
-@CommandHandler(UserDeleteDao)
-export class UserDeleteHandler implements ICommandHandler<UserDeleteDao> {
+@CommandHandler(UserDeleteDto)
+export class UserDeleteHandler implements ICommandHandler<UserDeleteDto> {
   constructor(private service: UserDeleteService) {}
 
-  async execute(dao: UserDeleteDao): Promise<void> {
-    const id = new UserId(dao.id);
+  async execute(dto: UserDeleteDto): Promise<void> {
+    const id = new UserId(dto.id);
     await this.service.execute(id);
   }
 }

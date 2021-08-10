@@ -3,10 +3,10 @@ import { ArgsType, Field } from '@nestjs/graphql';
 import { UserId } from '../../domain/user-id';
 import { UserName } from '../../domain/user-name';
 import { DomainValidator } from 'base-ddd';
-import { BaseDao } from '../../../share/application/base.dao';
+import { BaseDto } from '../../../share/application/base.dto';
 
 @ArgsType()
-export class UserPersistDao extends BaseDao {
+export class UserPersistDto extends BaseDto {
   constructor() {
     super();
   }
