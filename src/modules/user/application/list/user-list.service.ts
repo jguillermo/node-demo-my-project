@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { UserRepository } from '../../domain/user.repository';
 import { StringTypeImp } from 'base-ddd/dist/ValueObject/Implement/StringTypeImp';
-import { ListUserResponse } from '../list-user.response';
-import { UserResponse } from '../user.response';
 import { UUIDTypeImp } from 'base-ddd/dist/ValueObject/Implement/UUIDTypeImp';
 import { FilterOpStr, OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
+import { UserRepository } from '../../domain/user.repository';
+import { ListUserResponse } from '../list-user.response';
+import { UserResponse } from '../user.response';
 
 @Injectable()
 export class UserListService {

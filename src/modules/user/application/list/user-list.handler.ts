@@ -1,10 +1,10 @@
 import { QueryHandler, IQueryHandler } from '@nestjs/cqrs';
-import { UserListDto } from './user-list.dto';
-import { UserListService } from './user-list.service';
+import { OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
 import { UUIDTypeImp } from 'base-ddd/dist/ValueObject/Implement/UUIDTypeImp';
 import { StringTypeImp } from 'base-ddd/dist/ValueObject/Implement/StringTypeImp';
+import { UserListDto } from './user-list.dto';
+import { UserListService } from './user-list.service';
 import { ListUserResponse } from '../list-user.response';
-import { OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
 
 @QueryHandler(UserListDto)
 export class UserListHandler implements IQueryHandler<UserListDto> {
