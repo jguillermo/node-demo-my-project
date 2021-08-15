@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { CqrsModule } from '@nestjs/cqrs';
-import { UserResolver } from './app/user/user.resolver';
 import { AppEvents } from './event/events';
 import { UserModule } from './modules/user/user.module';
 import { ShareModule } from './modules/share/share.module';
+import { AppGraphQl } from './app/graph-ql';
 
 @Module({
   imports: [
@@ -18,6 +18,6 @@ import { ShareModule } from './modules/share/share.module';
     ShareModule,
   ],
   controllers: [],
-  providers: [UserResolver, ...AppEvents],
+  providers: [...AppEvents, ...AppGraphQl],
 })
 export class AppModule {}

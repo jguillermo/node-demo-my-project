@@ -8,7 +8,7 @@ import { UserListDto } from '../../modules/user/application/list/user-list.dto';
 import { UserPersistDto } from '../../modules/user/application/persist/user-persist.dto';
 import { UserDeleteDto } from '../../modules/user/application/delete/user-delete.dto';
 import { ResponseStatus } from '../../modules/share/application/applicationResponse';
-import { StatusType } from '../status.type';
+import { StatusType } from '../../modules/share/app/status.type';
 
 @Resolver(() => UserType)
 export class UserResolver {
