@@ -1,6 +1,6 @@
+import { FilterItem, OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
 import { User } from './user';
 import { UserId } from './user-id';
-import { FilterItem, OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
 
 export abstract class UserRepository {
   abstract persist(user: User): Promise<void>;

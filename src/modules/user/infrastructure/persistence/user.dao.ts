@@ -1,6 +1,6 @@
 import { User } from '../../domain/user';
-import { UserName } from '../../domain/user-name';
 import { UserId } from '../../domain/user-id';
+import { UserName } from '../../domain/user-name';
 import { ItemDto } from '../../../share/infrastructure/firestore/firestore.service';
 
 export class UserDao {
@@ -16,7 +16,7 @@ export class UserDao {
 
   static fromItem(item: ItemDto): UserDao {
     const dao = new UserDao();
-    dao.id = item.id;
+    dao.id = item.data.id; //item.id
     dao.name = item.data.name;
     return dao;
   }
