@@ -1,6 +1,6 @@
-import { UserId } from '../../src/modules/user/domain/user-id';
-import { UserName } from '../../src/modules/user/domain/user-name';
-import { User } from '../../src/modules/user/domain/user';
+import { UserId } from '../../src/user/domain/user-id';
+import { UserName } from '../../src/user/domain/user-name';
+import { User } from '../../src/user/domain/user';
 import * as faker from 'faker';
 
 export class UserIdMother {

@@ -1,8 +1,8 @@
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { TestingE2EModule } from '../testing-e2-e-module';
-import { UserRepository } from '../../src/modules/user/domain/user.repository';
-import { User } from '../../src/modules/user/domain/user';
+import { UserRepository } from '../../src/user/domain/user.repository';
+import { User } from '../../src/user/domain/user';
 import { UserMother } from './user-object-mother';
 
 describe('User entity [user] (e2e)', () => {

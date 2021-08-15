@@ -30,8 +30,8 @@ replace app.module.ts
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { CqrsModule } from '@nestjs/cqrs';
-import { UserResolver } from './app/user/user.resolver';
-import { AppEvents } from './event/events';
+import { UserModule } from './user/user.module';
+import { ShareModule } from './share/share.module';
 
 @Module({
   imports: [
@@ -41,12 +41,13 @@ import { AppEvents } from './event/events';
       debug: true,
     }),
     CqrsModule,
+    UserModule,
+    ShareModule,
   ],
   controllers: [],
-  providers: [UserResolver, ...AppEvents],
+  providers: [],
 })
-export class AppModule {
-}
+export class AppModule {}
 
 ```
 
@@ -81,19 +82,15 @@ bootstrap();
 
 ### 3.- generate modules share and user
 ```bash
-nest g mo modules/user
-nest g mo modules/share
+nest g mo user
+nest g mo share
 ```
 ### 4 copy src modules
 ### 5 copy src app
 ### 5 copy src event
 ### 5 copy test
 ### 6 copy firestore-files
-copy 3 files to firestore config and 1 files to firestore emulator
-- .firebaserc
-- firebase.json
-- firestore.indexes.json
-- firestore.rules
+genrate with cli 4 files to use firestore
 
 ### 6 copy makefile
 

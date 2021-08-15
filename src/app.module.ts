@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { CqrsModule } from '@nestjs/cqrs';
-import { UserModule } from './modules/user/user.module';
-import { ShareModule } from './modules/share/share.module';
+import { UserModule } from './user/user.module';
+import { ShareModule } from './share/share.module';
 
 @Module({
   imports: [
