@@ -1,6 +1,6 @@
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { UserUpdatedEvent } from '../../modules/user/domain/user-updated.event';
 import { Logger } from '@nestjs/common';
+import { UserUpdatedEvent } from '../../domain/user-updated.event';
 
 @EventsHandler(UserUpdatedEvent)
 export class UserUpdated implements IEventHandler<UserUpdatedEvent> {

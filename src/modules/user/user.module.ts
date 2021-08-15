@@ -11,6 +11,8 @@ import { UserPersistHandler } from './application/persist/user-persist.handler';
 import { ShareModule } from '../share/share.module';
 import { UserDeleteHandler } from './application/delete/user-delete.handler';
 import { UserDeleteService } from './application/delete/user-delete.service';
+import { UserResolver } from './infrastructure/graph-ql/user.resolver';
+import { AppEvents } from './infrastructure/event/events';
 
 export const CommandHandlers = [UserPersistHandler, UserDeleteHandler];
 export const QueryHandlers = [UserListHandler, UserFindByIdHandler];
@@ -26,6 +28,8 @@ export const Services = [UserPersistService, UserListService, UserFindByIdServic
     ...CommandHandlers,
     ...QueryHandlers,
     ...Services,
+    UserResolver,
+    ...AppEvents,
   ],
 })
 export class UserModule {}
