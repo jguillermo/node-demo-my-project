@@ -16,7 +16,8 @@ export class UserDao {
 
   static fromItem(item: ItemDto): UserDao {
     const dao = new UserDao();
-    dao.id = item.data.id; //item.id
+    //item.data.id = item.id
+    dao.id = item.data.id;
     dao.name = item.data.name;
     return dao;
   }
