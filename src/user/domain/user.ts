@@ -1,8 +1,8 @@
+import { AggregateRoot } from 'base-ddd';
 import { UserId } from './user-id';
 import { UserName } from './user-name';
 import { UserCreatedEvent } from './user-created.event';
 import { UserUpdatedEvent } from './user-updated.event';
-import { AggregateRoot } from 'base-ddd';
 import { UserDeletedEvent } from './user-deleted.event';
 
 export class User extends AggregateRoot {
@@ -24,12 +24,12 @@ export class User extends AggregateRoot {
     return this._name;
   }
 
-  change(name: UserName): void {
+  update(name: UserName): void {
     this._name = name;
     this.record(new UserUpdatedEvent(this.id.value, this.name.value));
   }
 
-  delete() {
+  delete(): void {
     this.record(new UserDeletedEvent(this.id.value, this.name.value));
   }
 }
