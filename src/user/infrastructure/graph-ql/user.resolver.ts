@@ -4,10 +4,10 @@ import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ResponseStatus } from '../../../share/application/applicationResponse';
 import { StatusType } from '../../../share/app/status.type';
 import { UserFindByIdDto } from '../../application/find-by-id/user-find-by-id.dto';
-import { UserResponse } from '../../application/user.response';
-import { UserListDto } from '../../application/list/user-list.dto';
 import { UserPersistDto } from '../../application/persist/user-persist.dto';
 import { UserDeleteDto } from '../../application/delete/user-delete.dto';
+import { UserListDto } from '../../application/list/user-list.dto';
+import { UserResponse } from '../../application/user.response';
 import { ListUserResponse } from '../../application/list-user.response';
 
 @Resolver(() => UserType)
