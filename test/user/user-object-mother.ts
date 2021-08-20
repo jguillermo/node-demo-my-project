@@ -3,6 +3,11 @@ import { UserName } from '../../src/user/domain/user-name';
 import { User } from '../../src/user/domain/user';
 import * as faker from 'faker';
 
+export interface UserDataInterface {
+  id?: string;
+  name?: string;
+}
+
 export class UserIdMother {
   static create(value?: string): UserId {
     const id = value ? value : faker.datatype.uuid();
@@ -18,7 +23,7 @@ export class UserNameMother {
 }
 
 export class UserMother {
-  static create(data?: any): User {
+  static create(data?: UserDataInterface): User {
     return new User(UserIdMother.create(data?.id), UserNameMother.create(data?.name));
   }
 }
