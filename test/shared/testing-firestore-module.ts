@@ -1,17 +1,15 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppModule } from '../src/app.module';
-import { UserRepository } from '../src/user/domain/user.repository';
-import { FirestoreService } from '../src/share/infrastructure/firestore/firestore.service';
+import { AppModule } from '../../src/app.module';
+import { FirestoreService } from '../../src/share/infrastructure/firestore/firestore.service';
 
-export interface CreateTestingInterface {
+export interface CreateTestingFirestoreInterface {
   app: INestApplication;
-  userRepository: UserRepository;
   firestoreService: FirestoreService;
 }
 
-export class TestingE2EModule {
-  static async create(): Promise<CreateTestingInterface> {
+export class TestingFirestoreModule {
+  static async create(): Promise<CreateTestingFirestoreInterface> {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
@@ -26,7 +24,6 @@ export class TestingE2EModule {
     await app.init();
     return {
       app,
-      userRepository: moduleFixture.get<UserRepository>(UserRepository),
       firestoreService: moduleFixture.get<FirestoreService>(FirestoreService),
     };
   }
