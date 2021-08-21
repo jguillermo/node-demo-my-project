@@ -1,6 +1,5 @@
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-
 import { UserRepository } from '../../../src/user/domain/user.repository';
 import { UserMother } from '../user-object-mother';
 import { TestingE2eModule } from '../../testing-e2e-module';

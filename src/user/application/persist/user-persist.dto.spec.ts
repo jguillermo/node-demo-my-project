@@ -5,7 +5,7 @@ describe('UserPersistDto', () => {
   describe('ok', () => {
     it('all correct', async () => {
       const dto = new UserPersistDto();
-      dto.id = '1dc7ceb2-a619-47e0-b350-f909f699acd2';
+      dto.id = 'e42ce453-ca22-5311-914d-76b8c4461e2b';
       dto.name = 'name';
       const errors = await validate(dto);
       expect(errors.length).toEqual(0);
