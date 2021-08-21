@@ -1,4 +1,5 @@
 path: src/product
+pathTest: test/product
 nameSpace: app.product
 name: Product
 properties:
