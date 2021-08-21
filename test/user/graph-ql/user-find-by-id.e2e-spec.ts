@@ -1,24 +1,23 @@
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { TestingE2EModule } from '../testing-e2-e-module';
-import { UserRepository } from '../../src/user/domain/user.repository';
-import { User } from '../../src/user/domain/user';
-import { UserMother } from './user-object-mother';
+import { TestingE2EModule } from '../../testing-e2-e-module';
+import { UserRepository } from '../../../src/user/domain/user.repository';
+import { UserMother } from '../user-object-mother';
 
-describe('User entity [user] (e2e)', () => {
+describe('GraphQl User (user)', () => {
   let app: INestApplication;
-  let userRepository: UserRepository;
+  let repository: UserRepository;
   beforeEach(async () => {
-    ({ app, userRepository } = await TestingE2EModule.create());
-    const users = await userRepository.findAll();
-    for await (const user of users) {
-      await userRepository.deleteById(user.id);
+    ({ app, userRepository: repository } = await TestingE2EModule.create());
+    const items = await repository.findAll();
+    for await (const item of items) {
+      await repository.deleteById(item.id);
     }
   });
 
-  it('get aggregate', async () => {
+  it('get', async () => {
     const user = UserMother.create();
-    await userRepository.persist(user);
+    await repository.persist(user);
     const query = `
           query{
             user(id: "${user.id.value}"){
@@ -39,7 +38,7 @@ describe('User entity [user] (e2e)', () => {
             },
           },
         });
-        const userDb: User = await userRepository.findById(user.id);
+        const userDb = await repository.findById(user.id);
         expect(userDb).not.toBeNull();
         expect(userDb.id.value).toEqual(user.id.value);
         expect(userDb.name.value).toEqual(user.name.value);
@@ -66,7 +65,7 @@ describe('User entity [user] (e2e)', () => {
             user: null,
           },
         });
-        const userDb: User = await userRepository.findById(user.id);
+        const userDb = await repository.findById(user.id);
         expect(userDb).toBeNull();
         expect(response.statusCode).toEqual(200);
       });

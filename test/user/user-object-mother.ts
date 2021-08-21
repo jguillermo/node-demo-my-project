@@ -1,7 +1,7 @@
+import * as faker from 'faker';
+import { User } from '../../src/user/domain/user';
 import { UserId } from '../../src/user/domain/user-id';
 import { UserName } from '../../src/user/domain/user-name';
-import { User } from '../../src/user/domain/user';
-import * as faker from 'faker';
 
 export interface UserDataInterface {
   id?: string;
