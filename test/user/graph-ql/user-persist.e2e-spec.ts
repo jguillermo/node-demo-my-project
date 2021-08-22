@@ -1,8 +1,8 @@
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
+import { UserE2eModule } from './user-e2e-module';
 import { UserRepository } from '../../../src/user/domain/user.repository';
 import { UserMother } from '../user-object-mother';
-import { UserE2eModule } from './user-e2e-module';
 
 describe('GraphQl User (userPersist)', () => {
   let app: INestApplication;
