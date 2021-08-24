@@ -9,4 +9,6 @@ properties:
   description: string
   createAt: date
   price: number
-  category: [cat1, cat2]
+  category:
+    type: enum
+    values: [cat1, cat2]
