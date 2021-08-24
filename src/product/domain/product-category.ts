@@ -1,8 +1,8 @@
 import { EnumType } from 'base-ddd';
 
 enum EnumProductCategory {
-  UP = 'UP',
-  DOWN = 'DOWN',
+  CAT1 = 'cat1',
+  CAT2 = 'cat2',
 }
 
 export class ProductCategory extends EnumType<string> {
@@ -13,5 +13,11 @@ export class ProductCategory extends EnumType<string> {
 
   protected enumValues(): string[] {
     return Object.keys(EnumProductCategory);
+  }
+  isValid(): boolean {
+    if (this.isNull) {
+      throw new Error('is required.');
+    }
+    return true;
   }
 }

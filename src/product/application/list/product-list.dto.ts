@@ -31,7 +31,7 @@ export class ProductListDto extends BaseDto {
 
   @Validate(DomainValidator, [DateTypeImp])
   @Field({ nullable: true })
-  createAt?: date;
+  createAt?: string;
 
   @Validate(DomainValidator, [NumberTypeImp])
   @Field({ nullable: true })

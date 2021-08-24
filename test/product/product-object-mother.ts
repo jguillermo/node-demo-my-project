@@ -13,7 +13,7 @@ export interface ProductDataInterface {
   name?: string;
   code?: string;
   description?: string;
-  createAt?: date;
+  createAt?: string;
   price?: number;
   category?: string;
 }
@@ -47,22 +47,22 @@ export class ProductDescriptionMother {
 }
 
 export class ProductCreateAtMother {
-  static create(value?: date): ProductCreateAt {
-    const createAt = value ? value : faker.random.word();
+  static create(value?: string): ProductCreateAt {
+    const createAt = value ? value : faker.datatype.datetime().toISOString();
     return new ProductCreateAt(createAt);
   }
 }
 
 export class ProductPriceMother {
   static create(value?: number): ProductPrice {
-    const price = value ? value : faker.random.word();
+    const price = value ? value : faker.datatype.number();
     return new ProductPrice(price);
   }
 }
 
 export class ProductCategoryMother {
   static create(value?: string): ProductCategory {
-    const category = value ? value : faker.random.word();
+    const category = value ? value : 'CAT1';
     return new ProductCategory(category);
   }
 }

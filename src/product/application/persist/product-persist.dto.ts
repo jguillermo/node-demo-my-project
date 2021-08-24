@@ -34,7 +34,7 @@ export class ProductPersistDto extends BaseDto {
 
   @Validate(DomainValidator, [ProductCreateAt])
   @Field()
-  createAt: date;
+  createAt: string;
 
   @Validate(DomainValidator, [ProductPrice])
   @Field()

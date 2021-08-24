@@ -16,7 +16,7 @@ export class ProductType {
   description: string;
 
   @Field()
-  createAt: date;
+  createAt: Date;
 
   @Field()
   price: number;

@@ -6,7 +6,7 @@ export class ProductCreatedEvent extends EventBase {
     private _name: string,
     private _code: string,
     private _description: string,
-    private _createAt: date,
+    private _createAt: string,
     private _price: number,
     private _category: string,
   ) {
@@ -29,7 +29,7 @@ export class ProductCreatedEvent extends EventBase {
     return this._description;
   }
 
-  get createAt(): date {
+  get createAt(): string {
     return this._createAt;
   }
 

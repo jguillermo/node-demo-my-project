@@ -6,7 +6,7 @@ export class ProductResponse {
     public name: string,
     public code: string,
     public description: string,
-    public createAt: date,
+    public createAt: string,
     public price: number,
     public category: string,
   ) {}

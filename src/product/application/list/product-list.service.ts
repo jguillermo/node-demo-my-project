@@ -53,7 +53,7 @@ export class ProductListService {
         {
           field: 'price',
           opStr: FilterOpStr.EQUAL_TO,
-          value: price.value,
+          value: price.toString,
         },
         {
           field: 'category',

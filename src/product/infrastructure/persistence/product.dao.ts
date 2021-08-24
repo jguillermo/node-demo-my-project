@@ -13,7 +13,7 @@ export class ProductDao {
   name: string;
   code: string;
   description: string;
-  createAt: date;
+  createAt: string;
   price: number;
   category: string;
 
