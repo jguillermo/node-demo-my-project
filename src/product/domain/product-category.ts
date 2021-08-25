@@ -11,13 +11,16 @@ export class ProductCategory extends EnumType<string> {
     return this._enum;
   }
 
-  protected enumValues(): string[] {
-    return Object.keys(EnumProductCategory);
-  }
   isValid(): boolean {
     if (this.isNull) {
       throw new Error('is required.');
     }
     return true;
+  }
+
+  public validValue(value: string): boolean {
+    return Object.keys(EnumProductCategory)
+      .map((e) => EnumProductCategory[e])
+      .includes(value);
   }
 }

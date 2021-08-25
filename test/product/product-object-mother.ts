@@ -55,14 +55,14 @@ export class ProductCreateAtMother {
 
 export class ProductPriceMother {
   static create(value?: number): ProductPrice {
-    const price = value ? value : faker.datatype.number();
+    const price = value ? value : 12; //todo: random number
     return new ProductPrice(price);
   }
 }
 
 export class ProductCategoryMother {
   static create(value?: string): ProductCategory {
-    const category = value ? value : 'CAT1';
+    const category = value ? value : 'cat1'; //todo get random enum
     return new ProductCategory(category);
   }
 }

@@ -13,7 +13,7 @@ export class ProductDao {
   name: string;
   code: string;
   description: string;
-  createAt: string;
+  createAt: Date;
   price: number;
   category: string;
 
@@ -36,7 +36,7 @@ export class ProductDao {
     dao.name = item.data.name;
     dao.code = item.data.code;
     dao.description = item.data.description;
-    dao.createAt = item.data.createAt;
+    dao.createAt = item.data.createAt.toDate();
     dao.price = item.data.price;
     dao.category = item.data.category;
     return dao;

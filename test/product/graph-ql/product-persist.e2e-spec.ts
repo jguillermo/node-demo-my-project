@@ -25,7 +25,7 @@ describe('GraphQl Product (productPersist)', () => {
               code: "${product.code.value}"
               description: "${product.description.value}"
               createAt: "${product.createAt.value}"
-              price: "${product.price.value}"
+              price: ${product.price.value}
               category: "${product.category.value}"
             ){
               ...on Status{
@@ -80,7 +80,7 @@ describe('GraphQl Product (productPersist)', () => {
               code: "${product.code.value}"
               description: "${product.description.value}"
               createAt: "${product.createAt.value}"
-              price: "${product.price.value}"
+              price: ${product.price.value}
               category: "${product.category.value}"
               showEntity: true
             ){

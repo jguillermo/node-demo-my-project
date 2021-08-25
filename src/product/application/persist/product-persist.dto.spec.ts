@@ -11,7 +11,7 @@ describe('ProductPersistDto', () => {
       dto.description = 'description';
       dto.createAt = '2021-12-05';
       dto.price = 12.5;
-      dto.category = 'CAT1'; //todo change to lowerCase
+      dto.category = 'cat1';
       const errors = await validate(dto);
       expect(errors.length).toEqual(0);
     });

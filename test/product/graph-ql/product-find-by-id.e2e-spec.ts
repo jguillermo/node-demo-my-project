@@ -23,6 +23,11 @@ describe('GraphQl Product (product)', () => {
             product(id: "${product.id.value}"){
               id
               name
+              code
+              description
+              createAt
+              price
+              category
             }
           }
           `;
@@ -63,6 +68,11 @@ describe('GraphQl Product (product)', () => {
             product(id: "${product.id.value}"){
               id
               name
+              code
+              description
+              createAt
+              price
+              category
             }
           }
           `;

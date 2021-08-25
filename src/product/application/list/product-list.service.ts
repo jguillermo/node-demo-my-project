@@ -48,7 +48,7 @@ export class ProductListService {
         {
           field: 'createAt',
           opStr: FilterOpStr.EQUAL_TO,
-          value: createAt.value,
+          value: createAt.toString,
         },
         {
           field: 'price',

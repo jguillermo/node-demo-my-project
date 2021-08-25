@@ -17,7 +17,7 @@ export class ProductResponse {
       product.name.value,
       product.code.value,
       product.description.value,
-      product.createAt.value,
+      product.createAt.toString,
       product.price.value,
       product.category.value,
     );
