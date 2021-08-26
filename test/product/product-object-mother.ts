@@ -13,7 +13,7 @@ export interface ProductDataInterface {
   name?: string;
   code?: string;
   description?: string;
-  createAt?: string;
+  createAt?: Date;
   price?: number;
   category?: string;
 }
@@ -47,7 +47,7 @@ export class ProductDescriptionMother {
 }
 
 export class ProductCreateAtMother {
-  static create(value?: string): ProductCreateAt {
+  static create(value?: Date): ProductCreateAt {
     const createAt = value ? value : faker.datatype.datetime().toISOString();
     return new ProductCreateAt(createAt);
   }
