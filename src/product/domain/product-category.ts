@@ -1,8 +1,8 @@
 import { EnumType } from 'base-ddd';
 
-enum EnumProductCategory {
-  CAT1 = 'cat1',
-  CAT2 = 'cat2',
+export enum EnumProductCategory {
+  cat1 = 'cat1',
+  cat2 = 'cat2',
 }
 
 export class ProductCategory extends EnumType<string> {

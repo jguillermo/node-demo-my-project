@@ -42,7 +42,7 @@ describe('GraphQl Product (product)', () => {
               name: product.name.value,
               code: product.code.value,
               description: product.description.value,
-              createAt: product.createAt.value,
+              createAt: product.createAt.toString,
               price: product.price.value,
               category: product.category.value,
             },

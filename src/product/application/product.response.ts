@@ -6,7 +6,7 @@ export class ProductResponse {
     public name: string,
     public code: string,
     public description: string,
-    public createAt: string,
+    public createAt: Date,
     public price: number,
     public category: string,
   ) {}
@@ -17,7 +17,7 @@ export class ProductResponse {
       product.name.value,
       product.code.value,
       product.description.value,
-      product.createAt.toString,
+      product.createAt.value,
       product.price.value,
       product.category.value,
     );
