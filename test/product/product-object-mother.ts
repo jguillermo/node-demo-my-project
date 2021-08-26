@@ -6,7 +6,7 @@ import { ProductCode } from '../../src/product/domain/product-code';
 import { ProductDescription } from '../../src/product/domain/product-description';
 import { ProductCreateAt } from '../../src/product/domain/product-create-at';
 import { ProductPrice } from '../../src/product/domain/product-price';
-import { ProductCategory } from '../../src/product/domain/product-category';
+import { EnumProductCategory, ProductCategory } from '../../src/product/domain/product-category';
 
 export interface ProductDataInterface {
   id?: string;
@@ -55,14 +55,16 @@ export class ProductCreateAtMother {
 
 export class ProductPriceMother {
   static create(value?: number): ProductPrice {
-    const price = value ? value : 12; //todo: random number
+    const price = value ? value : faker.datatype.number();
     return new ProductPrice(price);
   }
 }
 
 export class ProductCategoryMother {
   static create(value?: string): ProductCategory {
-    const category = value ? value : 'cat1'; //todo get random enum
+    const category = value
+      ? value
+      : faker.random.arrayElement(Object.keys(EnumProductCategory).map((e) => EnumProductCategory[e]));
     return new ProductCategory(category);
   }
 }

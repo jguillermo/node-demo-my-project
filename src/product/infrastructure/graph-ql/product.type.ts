@@ -22,7 +22,7 @@ export class ProductType {
   @Field()
   price: number;
 
-  @Field((type) => EnumProductCategory)
+  @Field(() => EnumProductCategory)
   category: EnumProductCategory;
 }
 
