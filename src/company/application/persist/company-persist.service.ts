@@ -4,24 +4,18 @@ import { CompanyRepository } from '../../domain/company.repository';
 import { Company } from '../../domain/company';
 import { CompanyId } from '../../domain/company-id';
 import { CompanyName } from '../../domain/company-name';
-import { CompanyAddressStreet } from '../../domain/company-address-street';
-import { CompanyAddressNumber } from '../../domain/company-address-number';
+import { CompanyAddress } from '../../domain/company-address/company-address';
 
 @Injectable()
 export class CompanyPersistService {
   constructor(private repository: CompanyRepository, private eventBus: EventBus) {}
 
-  public async execute(
-    id: CompanyId,
-    name: CompanyName,
-    addressStreet: CompanyAddressStreet,
-    addressNumber: CompanyAddressNumber,
-  ): Promise<void> {
+  public async execute(id: CompanyId, name: CompanyName, address: CompanyAddress): Promise<void> {
     let company = await this.repository.findById(id);
     if (!company) {
-      company = Company.create(id, name, addressStreet, addressNumber);
+      company = Company.create(id, name, address);
     } else {
-      company.update(name, addressStreet, addressNumber);
+      company.update(name, address);
     }
     await this.repository.persist(company);
     this.eventBus.publishAll(company.pullDomainEvents());

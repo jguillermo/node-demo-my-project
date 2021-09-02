@@ -1,30 +1,19 @@
 import { AggregateRoot } from 'base-ddd';
 import { CompanyId } from './company-id';
 import { CompanyName } from './company-name';
-import { CompanyAddressStreet } from './company-address-street';
-import { CompanyAddressNumber } from './company-address-number';
 import { CompanyCreatedEvent } from './company-created.event';
 import { CompanyUpdatedEvent } from './company-updated.event';
 import { CompanyDeletedEvent } from './company-deleted.event';
+import { CompanyAddress } from './company-address/company-address';
 
 export class Company extends AggregateRoot {
-  constructor(
-    private _id: CompanyId,
-    private _name: CompanyName,
-    private _addressStreet: CompanyAddressStreet,
-    private _addressNumber: CompanyAddressNumber,
-  ) {
+  constructor(private _id: CompanyId, private _name: CompanyName, private _address: CompanyAddress) {
     super();
   }
 
-  static create(
-    id: CompanyId,
-    name: CompanyName,
-    addressStreet: CompanyAddressStreet,
-    addressNumber: CompanyAddressNumber,
-  ): Company {
-    const company = new Company(id, name, addressStreet, addressNumber);
-    company.record(new CompanyCreatedEvent(id.value, name.value, addressStreet.value, addressNumber.value));
+  static create(id: CompanyId, name: CompanyName, address: CompanyAddress): Company {
+    const company = new Company(id, name, address);
+    company.record(new CompanyCreatedEvent(id.value, name.value, address.street.value, address.number.value));
     return company;
   }
 
@@ -36,26 +25,21 @@ export class Company extends AggregateRoot {
     return this._name;
   }
 
-  get addressStreet(): CompanyAddressStreet {
-    return this._addressStreet;
+  get address(): CompanyAddress {
+    return this._address;
   }
 
-  get addressNumber(): CompanyAddressNumber {
-    return this._addressNumber;
-  }
-
-  update(name: CompanyName, addressStreet: CompanyAddressStreet, addressNumber: CompanyAddressNumber): void {
+  update(name: CompanyName, address: CompanyAddress): void {
     this._name = name;
-    this._addressStreet = addressStreet;
-    this._addressNumber = addressNumber;
+    this._address = address;
     this.record(
-      new CompanyUpdatedEvent(this.id.value, this.name.value, this.addressStreet.value, this.addressNumber.value),
+      new CompanyUpdatedEvent(this.id.value, this.name.value, this.address.street.value, this.address.number.value),
     );
   }
 
   delete(): void {
     this.record(
-      new CompanyDeletedEvent(this.id.value, this.name.value, this.addressStreet.value, this.addressNumber.value),
+      new CompanyDeletedEvent(this.id.value, this.name.value, this.address.street.value, this.address.number.value),
     );
   }
 }

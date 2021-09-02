@@ -38,8 +38,8 @@ describe('GraphQl Company (companyList)', () => {
                 {
                   id: company.id.value,
                   name: company.name.value,
-                  addressStreet: company.addressStreet.value,
-                  addressNumber: company.addressNumber.value,
+                  addressStreet: company.address.street.value,
+                  addressNumber: company.address.number.value,
                 },
               ],
             },
@@ -48,8 +48,8 @@ describe('GraphQl Company (companyList)', () => {
           expect(companyDb).not.toBeNull();
           expect(companyDb.id.value).toEqual(company.id.value);
           expect(companyDb.name.value).toEqual(company.name.value);
-          expect(companyDb.addressStreet.value).toEqual(company.addressStreet.value);
-          expect(companyDb.addressNumber.value).toEqual(company.addressNumber.value);
+          expect(companyDb.address.street.value).toEqual(company.address.street.value);
+          expect(companyDb.address.number.value).toEqual(company.address.number.value);
           expect(response.statusCode).toEqual(200);
         });
     });
@@ -79,8 +79,8 @@ describe('GraphQl Company (companyList)', () => {
                 {
                   id: company.id.value,
                   name: company.name.value,
-                  addressStreet: company.addressStreet.value,
-                  addressNumber: company.addressNumber.value,
+                  addressStreet: company.address.street.value,
+                  addressNumber: company.address.number.value,
                 },
               ],
             },
@@ -89,8 +89,8 @@ describe('GraphQl Company (companyList)', () => {
           expect(companyDb).not.toBeNull();
           expect(companyDb.id.value).toEqual(company.id.value);
           expect(companyDb.name.value).toEqual(company.name.value);
-          expect(companyDb.addressStreet.value).toEqual(company.addressStreet.value);
-          expect(companyDb.addressNumber.value).toEqual(company.addressNumber.value);
+          expect(companyDb.address.street.value).toEqual(company.address.street.value);
+          expect(companyDb.address.number.value).toEqual(company.address.number.value);
           expect(response.statusCode).toEqual(200);
         });
     });

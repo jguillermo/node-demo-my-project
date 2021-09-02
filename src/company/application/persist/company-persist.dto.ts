@@ -4,8 +4,8 @@ import { DomainValidator } from 'base-ddd';
 import { BaseDto } from '../../../share/application/base.dto';
 import { CompanyId } from '../../domain/company-id';
 import { CompanyName } from '../../domain/company-name';
-import { CompanyAddressStreet } from '../../domain/company-address-street';
-import { CompanyAddressNumber } from '../../domain/company-address-number';
+import { CompanyAddressStreet } from '../../domain/company-address/company-address-street';
+import { CompanyAddressNumber } from '../../domain/company-address/company-address-number';
 
 @ArgsType()
 export class CompanyPersistDto extends BaseDto {

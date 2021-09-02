@@ -7,8 +7,8 @@ export class CompanyResponse {
     return new CompanyResponse(
       company.id.value,
       company.name.value,
-      company.addressStreet.value,
-      company.addressNumber.value,
+      company.address.street.value,
+      company.address.number.value,
     );
   }
 }
