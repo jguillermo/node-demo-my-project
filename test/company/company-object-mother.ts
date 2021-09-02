@@ -6,11 +6,15 @@ import { CompanyAddressStreet } from '../../src/company/domain/company-address/c
 import { CompanyAddressNumber } from '../../src/company/domain/company-address/company-address-number';
 import { CompanyAddress } from '../../src/company/domain/company-address/company-address';
 
+export interface CompanyAddressDataInterface {
+  street?: string;
+  number?: number;
+}
+
 export interface CompanyDataInterface {
   id?: string;
   name?: string;
-  addressStreet?: string;
-  addressNumber?: number;
+  address?: CompanyAddressDataInterface;
 }
 
 export class CompanyIdMother {
@@ -42,10 +46,10 @@ export class CompanyAddressNumberMother {
 }
 
 export class CompanyAddressMother {
-  static create(data?: CompanyDataInterface): CompanyAddress {
+  static create(data?: CompanyAddressDataInterface): CompanyAddress {
     return new CompanyAddress(
-      CompanyAddressNumberMother.create(data?.addressNumber),
-      CompanyAddressStreetMother.create(data?.addressStreet),
+      CompanyAddressNumberMother.create(data?.number),
+      CompanyAddressStreetMother.create(data?.street),
     );
   }
 }
@@ -55,7 +59,7 @@ export class CompanyMother {
     return new Company(
       CompanyIdMother.create(data?.id),
       CompanyNameMother.create(data?.name),
-      CompanyAddressMother.create(data),
+      CompanyAddressMother.create(data?.address),
     );
   }
 }

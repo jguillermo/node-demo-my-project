@@ -31,8 +31,10 @@ describe('GraphQl Company (companyPersist)', () => {
               ...on Company{
                 id
                 name
-                addressStreet
-                addressNumber
+                address{
+                  street
+                  number
+                }
               }
             }
           }
@@ -78,8 +80,10 @@ describe('GraphQl Company (companyPersist)', () => {
               ...on Company{
                 id
                 name
-                addressStreet
-                addressNumber
+                address{
+                  street
+                  number
+                }
               }
             }
           }
@@ -93,8 +97,10 @@ describe('GraphQl Company (companyPersist)', () => {
               companyPersist: {
                 id: company.id.value,
                 name: company.name.value,
-                addressStreet: company.address.street.value,
-                addressNumber: company.address.number.value,
+                address: {
+                  street: company.address.street.value,
+                  number: company.address.number.value,
+                },
               },
             },
           });

@@ -23,8 +23,10 @@ describe('GraphQl Company (company)', () => {
             company(id: "${company.id.value}"){
               id
               name
-              addressStreet
-              addressNumber
+              address{
+                street
+                number
+              }
             }
           }
           `;
@@ -37,8 +39,10 @@ describe('GraphQl Company (company)', () => {
             company: {
               id: company.id.value,
               name: company.name.value,
-              addressStreet: company.address.street.value,
-              addressNumber: company.address.number.value,
+              address: {
+                street: company.address.street.value,
+                number: company.address.number.value,
+              },
             },
           },
         });
@@ -59,8 +63,10 @@ describe('GraphQl Company (company)', () => {
             company(id: "${company.id.value}"){
               id
               name
-              addressStreet
-              addressNumber
+              address{
+                street
+                number
+              }
             }
           }
           `;

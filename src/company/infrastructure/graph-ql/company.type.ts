@@ -1,6 +1,15 @@
 import { createUnionType, Field, ObjectType } from '@nestjs/graphql';
 import { StatusType } from '../../../share/app/status.type';
 
+@ObjectType('CompanyAddress')
+class CompanyAddressType {
+  @Field()
+  street: string;
+
+  @Field()
+  number: number;
+}
+
 @ObjectType('Company')
 export class CompanyType {
   @Field()
@@ -9,11 +18,8 @@ export class CompanyType {
   @Field()
   name: string;
 
-  @Field()
-  addressStreet: string;
-
-  @Field()
-  addressNumber: number;
+  @Field((type) => CompanyAddressType)
+  address: CompanyAddressType;
 }
 
 export const ResultCompanyPersist = createUnionType({

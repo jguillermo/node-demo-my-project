@@ -23,8 +23,10 @@ describe('GraphQl Company (companyList)', () => {
             companyList{
               id
               name
-              addressStreet
-              addressNumber
+              address{
+                street
+                number
+              }
             }
           }
           `;
@@ -38,8 +40,10 @@ describe('GraphQl Company (companyList)', () => {
                 {
                   id: company.id.value,
                   name: company.name.value,
-                  addressStreet: company.address.street.value,
-                  addressNumber: company.address.number.value,
+                  address: {
+                    street: company.address.street.value,
+                    number: company.address.number.value,
+                  },
                 },
               ],
             },
@@ -64,8 +68,10 @@ describe('GraphQl Company (companyList)', () => {
             companyList(id:"${company.id.value}",paginator:{page:1, perPage:1},order:{field:"id", direction:"desc"}){
               id
               name
-              addressStreet
-              addressNumber
+              address{
+                street
+                number
+              }
             }
           }
           `;
@@ -79,8 +85,10 @@ describe('GraphQl Company (companyList)', () => {
                 {
                   id: company.id.value,
                   name: company.name.value,
-                  addressStreet: company.address.street.value,
-                  addressNumber: company.address.number.value,
+                  address: {
+                    street: company.address.street.value,
+                    number: company.address.number.value,
+                  },
                 },
               ],
             },
