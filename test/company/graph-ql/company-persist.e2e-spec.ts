@@ -22,8 +22,11 @@ describe('GraphQl Company (companyPersist)', () => {
             companyPersist(
               id: "${company.id.value}"
               name: "${company.name.value}"
-              addressStreet: "${company.address.street.value}"
-              addressNumber: ${company.address.number.value}
+              address: {
+                street: "${company.address.street.value}"
+                number: ${company.address.number.value}
+              }
+              
             ){
               ...on Status{
                 status
@@ -70,8 +73,10 @@ describe('GraphQl Company (companyPersist)', () => {
             companyPersist(
               id: "${company.id.value}"
               name: "${company.name.value}"
-              addressStreet: "${company.address.street.value}"
-              addressNumber: ${company.address.number.value}
+              address: {
+                street: "${company.address.street.value}"
+                number: ${company.address.number.value}
+              }
               showEntity: true
             ){
               ...on Status{

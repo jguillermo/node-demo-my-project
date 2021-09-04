@@ -1,9 +1,13 @@
-import { StringType, ValidatorInterface } from 'base-ddd';
+import { ValidatorInterface } from 'base-ddd';
 import { CompanyAddressNumber } from './company-address-number';
 import { CompanyAddressStreet } from './company-address-street';
 
 export class CompanyAddress implements ValidatorInterface {
   constructor(private _number: CompanyAddressNumber, private _street: CompanyAddressStreet) {}
+
+  static create(data: any) {
+    return new CompanyAddress(new CompanyAddressNumber(data?.number), new CompanyAddressStreet(data?.street));
+  }
 
   get number(): CompanyAddressNumber {
     return this._number;
@@ -14,10 +18,12 @@ export class CompanyAddress implements ValidatorInterface {
   }
 
   isValid(): boolean {
-    return this._number.isValid() && this._street.isValid();
+    this._number.isValid();
+    this._street.isValid();
+    return true;
   }
 
   validatorMessage(): string {
-    return 'value ($value) is not valid.';
+    return 'CompanyAddress is not valid.';
   }
 }

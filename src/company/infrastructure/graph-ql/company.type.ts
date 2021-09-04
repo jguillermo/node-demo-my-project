@@ -18,7 +18,7 @@ export class CompanyType {
   @Field()
   name: string;
 
-  @Field((type) => CompanyAddressType)
+  @Field(() => CompanyAddressType)
   address: CompanyAddressType;
 }
 

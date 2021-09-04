@@ -27,7 +27,7 @@
     "@nestjs/graphql": "^8.0.2",
     "@nestjs/platform-express": "^8.0.0",
     "apollo-server-express": "^2.25.2",
-    "base-ddd": "^1.13.0",
+    "base-ddd": "^1.14.0",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "firebase-admin": "^9.11.0",
