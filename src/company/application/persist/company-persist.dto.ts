@@ -7,7 +7,7 @@ import { CompanyName } from '../../domain/company-name';
 import { CompanyAddress } from '../../domain/company-address/company-address';
 import { CompanyAddressStreet } from '../../domain/company-address/company-address-street';
 import { CompanyAddressNumber } from '../../domain/company-address/company-address-number';
-import {Type} from "class-transformer";
+import { Type } from 'class-transformer';
 
 @InputType('CompanyAddressCreateInput')
 class CompanyAddressCreateInput {
