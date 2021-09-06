@@ -13,7 +13,7 @@ export class Company extends AggregateRoot {
 
   static create(id: CompanyId, name: CompanyName, address: CompanyAddress): Company {
     const company = new Company(id, name, address);
-    company.record(new CompanyCreatedEvent(id.value, name.value, address.street.value, address.number.value));
+    company.record(new CompanyCreatedEvent(id.value, name.value, address.value));
     return company;
   }
 
@@ -32,14 +32,10 @@ export class Company extends AggregateRoot {
   update(name: CompanyName, address: CompanyAddress): void {
     this._name = name;
     this._address = address;
-    this.record(
-      new CompanyUpdatedEvent(this.id.value, this.name.value, this.address.street.value, this.address.number.value),
-    );
+    this.record(new CompanyUpdatedEvent(this.id.value, this.name.value, this.address.value));
   }
 
   delete(): void {
-    this.record(
-      new CompanyDeletedEvent(this.id.value, this.name.value, this.address.street.value, this.address.number.value),
-    );
+    this.record(new CompanyDeletedEvent(this.id.value, this.name.value, this.address.value));
   }
 }

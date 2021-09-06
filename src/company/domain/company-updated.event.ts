@@ -1,12 +1,8 @@
 import { EventBase } from 'base-ddd';
+import { CompanyAddressMap } from './company-address';
 
 export class CompanyUpdatedEvent extends EventBase {
-  constructor(
-    private _id: string,
-    private _name: string,
-    private _addressStreet: string,
-    private _addressNumber: number,
-  ) {
+  constructor(private _id: string, private _name: string, private _address: CompanyAddressMap) {
     super();
   }
 
@@ -18,12 +14,8 @@ export class CompanyUpdatedEvent extends EventBase {
     return this._name;
   }
 
-  get addressStreet(): string {
-    return this._addressStreet;
-  }
-
-  get addressNumber(): number {
-    return this._addressNumber;
+  get address(): CompanyAddressMap {
+    return this._address;
   }
 
   eventName(): string {

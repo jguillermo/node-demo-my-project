@@ -2,6 +2,11 @@ import { ValidatorInterface } from 'base-ddd';
 import { CompanyAddressNumber } from './company-address-number';
 import { CompanyAddressStreet } from './company-address-street';
 
+export interface CompanyAddressMap {
+  street: string;
+  number: number;
+}
+
 export class CompanyAddress implements ValidatorInterface {
   private readonly _number: CompanyAddressNumber;
   private readonly _street: CompanyAddressStreet;
@@ -23,6 +28,13 @@ export class CompanyAddress implements ValidatorInterface {
     this._number.isValid();
     this._street.isValid();
     return true;
+  }
+
+  get value(): CompanyAddressMap {
+    return {
+      number: this.number.value,
+      street: this.street.value,
+    };
   }
 
   validatorMessage(): string {

@@ -14,8 +14,10 @@ export class CompanyListHandler implements IQueryHandler<CompanyListDto> {
   async execute(dto: CompanyListDto): Promise<ListCompanyResponse> {
     const id = new UUIDTypeImp(dto.id);
     const name = new StringTypeImp(dto.name);
+
     const addressStreet = new StringTypeImp(dto.address?.street);
     const addressNumber = new NumberTypeImp(dto.address?.number);
+
     const paginator = PaginatorTypeImp.create(dto.paginator?.page, dto.paginator?.perPage);
     const order = OrderTypeImp.create(dto.order?.field, dto.order?.direction);
 
