@@ -6,7 +6,6 @@ import { NumberTypeImp } from 'base-ddd/dist/ValueObject/Implement/NumberTypeImp
 import { StringTypeImp } from 'base-ddd/dist/ValueObject/Implement/StringTypeImp';
 import { UUIDTypeImp } from 'base-ddd/dist/ValueObject/Implement/UUIDTypeImp';
 import { Type } from 'class-transformer';
-import { CompanyAddress } from '../../domain/company-address/company-address';
 
 @InputType('CompanyAddressListInput')
 class CompanyAddressListInput {

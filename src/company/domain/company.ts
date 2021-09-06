@@ -4,7 +4,7 @@ import { CompanyName } from './company-name';
 import { CompanyCreatedEvent } from './company-created.event';
 import { CompanyUpdatedEvent } from './company-updated.event';
 import { CompanyDeletedEvent } from './company-deleted.event';
-import { CompanyAddress } from './company-address/company-address';
+import { CompanyAddress } from './company-address';
 
 export class Company extends AggregateRoot {
   constructor(private _id: CompanyId, private _name: CompanyName, private _address: CompanyAddress) {

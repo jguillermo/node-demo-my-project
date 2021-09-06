@@ -1,5 +1,5 @@
 import { Company } from '../domain/company';
-import { CompanyAddress } from '../domain/company-address/company-address';
+import { CompanyAddress } from '../domain/company-address';
 
 export class CompanyResponse {
   constructor(public id: string, public name: string, public address: CompanyAddressResponse) {}

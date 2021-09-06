@@ -4,7 +4,7 @@ import { CompanyRepository } from '../../domain/company.repository';
 import { Company } from '../../domain/company';
 import { CompanyId } from '../../domain/company-id';
 import { CompanyName } from '../../domain/company-name';
-import { CompanyAddress } from '../../domain/company-address/company-address';
+import { CompanyAddress } from '../../domain/company-address';
 
 @Injectable()
 export class CompanyPersistService {

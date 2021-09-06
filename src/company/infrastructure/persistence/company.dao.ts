@@ -2,7 +2,7 @@ import { Company } from '../../domain/company';
 import { CompanyId } from '../../domain/company-id';
 import { CompanyName } from '../../domain/company-name';
 import { ItemDto } from '../../../share/infrastructure/firestore/firestore.service';
-import { CompanyAddress } from '../../domain/company-address/company-address';
+import { CompanyAddress } from '../../domain/company-address';
 
 class CompanyAddressDao {
   street: string;
@@ -47,6 +47,6 @@ export class CompanyDao {
   }
 
   toAggregate(): Company {
-    return new Company(new CompanyId(this.id), new CompanyName(this.name), CompanyAddress.create(this.address));
+    return new Company(new CompanyId(this.id), new CompanyName(this.name), new CompanyAddress(this.address));
   }
 }

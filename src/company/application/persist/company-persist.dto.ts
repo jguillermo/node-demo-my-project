@@ -4,10 +4,8 @@ import { DomainValidator } from 'base-ddd';
 import { BaseDto } from '../../../share/application/base.dto';
 import { CompanyId } from '../../domain/company-id';
 import { CompanyName } from '../../domain/company-name';
-import { CompanyAddress } from '../../domain/company-address/company-address';
-import { CompanyAddressStreet } from '../../domain/company-address/company-address-street';
-import { CompanyAddressNumber } from '../../domain/company-address/company-address-number';
 import { Type } from 'class-transformer';
+import { CompanyAddress, CompanyAddressNumber, CompanyAddressStreet } from '../../domain/company-address';
 
 @InputType('CompanyAddressCreateInput')
 class CompanyAddressCreateInput {

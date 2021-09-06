@@ -2,9 +2,7 @@ import * as faker from 'faker';
 import { Company } from '../../src/company/domain/company';
 import { CompanyId } from '../../src/company/domain/company-id';
 import { CompanyName } from '../../src/company/domain/company-name';
-import { CompanyAddressStreet } from '../../src/company/domain/company-address/company-address-street';
-import { CompanyAddressNumber } from '../../src/company/domain/company-address/company-address-number';
-import { CompanyAddress } from '../../src/company/domain/company-address/company-address';
+import { CompanyAddress } from '../../src/company/domain/company-address';
 
 export interface CompanyAddressDataInterface {
   street?: string;
@@ -31,26 +29,13 @@ export class CompanyNameMother {
   }
 }
 
-export class CompanyAddressStreetMother {
-  static create(value?: string): CompanyAddressStreet {
-    const addressStreet = value ? value : faker.random.word();
-    return new CompanyAddressStreet(addressStreet);
-  }
-}
-
-export class CompanyAddressNumberMother {
-  static create(value?: number): CompanyAddressNumber {
-    const addressNumber = value ? value : faker.datatype.number();
-    return new CompanyAddressNumber(addressNumber);
-  }
-}
-
 export class CompanyAddressMother {
-  static create(data?: CompanyAddressDataInterface): CompanyAddress {
-    return new CompanyAddress(
-      CompanyAddressNumberMother.create(data?.number),
-      CompanyAddressStreetMother.create(data?.street),
-    );
+  static create(value?: CompanyAddressDataInterface): CompanyAddress {
+    const data = {
+      street: value?.street ? value.street : faker.random.word(),
+      number: value?.number ? value.number : faker.datatype.number(),
+    };
+    return new CompanyAddress(data);
   }
 }
 

@@ -3,10 +3,12 @@ import { CompanyAddressNumber } from './company-address-number';
 import { CompanyAddressStreet } from './company-address-street';
 
 export class CompanyAddress implements ValidatorInterface {
-  constructor(private _number: CompanyAddressNumber, private _street: CompanyAddressStreet) {}
+  private readonly _number: CompanyAddressNumber;
+  private readonly _street: CompanyAddressStreet;
 
-  static create(data: any) {
-    return new CompanyAddress(new CompanyAddressNumber(data?.number), new CompanyAddressStreet(data?.street));
+  constructor(data: any) {
+    this._number = new CompanyAddressNumber(data?.number);
+    this._street = new CompanyAddressStreet(data?.street);
   }
 
   get number(): CompanyAddressNumber {
