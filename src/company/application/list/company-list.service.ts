@@ -39,7 +39,7 @@ export class CompanyListService {
         {
           field: 'address.number',
           opStr: FilterOpStr.EQUAL_TO,
-          value: addressNumber.toString,
+          value: addressNumber.value,
         },
       ],
       paginator,
