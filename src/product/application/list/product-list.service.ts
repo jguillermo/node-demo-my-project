@@ -39,7 +39,7 @@ export class ProductListService {
         {
           field: 'createAt',
           opStr: FilterOpStr.EQUAL_TO,
-          value: DateTypeImp.create(dto.createAt).toString,
+          value: dto.createAt ? DateTypeImp.create(dto.createAt).toString : null,
         },
         {
           field: 'price',
