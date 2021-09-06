@@ -1,19 +1,16 @@
 import { ArgsType, Field, InputType } from '@nestjs/graphql';
-import { IsOptional, Validate, ValidateNested } from 'class-validator';
+import { IsOptional, Validate } from 'class-validator';
 import { DomainValidator, OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
 import { BaseDto, OrderDto, PaginatorDto } from '../../../share/application/base.dto';
-import { NumberTypeImp } from 'base-ddd/dist/ValueObject/Implement/NumberTypeImp';
-import { StringTypeImp } from 'base-ddd/dist/ValueObject/Implement/StringTypeImp';
-import { UUIDTypeImp } from 'base-ddd/dist/ValueObject/Implement/UUIDTypeImp';
 import { Type } from 'class-transformer';
 
 @InputType('CompanyAddressListInput')
 class CompanyAddressListInput {
-  @Validate(DomainValidator, [StringTypeImp])
+  @IsOptional()
   @Field({ nullable: true })
   street?: string;
 
-  @Validate(DomainValidator, [NumberTypeImp])
+  @IsOptional()
   @Field({ nullable: true })
   number?: number;
 }
@@ -24,15 +21,15 @@ export class CompanyListDto extends BaseDto {
     super();
   }
 
-  @Validate(DomainValidator, [UUIDTypeImp])
+  @IsOptional()
   @Field({ nullable: true })
   id?: string;
 
-  @Validate(DomainValidator, [StringTypeImp])
+  @IsOptional()
   @Field({ nullable: true })
   name?: string;
 
-  @ValidateNested()
+  @IsOptional()
   @Type(() => CompanyAddressListInput)
   @Field(() => CompanyAddressListInput, { nullable: true })
   address: CompanyAddressListInput;

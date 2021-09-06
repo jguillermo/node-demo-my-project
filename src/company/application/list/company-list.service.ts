@@ -3,19 +3,14 @@ import { CompanyRepository } from '../../domain/company.repository';
 import { CompanyResponse } from '../company.response';
 import { ListCompanyResponse } from '../list-company.response';
 import { FilterOpStr, OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
-import { NumberTypeImp } from 'base-ddd/dist/ValueObject/Implement/NumberTypeImp';
-import { StringTypeImp } from 'base-ddd/dist/ValueObject/Implement/StringTypeImp';
-import { UUIDTypeImp } from 'base-ddd/dist/ValueObject/Implement/UUIDTypeImp';
+import { CompanyListDto } from './company-list.dto';
 
 @Injectable()
 export class CompanyListService {
   constructor(private repository: CompanyRepository) {}
 
   public async execute(
-    id: UUIDTypeImp,
-    name: StringTypeImp,
-    addressStreet: StringTypeImp,
-    addressNumber: NumberTypeImp,
+    dto: CompanyListDto,
     paginator: PaginatorTypeImp,
     order: OrderTypeImp,
   ): Promise<ListCompanyResponse> {
@@ -24,22 +19,22 @@ export class CompanyListService {
         {
           field: 'id',
           opStr: FilterOpStr.EQUAL_TO,
-          value: id.value,
+          value: dto.id,
         },
         {
           field: 'name',
           opStr: FilterOpStr.EQUAL_TO,
-          value: name.value,
+          value: dto.name,
         },
         {
           field: 'address.street',
           opStr: FilterOpStr.EQUAL_TO,
-          value: addressStreet.value,
+          value: dto.address?.street,
         },
         {
           field: 'address.number',
           opStr: FilterOpStr.EQUAL_TO,
-          value: addressNumber.value,
+          value: dto.address?.number,
         },
       ],
       paginator,
