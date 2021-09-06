@@ -30,10 +30,7 @@ export class CompanyDao {
     //item.data.id = item.id
     dao.id = item.data.id;
     dao.name = item.data.name;
-    dao.address = {
-      street: item.data.addressStreet,
-      number: item.data.addressNumber,
-    };
+    dao.address = item.data.address;
     return dao;
   }
 
@@ -41,8 +38,10 @@ export class CompanyDao {
     return {
       id: this.id,
       name: this.name,
-      addressStreet: this.address.street,
-      addressNumber: this.address.number,
+      address: {
+        street: this.address.street,
+        number: this.address.number,
+      },
     };
   }
 

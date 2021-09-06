@@ -32,12 +32,12 @@ export class CompanyListService {
           value: name.value,
         },
         {
-          field: 'addressStreet',
+          field: 'address.street',
           opStr: FilterOpStr.EQUAL_TO,
           value: addressStreet.value,
         },
         {
-          field: 'addressNumber',
+          field: 'address.number',
           opStr: FilterOpStr.EQUAL_TO,
           value: addressNumber.toString,
         },
