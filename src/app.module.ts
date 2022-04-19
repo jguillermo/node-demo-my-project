@@ -6,6 +6,7 @@ import { UserModule } from './user/user.module';
 import { ShareModule } from './share/share.module';
 import { ProductModule } from './product/product.module';
 import { CompanyModule } from './company/company.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
@@ -14,6 +15,16 @@ import { CompanyModule } from './company/company.module';
       autoSchemaFile: true,
       playground: true,
       debug: true,
+    }),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'postgres',
+      database: 'postgres',
+      autoLoadEntities: true,
+      synchronize: true,
     }),
     CqrsModule,
     ProductModule,
