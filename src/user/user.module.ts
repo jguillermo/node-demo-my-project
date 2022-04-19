@@ -1,18 +1,20 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
-import { UserFirestoreRepository } from './infrastructure/persistence/user-firestore.repository';
 import { UserRepository } from './domain/user.repository';
 import { ShareModule } from '../share/share.module';
 import { UserResolver } from './infrastructure/graph-ql/user.resolver';
 import { AppEvents } from './infrastructure/event';
 import { ApplicationHandlers, ApplicationServices } from './application';
+import { UserPostgresRepository } from './infrastructure/persistence/postgres/user-postgres.repository';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserDao } from './infrastructure/persistence/postgres/user.dao';
 
 @Module({
-  imports: [CqrsModule, ShareModule],
+  imports: [CqrsModule, ShareModule, TypeOrmModule.forFeature([UserDao])],
   providers: [
     {
       provide: UserRepository,
-      useClass: UserFirestoreRepository,
+      useClass: UserPostgresRepository,
     },
     ...ApplicationHandlers,
     ...ApplicationServices,

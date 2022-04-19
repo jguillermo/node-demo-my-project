@@ -32,8 +32,8 @@ export class CompanyDao {
       new CompanyId(this.id),
       new CompanyName(this.name),
       new CompanyAddress({
-        number: this,
-        addressNumber: this.addressNumber,
+        number: this.addressNumber,
+        street: this.addressStreet,
       }),
     );
   }

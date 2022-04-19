@@ -5,19 +5,17 @@ import { ShareModule } from '../share/share.module';
 import { CompanyResolver } from './infrastructure/graph-ql/company.resolver';
 import { AppEvents } from './infrastructure/event';
 import { ApplicationHandlers, ApplicationServices } from './application';
-import {
-  CompanyPostgresRepository,
-  CompanyTypeOrmRepository,
-} from './infrastructure/persistence/postgres/company-postgres.repository';
+import { CompanyPostgresRepository } from './infrastructure/persistence/postgres/company-postgres.repository';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { CompanyDao } from './infrastructure/persistence/postgres/company.dao';
 
 @Module({
-  imports: [CqrsModule, ShareModule],
+  imports: [CqrsModule, ShareModule, TypeOrmModule.forFeature([CompanyDao])],
   providers: [
     {
       provide: CompanyRepository,
       useClass: CompanyPostgresRepository,
     },
-    CompanyTypeOrmRepository,
     ...ApplicationHandlers,
     ...ApplicationServices,
     ...AppEvents,

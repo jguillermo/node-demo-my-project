@@ -6,23 +6,24 @@ import { Company } from '../../../domain/company';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { CompanyDao } from './company.dao';
-
-@Injectable()
-export class CompanyTypeOrmRepository extends Repository<CompanyDao> {}
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class CompanyPostgresRepository extends CompanyRepository {
-  constructor(private repository: CompanyTypeOrmRepository) {
+  constructor(
+    @InjectRepository(CompanyDao)
+    private repository: Repository<CompanyDao>,
+  ) {
     super();
   }
 
   async persist(company: Company): Promise<void> {
     const dao = CompanyDao.fromAggregate(company);
-    await this.repository.insert(dao);
+    await this.repository.save(dao);
   }
 
   async findById(id: CompanyId): Promise<Company | null> {
-    const dao = await this.repository.findOneBy({ id: id.value });
+    const dao = await this.repository.findOne({ where: { id: id.value } });
     if (!dao) {
       return null;
     }
