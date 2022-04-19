@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+#  mailcatcher:
+#    image: schickling/mailcatcher
+#    networks:
+#      api:
+#        ipv4_address: 21.21.21.201
+#  rabbitmq:
+#    image: rabbitmq:3.9-management
+#    environment:
+#      RABBITMQ_DEFAULT_USER: root
+#      RABBITMQ_DEFAULT_PASS: root
+#    networks:
+#      api:
+#        ipv4_address: 21.21.21.202
+  postgres-db:
+    image: postgres:14.2
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      api:
+        ipv4_address: 21.21.21.203
+#  mongo-db:
+#    image: mongo:5.0
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: admin
+#      MONGO_INITDB_ROOT_PASSWORD: admin
+#    networks:
+#      api:
+#        ipv4_address: 21.21.21.204
+networks:
+  api:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 21.21.21.0/24
+volumes:
+  certs:
+    driver: local

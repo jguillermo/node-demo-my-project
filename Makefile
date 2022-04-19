@@ -40,6 +40,21 @@ test:
 	@make test-unit
 	@make test-e2e
 
+up:
+	@docker compose up -d
+
+down:
+	@docker compose down
+
+ps:
+	@docker compose ps
+
+docker-kill:
+	@make down
+	@docker rm -f $$(docker ps -a -q) || true
+	@docker volume prune -f
+	@docker network prune -f
+
 help:
 	@printf "\033[31m%-16s %-59s %s\033[0m\n" "Target" "Help" "Usage"; \
 	printf "\033[31m%-16s %-59s %s\033[0m\n" "------" "----" "-----"; \
