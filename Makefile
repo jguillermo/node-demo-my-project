@@ -29,7 +29,8 @@ test-unit:
 	npm run test
 
 test-e2e:
-	firebase emulators:exec "npm run test:e2e" --only firestore
+# 	firebase emulators:exec "npm run test:e2e" --only firestore
+	npm run test:e2e
 
 .PHONY: test
 test:
