@@ -1,4 +1,4 @@
-import * as faker from 'faker';
+import { faker } from '@faker-js/faker';
 import { Company } from '../../src/company/domain/company';
 import { CompanyId } from '../../src/company/domain/company-id';
 import { CompanyName } from '../../src/company/domain/company-name';
