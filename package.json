@@ -18,7 +18,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --runInBand --verbose --config ./test/jest-e2e.json"
+    "test:e2e": "jest --runInBand --verbose --config ./test/jest-e2e.json",
+    "cucumber": "cucumber-js"
   },
   "dependencies": {
     "@nestjs/apollo": "^10.0.9",
@@ -41,6 +42,7 @@
     "typeorm": "^0.3.6"
   },
   "devDependencies": {
+    "@cucumber/cucumber": "^8.0.0",
     "@faker-js/faker": "^6.1.2",
     "@nestjs/cli": "^8.2.5",
     "@nestjs/schematics": "^8.0.10",
