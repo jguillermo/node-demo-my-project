@@ -29,8 +29,7 @@ test-unit:
 	npm run test
 
 test-e2e:
-# 	firebase emulators:exec "npm run test:e2e" --only firestore
-	npm run test:e2e
+	firebase emulators:exec "npm run test:e2e" --only firestore
 
 .PHONY: test
 test:
@@ -55,6 +54,12 @@ docker-kill:
 	@docker rm -f $$(docker ps -a -q) || true
 	@docker volume prune -f
 	@docker network prune -f
+
+docker-build:
+	docker build -t nestjs-app:16.14.2-1 --no-cache .
+
+docker-run:
+	docker run -it nestjs-app:16.14.2-1 sh
 
 help:
 	@printf "\033[31m%-16s %-59s %s\033[0m\n" "Target" "Help" "Usage"; \

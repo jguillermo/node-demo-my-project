@@ -13,16 +13,16 @@ services:
 #    networks:
 #      api:
 #        ipv4_address: 21.21.21.202
-  postgres-db:
-    image: postgres:14.2
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - "5432:5432"
-    networks:
-      api:
-        ipv4_address: 21.21.21.203
+#  postgres-db:
+#    image: postgres:14.2
+#    restart: always
+#    environment:
+#      POSTGRES_PASSWORD: postgres
+#    ports:
+#      - "5432:5432"
+#    networks:
+#      api:
+#        ipv4_address: 21.21.21.203
 #  mongo-db:
 #    image: mongo:5.0
 #    environment:
@@ -31,6 +31,16 @@ services:
 #    networks:
 #      api:
 #        ipv4_address: 21.21.21.204
+  app:
+    image: nestjs-app:16.14.2-1
+    build:
+      context: .
+    command: npm run start:dev
+    volumes:
+      - .:/usr/src/app
+    networks:
+      api:
+        ipv4_address: 21.21.21.204
 networks:
   api:
     driver: bridge
