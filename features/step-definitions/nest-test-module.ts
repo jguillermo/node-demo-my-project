@@ -2,9 +2,10 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from '../../src/app.module';
 
-export abstract class TestingE2eModule {
+export abstract class NestTestModule {
   private _app: INestApplication;
   private _moduleFixture: TestingModule;
+  private static _port = 3334;
 
   protected async init(): Promise<void> {
     this._moduleFixture = await Test.createTestingModule({
@@ -19,6 +20,7 @@ export abstract class TestingE2eModule {
       }),
     );
     await this._app.init();
+    await this._app.listen(NestTestModule._port);
   }
 
   get app(): INestApplication {
@@ -27,5 +29,9 @@ export abstract class TestingE2eModule {
 
   get moduleFixture(): TestingModule {
     return this._moduleFixture;
+  }
+
+  static get url(): string {
+    return `http://localhost:${NestTestModule._port}/graphql`;
   }
 }

@@ -32,7 +32,7 @@ test-e2e:
 	firebase emulators:exec "npm run test:e2e" --only firestore
 
 test-bdd:
-	npm run bdd
+	firebase emulators:exec "npm run bdd" --only firestore
 
 .PHONY: test
 test:
