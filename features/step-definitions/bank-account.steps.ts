@@ -3,7 +3,7 @@ import { assert } from 'chai';
 
 @binding()
 export class BankAccountSteps {
-  private accountBalance: number = 0;
+  private accountBalance = 0;
 
   @given(/A bank account with starting balance of \$(\d*)/)
   public givenAnAccountWithStartingBalance(amount: number) {
