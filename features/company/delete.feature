@@ -1,7 +1,7 @@
-Feature: find Company by id
-  In order to find company by id
+Feature: Delete Company
+  In order to delete company
   As an user
-  I need to be able to find one Company
+  I need to be able to delete Company
 
   Background:
   Given I have the following data on collection "companies"
@@ -19,17 +19,12 @@ Feature: find Company by id
     """
 
 
-  Scenario: find one company
+  Scenario: delete one company
     Given I have the following payload
     """
-    query{
-      company(id: "daf673b7-b1ba-415e-ac5e-04848e5e2e5f"){
-        id
-        name
-        address{
-          street
-          number
-        }
+    mutation{
+      companyDelete(id:"daf673b7-b1ba-415e-ac5e-04848e5e2e5f"){
+        status
       }
     }
     """
@@ -38,13 +33,8 @@ Feature: find Company by id
     """
     {
       "data": {
-        "company": {
-            "id": "daf673b7-b1ba-415e-ac5e-04848e5e2e5f",
-            "name": "Company A",
-            "address": {
-              "street": "Av. Lima",
-              "number": 385
-            }
+        "companyDelete": {
+            "status": "ok"
          }
       }
     }
@@ -52,17 +42,12 @@ Feature: find Company by id
     Then response should have a status 200
 
 
-  Scenario: find company not exist
+  Scenario: delete company not exist
     Given I have the following payload
     """
-    query{
-      company(id: "daf673b7-b1ba-415e-ac5e-04848e5e2e6f"){
-        id
-        name
-        address{
-          street
-          number
-        }
+    mutation{
+      companyDelete(id:"daf673b7-b1ba-415e-ac5e-04848e5e2e6f"){
+        status
       }
     }
     """
@@ -71,7 +56,9 @@ Feature: find Company by id
     """
     {
       "data": {
-        "company": null
+        "companyDelete": {
+            "status": "ok"
+         }
       }
     }
     """
