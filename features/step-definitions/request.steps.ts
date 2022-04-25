@@ -4,6 +4,7 @@ import { CompanyRepository } from '../../src/company/domain/company.repository';
 import { CompanyBDDModule } from './company-e2e-module';
 import * as pactum from 'pactum';
 import * as Spec from 'pactum/src/models/Spec';
+import { toJson } from './tools/string-tools';
 
 @binding()
 export class RequestSteps {
@@ -14,6 +15,7 @@ export class RequestSteps {
 
   @before()
   public async beforeAllScenarios() {
+    console.log('RequestSteps before');
     ({ app: this.app, companyRepository: this.repository } = await CompanyBDDModule.create());
     const items = await this.repository.findAll();
     for await (const item of items) {
@@ -21,16 +23,13 @@ export class RequestSteps {
     }
     this.spec = pactum.spec();
     this._playload = '';
-
-    console.log('run before context');
   }
 
   @after()
   public async afterAllScenarios() {
+    console.log('RequestSteps after');
     await this.app.close();
   }
-
-  private accountBalance = 0;
 
   @given('I have the following payload')
   public i_have_the_following_payload(payload: string) {
@@ -44,12 +43,7 @@ export class RequestSteps {
 
   @when('I validate the response is')
   public async i_validate_the_response_is(response: string) {
-    let responseJson = {};
-    try {
-      responseJson = JSON.parse(response);
-    } catch (error) {
-      throw new Error('JSON parse Error:' + error);
-    }
+    const responseJson = toJson(response);
 
     await this.spec.expectJson(responseJson);
   }
@@ -57,10 +51,5 @@ export class RequestSteps {
   @then('response should have a status {int}')
   public i_get_a_status_code_response(statusCode: number) {
     this.spec.response().should.have.status(statusCode);
-  }
-
-  @then('I validate the following data exists on collection Company')
-  public i_validate_the_following_data_exists_on_collection(data: string) {
-    //console.log('validate data:' + data);
   }
 }

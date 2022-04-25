@@ -45,11 +45,11 @@ Feature: Create Company
     """
     [
       {
-        id: "daf673b7-b1ba-415e-ac5e-04848e5e2e5f"
-        name: "Company A"
-        address: {
-          street: "Av. Lima"
-          number: 385
+        "id": "daf673b7-b1ba-415e-ac5e-04848e5e2e5f",
+        "name": "Company A",
+        "address": {
+          "street": "Av. Lima",
+          "number": 385
         }
       }
     ]
