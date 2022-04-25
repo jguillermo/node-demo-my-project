@@ -32,13 +32,15 @@ Feature: Create Company
     When I make a request to graphql
     And I validate the response is
     """
-    data: {
-      companyPersist: {
-        status: 'ok'
-      }
+    {
+      "data": {
+        "companyPersist": {
+            "status": "ok"
+         }
+       }
     }
     """
-    Then I get a SUCCESSFUL response
+    Then response should have a status 200
     And I validate the following data exists on collection Company
     """
     [
