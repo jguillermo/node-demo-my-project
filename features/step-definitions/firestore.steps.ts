@@ -22,6 +22,15 @@ export class FirestoreSteps {
     await this.deleteCollections();
   }
 
+  @then('I have the following data on collection Company')
+  public async i_have_the_following_data_on_collection(data: string) {
+    const collections = toJson(data);
+    for await (const collection of collections) {
+      const docRef = this.db.collection('companies').doc(collection.id);
+      await docRef.set(collection);
+    }
+  }
+
   @then('I validate the following data exists on collection Company')
   public async i_validate_the_following_data_exists_on_collection(data: string) {
     const dataJson = toJson(data);
