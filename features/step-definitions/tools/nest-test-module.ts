@@ -1,8 +1,8 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppModule } from '../../src/app.module';
+import { AppModule } from '../../../src/app.module';
 
-export abstract class NestTestModule {
+export class NestTestModule {
   private _app: INestApplication;
   private _moduleFixture: TestingModule;
   private static _port = 3334;
@@ -33,5 +33,11 @@ export abstract class NestTestModule {
 
   static get url(): string {
     return `http://localhost:${NestTestModule._port}/graphql`;
+  }
+
+  static async create(): Promise<INestApplication> {
+    const module = new NestTestModule();
+    await module.init();
+    return module.app;
   }
 }

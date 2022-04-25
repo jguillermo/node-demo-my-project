@@ -1,25 +1,19 @@
 import { after, before, binding, given, then, when } from 'cucumber-tsflow';
 import { INestApplication } from '@nestjs/common';
-import { CompanyRepository } from '../../src/company/domain/company.repository';
-import { CompanyBDDModule } from './company-e2e-module';
 import * as pactum from 'pactum';
 import * as Spec from 'pactum/src/models/Spec';
 import { toJson } from './tools/string-tools';
+import { NestTestModule } from './tools/nest-test-module';
 
 @binding()
 export class RequestSteps {
   private app: INestApplication;
-  private repository: CompanyRepository;
   private _playload: string;
   private spec: Spec;
 
   @before()
   public async beforeAllScenarios() {
-    ({ app: this.app, companyRepository: this.repository } = await CompanyBDDModule.create());
-    const items = await this.repository.findAll();
-    for await (const item of items) {
-      await this.repository.deleteById(item.id);
-    }
+    this.app = await NestTestModule.create();
     this.spec = pactum.spec();
     this._playload = '';
   }
@@ -36,7 +30,7 @@ export class RequestSteps {
 
   @when('I make a request to graphql')
   public i_make_a_request_to_graphql() {
-    this.spec.post(CompanyBDDModule.url).withGraphQLQuery(this._playload);
+    this.spec.post(NestTestModule.url).withGraphQLQuery(this._playload);
   }
 
   @when('I validate the response is')
