@@ -15,7 +15,6 @@ export class RequestSteps {
 
   @before()
   public async beforeAllScenarios() {
-    console.log('RequestSteps before');
     ({ app: this.app, companyRepository: this.repository } = await CompanyBDDModule.create());
     const items = await this.repository.findAll();
     for await (const item of items) {
@@ -27,7 +26,6 @@ export class RequestSteps {
 
   @after()
   public async afterAllScenarios() {
-    console.log('RequestSteps after');
     await this.app.close();
   }
 

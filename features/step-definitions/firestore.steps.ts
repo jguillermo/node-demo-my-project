@@ -1,4 +1,4 @@
-import { after, before, binding, then } from 'cucumber-tsflow';
+import { after, before, binding, given, then } from 'cucumber-tsflow';
 import admin, { firestore } from 'firebase-admin';
 import Firestore = firestore.Firestore;
 import { Firebase } from '../../src/share/infrastructure/firebase';
@@ -12,14 +12,14 @@ export class FirestoreSteps {
 
   @before()
   public async beforeAllScenarios() {
-    console.log('FirestoreSteps  before');
     Firebase.initDefaultApp();
     this.db = admin.firestore();
+    await this.deleteCollections();
   }
 
   @after()
   public async afterAllScenarios() {
-    console.log('FirestoreSteps  after');
+    await this.deleteCollections();
   }
 
   @then('I validate the following data exists on collection Company')
@@ -42,6 +42,18 @@ export class FirestoreSteps {
       throw new InternalServerErrorException(`Error en el servidor firestore ${e}`);
     }
     return dataDb;
+  }
+
+  private async deleteCollections() {
+    const collectionRef = await this.db.listCollections();
+
+    const collections = collectionRef.map((collection) => {
+      return collection.id;
+    });
+
+    for await (const collection of collections) {
+      await this.deleteCollection(collection);
+    }
   }
 
   private async deleteCollection(collectionPath) {
