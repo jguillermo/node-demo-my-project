@@ -43,4 +43,37 @@ export class FirestoreSteps {
     }
     return dataDb;
   }
+
+  private async deleteCollection(collectionPath) {
+    const collectionRef = this.db.collection(collectionPath);
+    const query = collectionRef.orderBy('__name__');
+
+    return new Promise((resolve, reject) => {
+      this.deleteQueryBatch(query, resolve).catch(reject);
+    });
+  }
+
+  private async deleteQueryBatch(query, resolve) {
+    const snapshot = await query.get();
+
+    const batchSize = snapshot.size;
+    if (batchSize === 0) {
+      // When there are no documents left, we are done
+      resolve();
+      return;
+    }
+
+    // Delete documents in a batch
+    const batch = this.db.batch();
+    snapshot.docs.forEach((doc) => {
+      batch.delete(doc.ref);
+    });
+    await batch.commit();
+
+    // Recurse on the next process tick, to avoid
+    // exploding the stack.
+    process.nextTick(() => {
+      this.deleteQueryBatch(query, resolve);
+    });
+  }
 }
