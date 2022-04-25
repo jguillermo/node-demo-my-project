@@ -41,7 +41,7 @@ Feature: Persist Company
     }
     """
     Then response should have a status 200
-    And I validate the following data exists on collection Company
+    And I validate the following data exists on collection "companies"
     """
     [
       {
@@ -57,7 +57,7 @@ Feature: Persist Company
 
 
   Scenario: Update Company
-    Given I have the following data on collection Company
+    Given I have the following data on collection "companies"
     """
     [
       {
@@ -107,7 +107,7 @@ Feature: Persist Company
     }
     """
     Then response should have a status 200
-    And I validate the following data exists on collection Company
+    And I validate the following data exists on collection "companies"
     """
     [
       {
