@@ -1,8 +1,13 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from '../src/app.module';
+import { UserRepository } from '../src/user/domain/user.repository';
 
-export abstract class TestingE2eModule {
+export interface TestingInterface {
+  userRepository: UserRepository;
+}
+
+export class TestingE2eModule {
   private _app: INestApplication;
   private _moduleFixture: TestingModule;
 
@@ -27,5 +32,13 @@ export abstract class TestingE2eModule {
 
   get moduleFixture(): TestingModule {
     return this._moduleFixture;
+  }
+
+  static async create(): Promise<TestingInterface> {
+    const module = new TestingE2eModule();
+    await module.init();
+    return {
+      userRepository: module.moduleFixture.get<UserRepository>(UserRepository),
+    };
   }
 }
