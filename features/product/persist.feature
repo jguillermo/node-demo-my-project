@@ -130,10 +130,7 @@ Feature: Persist Product
         "name": "Product A",
         "code": "c96a8ea2-aba7-45a5-a93b-c2f666aa09c8",
         "description": "description A",
-        "createAt": {
-          "_nanoseconds": 0,
-          "_seconds": 1525564800
-        },
+        "createAt": "Date(2018-05-07)",
         "price": 12,
         "category": "books"
       }
@@ -181,7 +178,10 @@ Feature: Persist Product
           "name": "Product B",
           "code": "c96a8ea2-aba7-45a5-a93b-c2f666aa09c9",
           "description": "description B",
-          "createAt": "2018-05-07",
+           "createAt": {
+             "_nanoseconds": 0,
+             "_seconds": 1525651200
+           },
           "price": 120,
           "category": "books"
       }
