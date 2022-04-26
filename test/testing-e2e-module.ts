@@ -2,9 +2,11 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from '../src/app.module';
 import { UserRepository } from '../src/user/domain/user.repository';
+import { FirestoreService } from '../src/share/infrastructure/firestore/firestore.service';
 
 export interface TestingInterface {
   userRepository: UserRepository;
+  firestoreService: FirestoreService;
 }
 
 export class TestingE2eModule {
@@ -39,6 +41,7 @@ export class TestingE2eModule {
     await module.init();
     return {
       userRepository: module.moduleFixture.get<UserRepository>(UserRepository),
+      firestoreService: module.moduleFixture.get<FirestoreService>(FirestoreService),
     };
   }
 }
