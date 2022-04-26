@@ -42,6 +42,7 @@ test:
 	@make lint-check
 	@make test-unit
 	@make test-e2e
+	@make test-bdd
 
 up:
 	@docker compose up -d
