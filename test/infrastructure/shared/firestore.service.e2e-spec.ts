@@ -1,4 +1,4 @@
-import { FirestoreService } from '../../src/share/infrastructure/firestore/firestore.service';
+import { FirestoreService } from '../../../src/share/infrastructure/firestore/firestore.service';
 import { FilterOpStr, OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
 import { TestingE2eModule } from '../testing-e2e-module';
 

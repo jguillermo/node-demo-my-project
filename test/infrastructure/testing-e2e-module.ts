@@ -1,8 +1,8 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppModule } from '../src/app.module';
-import { UserRepository } from '../src/user/domain/user.repository';
-import { FirestoreService } from '../src/share/infrastructure/firestore/firestore.service';
+import { AppModule } from '../../src/app.module';
+import { UserRepository } from '../../src/user/domain/user.repository';
+import { FirestoreService } from '../../src/share/infrastructure/firestore/firestore.service';
 
 export interface TestingInterface {
   userRepository: UserRepository;
