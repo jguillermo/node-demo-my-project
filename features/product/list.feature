@@ -21,7 +21,7 @@ Feature: List Product
 
 
   Scenario: List Product whitout filter
-    Given I have the following payload
+    Given I make a request to graphql
     """
     query{
       productList{
@@ -35,7 +35,6 @@ Feature: List Product
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {
@@ -57,7 +56,7 @@ Feature: List Product
     Then response should have a status 200
 
   Scenario: List Product all filter
-    Given I have the following payload
+    Given I make a request to graphql
     """
     query{
       productList(id:"c96a8ea2-aba7-45a5-a93b-c2f666aa09c9",paginator:{page:1, perPage:1},order:{field:"id", direction:"desc"}){
@@ -66,7 +65,6 @@ Feature: List Product
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {

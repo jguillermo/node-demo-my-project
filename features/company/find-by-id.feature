@@ -20,7 +20,7 @@ Feature: find Company by id
 
 
   Scenario: find one company
-    Given I have the following payload
+    Given I make a request to graphql
     """
     query{
       company(id: "daf673b7-b1ba-415e-ac5e-04848e5e2e5f"){
@@ -33,7 +33,6 @@ Feature: find Company by id
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {
@@ -53,7 +52,7 @@ Feature: find Company by id
 
 
   Scenario: find company not exist
-    Given I have the following payload
+    Given I make a request to graphql
     """
     query{
       company(id: "daf673b7-b1ba-415e-ac5e-04848e5e2e6f"){
@@ -66,7 +65,6 @@ Feature: find Company by id
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {

@@ -16,7 +16,7 @@ Feature: Delete User
 
 
   Scenario: delete one user
-    Given I have the following payload
+    Given I make a request to graphql
     """
     mutation{
       userDelete(id:"daf673b7-b1ba-415e-ac5e-04848e5e2e5f"){
@@ -24,7 +24,6 @@ Feature: Delete User
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {
@@ -39,7 +38,7 @@ Feature: Delete User
 
 
   Scenario: delete user not exist
-    Given I have the following payload
+    Given I make a request to graphql
     """
     mutation{
       userDelete(id:"daf673b7-b1ba-415e-ac5e-04848e5e2e6f"){
@@ -47,7 +46,6 @@ Feature: Delete User
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {

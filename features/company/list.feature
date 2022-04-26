@@ -20,7 +20,7 @@ Feature: List Company
 
 
   Scenario: List Company whitout filter
-    Given I have the following payload
+    Given I make a request to graphql
     """
     query{
       companyList{
@@ -33,7 +33,6 @@ Feature: List Company
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {
@@ -54,7 +53,7 @@ Feature: List Company
     Then response should have a status 200
 
   Scenario: List Company all filter
-    Given I have the following payload
+    Given I make a request to graphql
     """
     query{
       companyList(id:"daf673b7-b1ba-415e-ac5e-04848e5e2e5f",paginator:{page:1, perPage:1},order:{field:"id", direction:"desc"}){
@@ -67,7 +66,6 @@ Feature: List Company
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {

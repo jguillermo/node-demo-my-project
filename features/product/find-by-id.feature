@@ -21,7 +21,7 @@ Feature: find Product by id
 
 
   Scenario: find one product
-    Given I have the following payload
+    Given I make a request to graphql
     """
     query{
       product(id: "c96a8ea2-aba7-45a5-a93b-c2f666aa09c9"){
@@ -35,7 +35,6 @@ Feature: find Product by id
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {
@@ -56,7 +55,7 @@ Feature: find Product by id
 
 
   Scenario: find product not exist
-    Given I have the following payload
+    Given I make a request to graphql
     """
     query{
       product(id: "c96a8ea2-aba7-45a5-a93b-c2f666aa08c9"){
@@ -70,7 +69,6 @@ Feature: find Product by id
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {

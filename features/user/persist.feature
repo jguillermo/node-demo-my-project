@@ -4,7 +4,7 @@ Feature: Persist User
   I need to be able to persist User
 
   Scenario: Create User
-    Given I have the following payload
+    Given I make a request to graphql
     """
     mutation{
       userPersist(
@@ -21,7 +21,6 @@ Feature: Persist User
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {
@@ -44,7 +43,7 @@ Feature: Persist User
     """
 
   Scenario: Create User show entity
-    Given I have the following payload
+    Given I make a request to graphql
     """
     mutation{
       userPersist(
@@ -62,7 +61,6 @@ Feature: Persist User
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {
@@ -95,7 +93,7 @@ Feature: Persist User
       }
     ]
     """
-    And I have the following payload
+    And I make a request to graphql
     """
     mutation{
       userPersist(
@@ -112,7 +110,6 @@ Feature: Persist User
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {

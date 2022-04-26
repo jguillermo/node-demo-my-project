@@ -4,7 +4,7 @@ Feature: Persist Product
   I need to be able to persist Product
 
   Scenario: Create Product
-    Given I have the following payload
+    Given I make a request to graphql
     """
     mutation{
       productPersist(
@@ -26,7 +26,6 @@ Feature: Persist Product
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {
@@ -57,7 +56,7 @@ Feature: Persist Product
     """
 
   Scenario: Create Product show entity
-    Given I have the following payload
+    Given I make a request to graphql
     """
     mutation{
       productPersist(
@@ -85,7 +84,6 @@ Feature: Persist Product
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {
@@ -136,7 +134,7 @@ Feature: Persist Product
       }
     ]
     """
-    And I have the following payload
+    And I make a request to graphql
     """
     mutation{
       productPersist(
@@ -158,7 +156,6 @@ Feature: Persist Product
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {

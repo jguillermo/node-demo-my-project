@@ -4,7 +4,7 @@ Feature: Persist Company
   I need to be able to persist Company
 
   Scenario: Create Company
-    Given I have the following payload
+    Given I make a request to graphql
     """
     mutation{
       companyPersist(
@@ -29,7 +29,6 @@ Feature: Persist Company
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {
@@ -56,7 +55,7 @@ Feature: Persist Company
     """
 
   Scenario: Create Company show entity
-    Given I have the following payload
+    Given I make a request to graphql
     """
     mutation{
       companyPersist(
@@ -82,7 +81,6 @@ Feature: Persist Company
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {
@@ -127,7 +125,7 @@ Feature: Persist Company
       }
     ]
     """
-    And I have the following payload
+    And I make a request to graphql
     """
     mutation{
       companyPersist(
@@ -152,7 +150,6 @@ Feature: Persist Company
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {

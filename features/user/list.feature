@@ -16,7 +16,7 @@ Feature: List User
 
 
   Scenario: List User whitout filter
-    Given I have the following payload
+    Given I make a request to graphql
     """
     query{
       userList{
@@ -25,7 +25,6 @@ Feature: List User
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {
@@ -42,7 +41,7 @@ Feature: List User
     Then response should have a status 200
 
   Scenario: List User all filter
-    Given I have the following payload
+    Given I make a request to graphql
     """
     query{
       userList(id:"daf673b7-b1ba-415e-ac5e-04848e5e2e5f",paginator:{page:1, perPage:1},order:{field:"id", direction:"desc"}){
@@ -51,7 +50,6 @@ Feature: List User
       }
     }
     """
-    When I make a request to graphql
     And I validate the response is
     """
     {
