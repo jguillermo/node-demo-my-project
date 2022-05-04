@@ -1,38 +1,37 @@
 .DEFAULT_GOAL := test
 ## GENERAL ##
 
-install:
-	npm install
+export BACKEND_RUN=docker compose run backend
 
-install-production:
-	npm install --production
+install:
+	@${BACKEND_RUN} npm install
 
 build:
-	npm run build --if-present
-
-run:
-	firebase emulators:exec "npm run start:dev" --only firestore
+	docker build -t my-proyect-app:prod-1 --target production .
 
 lint:
-	npm run lint
+	@${BACKEND_RUN} npm run lint
 
 lint-check:
-	npx eslint "{src,apps,libs,test}/**/*.ts"
+	@${BACKEND_RUN} npx eslint "{src,apps,libs,test}/**/*.ts"
 
 format:
-	npm run format
+	@${BACKEND_RUN} npm run format
 
 format-check:
-	npx prettier --check "src/**/*.ts" "test/**/*.ts"
+	@${BACKEND_RUN} npx prettier --check "src/**/*.ts" "test/**/*.ts"
 
 test-unit:
-	npm run test
+	@${BACKEND_RUN} npm run test
 
-test-e2e:
-	firebase emulators:exec "npm run test:e2e" --only firestore
+test-integration:
+	@${BACKEND_RUN} firebase emulators:exec "npm run test:e2e" --only firestore
 
 test-bdd:
-	firebase emulators:exec "npm run bdd" --only firestore
+	@${BACKEND_RUN} firebase emulators:exec "npm run bdd" --only firestore
+
+sh:
+	@${BACKEND_RUN} sh
 
 .PHONY: test
 test:
@@ -41,11 +40,12 @@ test:
 	@make format-check
 	@make lint-check
 	@make test-unit
-	@make test-e2e
+	@make test-integration
 	@make test-bdd
 
 up:
 	@docker compose up -d
+	@make log
 
 down:
 	@docker compose down
@@ -53,17 +53,14 @@ down:
 ps:
 	@docker compose ps
 
+log:
+	@docker compose logs -f backend
+
 docker-kill:
 	@make down
 	@docker rm -f $$(docker ps -a -q) || true
 	@docker volume prune -f
 	@docker network prune -f
-
-docker-build:
-	docker build -t nestjs-app:16.14.2-1 --no-cache .
-
-docker-run:
-	docker run -it nestjs-app:16.14.2-1 sh
 
 help:
 	@printf "\033[31m%-16s %-59s %s\033[0m\n" "Target" "Help" "Usage"; \

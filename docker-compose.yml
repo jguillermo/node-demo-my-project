@@ -1,46 +1,19 @@
 version: "3.8"
 services:
-#  mailcatcher:
-#    image: schickling/mailcatcher
-#    networks:
-#      api:
-#        ipv4_address: 21.21.21.201
-#  rabbitmq:
-#    image: rabbitmq:3.9-management
-#    environment:
-#      RABBITMQ_DEFAULT_USER: root
-#      RABBITMQ_DEFAULT_PASS: root
-#    networks:
-#      api:
-#        ipv4_address: 21.21.21.202
-#  postgres-db:
-#    image: postgres:14.2
-#    restart: always
-#    environment:
-#      POSTGRES_PASSWORD: postgres
-#    ports:
-#      - "5432:5432"
-#    networks:
-#      api:
-#        ipv4_address: 21.21.21.203
-#  mongo-db:
-#    image: mongo:5.0
-#    environment:
-#      MONGO_INITDB_ROOT_USERNAME: admin
-#      MONGO_INITDB_ROOT_PASSWORD: admin
-#    networks:
-#      api:
-#        ipv4_address: 21.21.21.204
-  app:
-    image: nestjs-app:16.14.2-1
+  backend:
+    image: my-proyect-app:v-1
     build:
       context: .
-    command: npm run start:dev
+      target: development
+    command: firebase emulators:exec "npm run start:dev" --only firestore
+    ports:
+     - "3000:3000"
     volumes:
       - .:/usr/src/app
     networks:
       api:
         ipv4_address: 21.21.21.204
+
 networks:
   api:
     driver: bridge
