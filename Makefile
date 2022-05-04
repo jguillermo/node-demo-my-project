@@ -33,6 +33,9 @@ test-bdd:
 sh:
 	@${BACKEND_RUN} sh
 
+exec:
+	docker compose exec backend sh
+
 .PHONY: test
 test:
 	@make format

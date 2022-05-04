@@ -5,6 +5,9 @@ RUN npm install --global npm@8.7.0
 
 FROM base AS development
 
+ARG NODE_ENV=development
+ENV NODE_ENV=${NODE_ENV}
+
 RUN apk add openjdk11
 
 RUN npm install --global rimraf firebase-tools
