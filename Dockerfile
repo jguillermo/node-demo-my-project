@@ -1,12 +1,13 @@
 FROM node:16.14.2-alpine3.15 AS base
 WORKDIR /usr/src/app
+RUN npm install --global npm@8.7.0
 
 
 FROM base AS development
 
 RUN apk add openjdk11
 
-RUN npm install --global npm@8.7.0 rimraf firebase-tools
+RUN npm install --global rimraf firebase-tools
 
 RUN firebase emulators:exec "node --version" --only firestore
 
