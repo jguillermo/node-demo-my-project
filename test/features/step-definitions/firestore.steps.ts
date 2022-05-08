@@ -1,7 +1,7 @@
-import { after, before, binding, given, then } from 'cucumber-tsflow';
+import { after, before, binding, then } from 'cucumber-tsflow';
 import admin, { firestore } from 'firebase-admin';
 import Firestore = firestore.Firestore;
-import { Firebase } from '../../src/context/share/infrastructure/firebase';
+import { Firebase } from '../../../src/context/share/infrastructure/firebase';
 import { InternalServerErrorException } from '@nestjs/common';
 import { assert } from 'chai';
 import { toJson } from './tools/string-tools';
