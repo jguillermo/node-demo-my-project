@@ -1,0 +1,12 @@
+path: src/task
+pathTest: test/task
+nameSpace: app.task
+name: Task
+properties:
+  id: id
+  title: string
+  description: string
+  status: [pending, completed]
+#  due:
+#    date: date
+#    isRecurring: false
