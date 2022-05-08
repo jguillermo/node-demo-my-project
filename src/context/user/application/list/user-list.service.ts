@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../../domain/user.repository';
 import { UserResponse } from '../user.response';
-import { ListUserResponse } from '../list-user.response';
+import { UserListResponse } from '../user-list.response';
 import { FilterOpStr, OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
 import { UserListDto } from './user-list.dto';
 
@@ -9,7 +9,7 @@ import { UserListDto } from './user-list.dto';
 export class UserListService {
   constructor(private repository: UserRepository) {}
 
-  public async execute(dto: UserListDto, paginator: PaginatorTypeImp, order: OrderTypeImp): Promise<ListUserResponse> {
+  public async execute(dto: UserListDto, paginator: PaginatorTypeImp, order: OrderTypeImp): Promise<UserListResponse> {
     const listUser = await this.repository.findAll(
       [
         {
@@ -26,7 +26,7 @@ export class UserListService {
       paginator,
       order,
     );
-    return new ListUserResponse(
+    return new UserListResponse(
       listUser.map((user) => {
         return UserResponse.fromAggregate(user);
       }),

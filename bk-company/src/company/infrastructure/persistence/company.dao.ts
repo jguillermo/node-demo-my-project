@@ -1,7 +1,7 @@
 import { Company } from '../../domain/company';
 import { CompanyId } from '../../domain/company-id';
 import { CompanyName } from '../../domain/company-name';
-import { ItemDto } from '../../../../../src/share/infrastructure/firestore/firestore.service';
+import { ItemDto } from '../../../../../src/context/share/infrastructure/firestore/firestore.service';
 import { CompanyAddress } from '../../domain/company-address';
 
 class CompanyAddressDao {

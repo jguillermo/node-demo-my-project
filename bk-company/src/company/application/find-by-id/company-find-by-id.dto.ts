@@ -1,7 +1,7 @@
 import { ArgsType, Field } from '@nestjs/graphql';
 import { Validate } from 'class-validator';
 import { DomainValidator } from 'base-ddd';
-import { BaseDto } from '../../../../../src/share/application/base.dto';
+import { BaseDto } from '../../../../../src/context/share/application/base.dto';
 import { CompanyId } from '../../domain/company-id';
 
 @ArgsType()

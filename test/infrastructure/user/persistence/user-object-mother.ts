@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
-import { User } from '../../../../src/user/domain/aggregate/user';
-import { UserId } from '../../../../src/user/domain/aggregate/user-id';
-import { UserName } from '../../../../src/user/domain/aggregate/user-name';
+import { User } from '../../../../src/context/user/domain/aggregate/user';
+import { UserId } from '../../../../src/context/user/domain/aggregate/user-id';
+import { UserName } from '../../../../src/context/user/domain/aggregate/user-name';
 
 export interface UserDataInterface {
   id?: string;

@@ -1,14 +1,14 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ResultUserPersist, UserType } from './user.type';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { ResponseStatus } from '../../../share/application/applicationResponse';
-import { StatusType } from '../../../share/app/status.type';
-import { UserFindByIdDto } from '../../application/find-by-id/user-find-by-id.dto';
-import { UserPersistDto } from '../../application/persist/user-persist.dto';
-import { UserDeleteDto } from '../../application/delete/user-delete.dto';
-import { UserListDto } from '../../application/list/user-list.dto';
-import { UserResponse } from '../../application/user.response';
-import { ListUserResponse } from '../../application/list-user.response';
+import { ResponseStatus } from '../../../context/share/application/applicationResponse';
+import { StatusType } from '../../../context/share/app/status.type';
+import { UserFindByIdDto } from '../../../context/user/application/find-by-id/user-find-by-id.dto';
+import { UserPersistDto } from '../../../context/user/application/persist/user-persist.dto';
+import { UserDeleteDto } from '../../../context/user/application/delete/user-delete.dto';
+import { UserListDto } from '../../../context/user/application/list/user-list.dto';
+import { UserResponse } from '../../../context/user/application/user.response';
+import { UserListResponse } from '../../../context/user/application/user-list.response';
 
 @Resolver(() => UserType)
 export class UserResolver {
@@ -16,7 +16,7 @@ export class UserResolver {
 
   @Query(() => [UserType], { name: 'userList' })
   async list(@Args() args: UserListDto): Promise<UserResponse[]> {
-    const data: ListUserResponse = await this.queryBus.execute(args);
+    const data: UserListResponse = await this.queryBus.execute(args);
     return data.list;
   }
 

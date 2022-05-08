@@ -1,8 +1,8 @@
-import { UserRepository } from '../../../../src/user/domain/user.repository';
+import { UserRepository } from '../../../../src/context/user/domain/user.repository';
 import { UserMother } from './user-object-mother';
 import { TestingE2eModule } from '../../testing-e2e-module';
 
-describe('User repository', () => {
+describe('User persistence', () => {
   let repository: UserRepository;
   beforeEach(async () => {
     ({ userRepository: repository } = await TestingE2eModule.create());

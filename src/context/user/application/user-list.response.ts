@@ -1,6 +1,6 @@
 import { UserResponse } from './user.response';
 
-export class ListUserResponse {
+export class UserListResponse {
   public list: UserResponse[];
 
   constructor(list: UserResponse[]) {

@@ -1,8 +1,8 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ResultCompanyPersist, CompanyType } from './company.type';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { ResponseStatus } from '../../../../../src/share/application/applicationResponse';
-import { StatusType } from '../../../../../src/share/app/status.type';
+import { ResponseStatus } from '../../../../../src/context/share/application/applicationResponse';
+import { StatusType } from '../../../../../src/context/share/app/status.type';
 import { CompanyFindByIdDto } from '../../application/find-by-id/company-find-by-id.dto';
 import { CompanyPersistDto } from '../../application/persist/company-persist.dto';
 import { CompanyDeleteDto } from '../../application/delete/company-delete.dto';

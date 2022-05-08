@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { CqrsModule } from '@nestjs/cqrs';
-import { UserModule } from './user/user.module';
-import { ShareModule } from './share/share.module';
+import { UserModule } from '../context/user/user.module';
+import { ShareModule } from '../context/share/share.module';
 
 @Module({
   imports: [
