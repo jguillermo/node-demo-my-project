@@ -1,7 +1,7 @@
 import { ArgsType, Field, InputType } from '@nestjs/graphql';
 import { IsOptional, Validate } from 'class-validator';
 import { DomainValidator, OrderTypeImp, PaginatorTypeImp } from 'base-ddd';
-import { BaseDto, OrderDto, PaginatorDto } from '../../../share/application/base.dto';
+import { BaseDto, OrderDto, PaginatorDto } from '../../../../../src/share/application/base.dto';
 import { Type } from 'class-transformer';
 
 @InputType('CompanyAddressListInput')

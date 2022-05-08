@@ -1,7 +1,7 @@
 import { Validate, IsOptional, ValidateNested } from 'class-validator';
 import { ArgsType, Field, InputType } from '@nestjs/graphql';
 import { DomainValidator } from 'base-ddd';
-import { BaseDto } from '../../../share/application/base.dto';
+import { BaseDto } from '../../../../../src/share/application/base.dto';
 import { CompanyId } from '../../domain/company-id';
 import { CompanyName } from '../../domain/company-name';
 import { Type } from 'class-transformer';

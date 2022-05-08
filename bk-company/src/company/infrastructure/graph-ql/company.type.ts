@@ -1,5 +1,5 @@
 import { createUnionType, Field, ObjectType } from '@nestjs/graphql';
-import { StatusType } from '../../../share/app/status.type';
+import { StatusType } from '../../../../../src/share/app/status.type';
 
 @ObjectType('CompanyAddress')
 class CompanyAddressType {

@@ -4,7 +4,6 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { CqrsModule } from '@nestjs/cqrs';
 import { UserModule } from './user/user.module';
 import { ShareModule } from './share/share.module';
-import { CompanyModule } from './company/company.module';
 
 @Module({
   imports: [
@@ -15,7 +14,6 @@ import { CompanyModule } from './company/company.module';
       debug: true,
     }),
     CqrsModule,
-    CompanyModule,
     UserModule,
     ShareModule,
   ],

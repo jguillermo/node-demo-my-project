@@ -4,7 +4,7 @@ import { Company } from '../../domain/company';
 import { CompanyId } from '../../domain/company-id';
 import { CompanyDao } from './company.dao';
 import { CompanyRepository } from '../../domain/company.repository';
-import { FirestoreService } from '../../../share/infrastructure/firestore/firestore.service';
+import { FirestoreService } from '../../../../../src/share/infrastructure/firestore/firestore.service';
 
 @Injectable()
 export class CompanyFirestoreRepository extends CompanyRepository {
