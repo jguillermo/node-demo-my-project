@@ -1,9 +1,9 @@
 import { AggregateRoot } from 'base-ddd';
 import { UserId } from './user-id';
 import { UserName } from './user-name';
-import { UserCreatedEvent } from './user-created.event';
-import { UserUpdatedEvent } from './user-updated.event';
-import { UserDeletedEvent } from './user-deleted.event';
+import { UserCreatedEvent } from '../event/user-created.event';
+import { UserUpdatedEvent } from '../event/user-updated.event';
+import { UserDeletedEvent } from '../event/user-deleted.event';
 
 export class User extends AggregateRoot {
   constructor(private _id: UserId, private _name: UserName) {

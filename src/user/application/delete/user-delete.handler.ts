@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UserDeleteService } from './user-delete.service';
 import { UserDeleteDto } from './user-delete.dto';
-import { UserId } from '../../domain/user-id';
+import { UserId } from '../../domain/aggregate/user-id';
 
 @CommandHandler(UserDeleteDto)
 export class UserDeleteHandler implements ICommandHandler<UserDeleteDto> {

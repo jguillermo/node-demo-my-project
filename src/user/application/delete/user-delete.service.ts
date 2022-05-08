@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventBus } from '@nestjs/cqrs';
 import { UserRepository } from '../../domain/user.repository';
-import { UserId } from '../../domain/user-id';
+import { UserId } from '../../domain/aggregate/user-id';
 
 @Injectable()
 export class UserDeleteService {

@@ -1,6 +1,6 @@
-import { UserRepository } from '../../../src/user/domain/user.repository';
+import { UserRepository } from '../../../../src/user/domain/user.repository';
 import { UserMother } from './user-object-mother';
-import { TestingE2eModule } from '../testing-e2e-module';
+import { TestingE2eModule } from '../../testing-e2e-module';
 
 describe('User repository', () => {
   let repository: UserRepository;

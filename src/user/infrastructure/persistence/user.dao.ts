@@ -1,6 +1,6 @@
-import { User } from '../../domain/user';
-import { UserId } from '../../domain/user-id';
-import { UserName } from '../../domain/user-name';
+import { User } from '../../domain/aggregate/user';
+import { UserId } from '../../domain/aggregate/user-id';
+import { UserName } from '../../domain/aggregate/user-name';
 import { ItemDto } from '../../../share/infrastructure/firestore/firestore.service';
 
 export class UserDao {

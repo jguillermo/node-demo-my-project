@@ -1,4 +1,4 @@
-import { User } from '../domain/user';
+import { User } from '../domain/aggregate/user';
 
 export class UserResponse {
   constructor(public id: string, public name: string) {}

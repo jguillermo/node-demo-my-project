@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { EventBus } from '@nestjs/cqrs';
 import { UserRepository } from '../../domain/user.repository';
-import { User } from '../../domain/user';
-import { UserId } from '../../domain/user-id';
-import { UserName } from '../../domain/user-name';
+import { User } from '../../domain/aggregate/user';
+import { UserId } from '../../domain/aggregate/user-id';
+import { UserName } from '../../domain/aggregate/user-name';
 
 @Injectable()
 export class UserPersistService {
