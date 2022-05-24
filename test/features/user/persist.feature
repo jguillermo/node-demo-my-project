@@ -98,7 +98,7 @@ Feature: Persist User
     mutation{
       userPersist(
         id: "daf673b7-b1ba-415e-ac5e-04848e5e2e5f"
-        name: "NameEdit"
+        name: "NameUpdate"
       ){
         ...on Status{
           status
@@ -126,7 +126,7 @@ Feature: Persist User
     [
       {
         "id": "daf673b7-b1ba-415e-ac5e-04848e5e2e5f",
-        "name": "NameEdit"
+        "name": "NameUpdate"
       }
     ]
     """
