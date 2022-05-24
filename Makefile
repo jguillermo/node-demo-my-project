@@ -7,7 +7,7 @@ install:
 	@${BACKEND_RUN} npm install
 
 build:
-	docker build -t my-proyect-app:prod-1 --target production .
+	docker build -t my-proyect-app:prod-2 --target production .
 
 lint:
 	@${BACKEND_RUN} npm run lint

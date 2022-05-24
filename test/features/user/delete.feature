@@ -4,12 +4,12 @@ Feature: Delete User
   I need to be able to delete User
 
   Background:
-  Given I have the following data on collection "companies"
+  Given I have the following data on collection "users"
   """
     [
       {
         "id": "daf673b7-b1ba-415e-ac5e-04848e5e2e5f",
-        "name": "User A"
+        "name": "Name"
       }
     ]
     """
@@ -35,6 +35,7 @@ Feature: Delete User
     }
     """
     Then response should have a status 200
+    And I validate empty data on collection "users"
 
 
   Scenario: delete user not exist

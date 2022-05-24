@@ -38,6 +38,12 @@ export class FirestoreSteps {
     assert.deepEqual(dataDb, dataJson);
   }
 
+  @then('I validate empty data on collection {string}')
+  public async i_validate_empty_data_on_collection(collectionPath: string) {
+    const dataDb = await this.getAllDataByCollection(collectionPath);
+    assert.deepEqual(dataDb, []);
+  }
+
   private async getAllDataByCollection(collection: string) {
     let dataDb = [];
     try {
