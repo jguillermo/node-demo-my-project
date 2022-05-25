@@ -1,0 +1,12 @@
+path: product
+pathTest: product
+nameSpace: app.product
+name: Product
+properties:
+  id: id
+  name: string
+  code: uuid
+  description: string
+  createAt: date
+  price: number
+  category: [books, computers]

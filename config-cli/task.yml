@@ -1,5 +1,5 @@
-path: src/task
-pathTest: test/task
+path: task
+pathTest: task
 nameSpace: app.task
 name: Task
 properties:
