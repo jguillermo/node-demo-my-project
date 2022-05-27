@@ -10,11 +10,11 @@ Feature: Delete Product
       {
         "id": "464120be-58e3-5723-abfe-6b9ac2ce98bf",
         "name": "Name",
-        "code": "",
+        "code": "f35fe446-7071-4909-8c24-2143164e5483",
         "description": "Description",
-        "createAt": "",
-        "price": "",
-        "category": ""
+        "createAt": "Date(2018-03-23)",
+        "price": 12,
+        "category": "books"
       }
     ]
     """

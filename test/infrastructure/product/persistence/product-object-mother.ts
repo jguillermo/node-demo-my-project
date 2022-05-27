@@ -67,7 +67,7 @@ export class ProductCategoryMother {
   static create(value?: string): ProductCategory {
     const category = value
       ? value
-      : faker.random.arrayElement(Object.keys(EnumProductCategory).map((e) => EnumProductCategory[e]));
+      : faker.helpers.arrayElement(Object.keys(EnumProductCategory).map((e) => EnumProductCategory[e]));
     return new ProductCategory(category);
   }
 }

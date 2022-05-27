@@ -10,11 +10,11 @@ Feature: find Product by id
       {
         "id": "464120be-58e3-5723-abfe-6b9ac2ce98bf",
         "name": "Name",
-        "code": "",
+        "code": "f35fe446-7071-4909-8c24-2143164e5483",
         "description": "Description",
-        "createAt": "",
-        "price": "",
-        "category": ""
+        "createAt": "Date(2018-03-23)",
+        "price": 12,
+        "category": "books"
       }
     ]
     """
@@ -27,6 +27,11 @@ Feature: find Product by id
       product(id: "464120be-58e3-5723-abfe-6b9ac2ce98bf"){
         id
         name
+        code
+        description
+        createAt
+        price
+        category
       }
     }
     """
@@ -37,11 +42,11 @@ Feature: find Product by id
         "product": {
             "id": "464120be-58e3-5723-abfe-6b9ac2ce98bf",
             "name": "Name",
-            "code": "",
+            "code": "f35fe446-7071-4909-8c24-2143164e5483",
             "description": "Description",
-            "createAt": "",
-            "price": "",
-            "category": ""
+            "createAt": "2018-03-23T00:00:00.000Z",
+            "price": 12,
+            "category": "books"
          }
       }
     }
@@ -56,6 +61,11 @@ Feature: find Product by id
       product(id: "daf673b7-b1ba-415e-ac5e-04848e5e2e6f"){
         id
         name
+        code
+        description
+        createAt
+        price
+        category
       }
     }
     """

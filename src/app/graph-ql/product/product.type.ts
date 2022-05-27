@@ -1,6 +1,6 @@
 import { createUnionType, Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { StatusType } from '../../../context/share/app/status.type';
-import { EnumProductCategory } from '../../domain/product-category';
+import { EnumProductCategory } from '../../../context/product/domain/aggregate/product-category';
 
 @ObjectType('Product')
 export class ProductType {

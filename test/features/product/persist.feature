@@ -10,11 +10,11 @@ Feature: Persist Product
       productPersist(
         id: "464120be-58e3-5723-abfe-6b9ac2ce98bf"
         name: "Name"
-        code: ""
+        code: "f35fe446-7071-4909-8c24-2143164e5483"
         description: "Description"
-        createAt: ""
-        price: ""
-        category: ""
+        createAt: "2018-03-23"
+        price: 12
+        category: "books"
       ){
         ...on Status{
           status
@@ -48,11 +48,11 @@ Feature: Persist Product
       {
         "id": "464120be-58e3-5723-abfe-6b9ac2ce98bf",
         "name": "Name",
-        "code": "",
+        "code": "f35fe446-7071-4909-8c24-2143164e5483",
         "description": "Description",
-        "createAt": "",
-        "price": "",
-        "category": ""
+        "createAt": "2018-03-23T00:00:00.000Z",
+        "price": 12,
+        "category": "books"
       }
     ]
     """
@@ -64,11 +64,11 @@ Feature: Persist Product
       productPersist(
         id: "464120be-58e3-5723-abfe-6b9ac2ce98bf"
         name: "Name"
-        code: ""
+        code: "f35fe446-7071-4909-8c24-2143164e5483"
         description: "Description"
-        createAt: ""
-        price: ""
-        category: ""
+        createAt: "2018-03-23"
+        price: 12
+        category: "books"
         showEntity: true
       ){
         ...on Status{
@@ -93,11 +93,11 @@ Feature: Persist Product
         "productPersist": {
            "id": "464120be-58e3-5723-abfe-6b9ac2ce98bf",
            "name": "Name",
-           "code": "",
+           "code": "f35fe446-7071-4909-8c24-2143164e5483",
            "description": "Description",
-           "createAt": "",
-           "price": "",
-           "category": ""
+           "createAt": "2018-03-23T00:00:00.000Z",
+           "price": 12,
+           "category": "books"
          }
        }
     }
@@ -109,11 +109,11 @@ Feature: Persist Product
       {
         "id": "464120be-58e3-5723-abfe-6b9ac2ce98bf",
         "name": "Name",
-        "code": "",
+        "code": "f35fe446-7071-4909-8c24-2143164e5483",
         "description": "Description",
-        "createAt": "",
-        "price": "",
-        "category": ""
+        "createAt": "2018-03-23T00:00:00.000Z",
+        "price": 12,
+        "category": "books"
       }
     ]
     """
@@ -125,11 +125,11 @@ Feature: Persist Product
       {
         "id": "464120be-58e3-5723-abfe-6b9ac2ce98bf",
         "name": "Name",
-        "code": "",
+        "code": "f35fe446-7071-4909-8c24-2143164e5483",
         "description": "Description",
-        "createAt": "",
-        "price": "",
-        "category": ""
+        "createAt": "Date(2018-03-23)",
+        "price": 12,
+        "category": "books"
       }
     ]
     """
@@ -139,11 +139,11 @@ Feature: Persist Product
       productPersist(
         id: "464120be-58e3-5723-abfe-6b9ac2ce98bf"
         name: "NameUpdate"
-        code: ""
+        code: "f35fe446-7071-4909-8c24-2143164e5483"
         description: "DescriptionUpdate"
-        createAt: ""
-        price: ""
-        category: ""
+        createAt: "2018-03-23"
+        price: 12
+        category: "books"
       ){
         ...on Status{
           status
@@ -177,11 +177,11 @@ Feature: Persist Product
       {
         "id": "464120be-58e3-5723-abfe-6b9ac2ce98bf",
         "name": "NameUpdate",
-        "code": "",
+        "code": "f35fe446-7071-4909-8c24-2143164e5483",
         "description": "DescriptionUpdate",
-        "createAt": "",
-        "price": "",
-        "category": ""
+        "createAt": "2018-03-23T00:00:00.000Z",
+        "price": 12,
+        "category": "books"
       }
     ]
     """
