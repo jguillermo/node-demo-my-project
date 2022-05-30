@@ -1,0 +1,14 @@
+path: company
+pathTest: company
+nameSpace: app.company
+name: Company
+properties:
+  id: id
+  name: string
+  addressStreet: string
+  addressNumber: number
+#valueObject:
+#  - name: Address
+#    properties:
+#      street: string
+#      number: number
